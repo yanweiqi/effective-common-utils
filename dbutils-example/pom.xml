@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.effective.common</groupId>
+    <artifactId>effective-common-utils</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>dbutils-example</artifactId>
+  <name>dbutils-example</name>
+  <url>http://maven.apache.org</url>
+  
+  <dependencies>
+		<!-- LOGGING begin -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- LOGGING end --> 
+		 
+	    <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+	    </dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>    
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-dbutils</groupId>
+			<artifactId>commons-dbutils</artifactId>
+		</dependency>
+		
+  </dependencies>
+  
+  <build>
+		<finalName>dbutils-example</finalName>
+		<resources>		
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<filtering>true</filtering>
+				<directory>src/main/resources</directory>
+			</testResource>
+		</testResources>
+  </build>
+  
+  <profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<log4j.level>info</log4j.level>
+				<log4j.path>e:/tmp/logs</log4j.path>
+			</properties>
+		</profile>
+  </profiles>
+</project>
