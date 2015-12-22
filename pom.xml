@@ -19,7 +19,9 @@
      <googlecode.log4jdbc.version>1.2</googlecode.log4jdbc.version>
      <mysql.version>5.1.36</mysql.version>
      <commons-dbutils.version>1.6</commons-dbutils.version>
+     <commons-lang3.version>3.2.1</commons-lang3.version>
      <junit.version>4.12</junit.version>
+     <spring.version>4.2.1.RELEASE</spring.version>
   </properties>
 
   <dependencyManagement>
@@ -82,11 +84,27 @@
 			<version>${commons-dbutils.version}</version>
 		</dependency>
 		
+		<!-- utils -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>		
+		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		
+		<!-- spring 4.2.1.RELEASE -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-framework-bom</artifactId>
+			<version>${spring.version}</version>
+			<type>pom</type>
+			<scope>import</scope>
 		</dependency>
      </dependencies>
   </dependencyManagement>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<groups>
+	<group name="g2" master="test"  salve="test"/>	
+	<group name="g3" master="test2" salve="test2"/>	
+</groups>
+
+
+

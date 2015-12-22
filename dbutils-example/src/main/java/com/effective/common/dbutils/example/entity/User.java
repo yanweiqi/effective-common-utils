@@ -1,5 +1,7 @@
 package com.effective.common.dbutils.example.entity;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class User {
 
     private int id;
@@ -25,4 +27,8 @@ public class User {
 		this.pwd = pwd;
 	}   
     
+	@Override
+	public String toString(){
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
