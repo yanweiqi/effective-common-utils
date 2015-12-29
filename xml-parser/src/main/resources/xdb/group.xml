@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GB2312"?>
+
+<groups>
+	
+	<group name="g1" class="com.effective.common.xml.xdb.config.group.model.Group">
+	   <master name="m1" class="com.effective.common.xml.xdb.config.datasorce.model.Master"> 
+	      <datasource name="ds1" ref="ds1"/>
+	   </master>
+	    
+	   <slave name="s1" class="com.effective.common.xml.xdb.config.datasorce.model.Slave">	
+		  <list name="datasources">
+		     <datasource name="ds2" ref="ds2"/>
+		     <datasource name="ds3" ref="ds3"/>
+		     <datasource name="ds4" ref="ds4"/>
+		  </list>
+	   </slave>
+	</group>	
+
+</groups>
+
+
+

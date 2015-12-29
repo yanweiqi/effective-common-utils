@@ -1,14 +1,14 @@
 package com.effective.common.xml.xdb.config;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.List;
-
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.effective.common.xml.xdb.config.datasorce.xml.DataSourceXmlParserHandler;
+import com.effective.common.xml.xdb.config.group.xml.GroupXmlParserHandler;
 
 
 /**
@@ -17,33 +17,19 @@ import org.slf4j.LoggerFactory;
 * @date 2015年12月22日
 * @Copyright Copyright©2015   
 */
-public class XmlParserFactory<T, M extends AbstarctXmlParserHandler<T>> {
+@Service
+public class XmlParserFactory {
 	
     private static final Logger logger = LoggerFactory.getLogger(XmlParserFactory.class);
     
-    private M m;
-   
-	public List<T> buildBean(String ds_path){
-		List<T> list = null;
-        try {
-        	SAXParserFactory factory = SAXParserFactory.newInstance();
-            InputStream xmlInput = new FileInputStream(ds_path);
-            SAXParser  saxParser = factory.newSAXParser();
-            saxParser.parse(xmlInput, m);
-            list = m.getList();
-        } catch (Throwable e) {
-            logger.error(e.getMessage(),e);
-        }
-		return list;
-	}
-	
-	public M getM() {
-		return m;
-	}
-
-	public void setM(M m) {
-		this.m = m;
-	}
-
+    private static ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<String, Object>();
+    
+    @Autowired
+    private GroupXmlParserHandler groupXmlParserHandler;
+    
+    @Autowired
+    private DataSourceXmlParserHandler dataSourceXmlParserHandler;
+    
+    
     
 }
