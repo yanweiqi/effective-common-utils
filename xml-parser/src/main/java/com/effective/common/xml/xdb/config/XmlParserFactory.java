@@ -1,11 +1,11 @@
 package com.effective.common.xml.xdb.config;
 
-import java.util.concurrent.ConcurrentHashMap;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.effective.common.xml.xdb.config.datasorce.xml.DataSourceXmlParserHandler;
 import com.effective.common.xml.xdb.config.group.xml.GroupXmlParserHandler;
@@ -17,19 +17,22 @@ import com.effective.common.xml.xdb.config.group.xml.GroupXmlParserHandler;
 * @date 2015年12月22日
 * @Copyright Copyright©2015   
 */
-@Service
+@Named
 public class XmlParserFactory {
 	
-    private static final Logger logger = LoggerFactory.getLogger(XmlParserFactory.class);
-    
-    private static ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<String, Object>();
-    
+    @SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(XmlParserFactory.class);
+        
     @Autowired
     private GroupXmlParserHandler groupXmlParserHandler;
     
     @Autowired
     private DataSourceXmlParserHandler dataSourceXmlParserHandler;
     
-    
+    @Inject
+    public void build(){
+    	dataSourceXmlParserHandler.buildBean();
+    	groupXmlParserHandler.buildBean();
+    }
     
 }

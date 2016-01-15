@@ -103,7 +103,7 @@ public class DataSourceXmlParserHandler extends AbstarctXmlParserHandler<DataSou
 	}
     
 	public DataSource getDataSourceByName(String name){
-		return  cache.get(name);
+		return cache.get(name);
 	}
     
 }

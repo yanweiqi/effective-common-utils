@@ -34,9 +34,9 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
 	
 	private static final Logger logger = LoggerFactory.getLogger(GroupXmlParserHandler.class);
 	
-	private List<Group> groups = new ArrayList<Group>();
+	private static List<Group> groups = new ArrayList<Group>();
 	
-	private static Group group;
+	private Group group;
 	
 	@Autowired
 	private FileConfigService fileConfigService; 
@@ -58,7 +58,7 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
         	group =  new Group();
         	group.setName(attributes.getValue("name"));;
             group.setClassName(attributes.getValue("class"));
-            elementStack.push(qName); // 将标签名压入栈
+            elementStack.push(qName); 
             objectStack.push(group);
         }
         
@@ -66,25 +66,23 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
         	Master master = new Master();
         	master.setName(attributes.getValue("name"));
         	master.setClassName(attributes.getValue("class"));
-            elementStack.push(qName); // 将标签名压入栈
+            elementStack.push(qName); 
             objectStack.push(master);
             group.setMaster(master);
         }
-    	
     	
         if("slave".equalsIgnoreCase(qName)){
         	Slave slave = new Slave();
         	slave.setName(attributes.getValue("name"));
         	slave.setClassName(attributes.getValue("class"));
-            elementStack.push(qName); // 将标签名压入栈
+            elementStack.push(qName); 
             objectStack.push(slave);
             group.setSlave(slave);
         }
         
-        
     	if("list".equalsIgnoreCase(qName)){
     		List<DataSource> dataSources = new ArrayList<DataSource>();
-            elementStack.push(qName); // 将标签名压入栈
+            elementStack.push(qName); 
             objectStack.push(dataSources);
             group.getSlave().setDatasources(dataSources);
     	}
@@ -92,9 +90,8 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
 		if("datasource".equalsIgnoreCase(qName)){
 			String ref = attributes.getValue("ref");
 			DataSource dataSource = dataSourceXmlParserHandler.getDataSourceByName(ref);
-            elementStack.push(qName); // 将标签名压入栈
+            elementStack.push(qName); 
             objectStack.push(dataSource);
-            //group.getSlave().getDatasources().add(dataSource);
 		}
     }
 	
@@ -133,7 +130,6 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
         }
         
         if("datasource".equalsIgnoreCase(qName)){
-        	logger.info("父节点:"+currentElementParent());
         	logger.info("结束解析:"+qName);
         	if("master".equals(currentElementParent())){
         		DataSource dataSource = (DataSource) objectStack.pop();
@@ -153,7 +149,6 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
         	elementStack.pop();
         }
     	logger.info("-------->endElement()  uri:"+uri+",localName:"+localName+",qName:"+qName);
-    	
     }
     
     @Override
@@ -181,10 +176,5 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
 	public List<Group> getGroups() {
 		return groups;
 	}
-
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}
-    
     
 }
