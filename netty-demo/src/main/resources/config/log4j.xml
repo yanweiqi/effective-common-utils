@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Threshold" value="ALL" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d][%p,%c{3}.%M(%L)] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="FILE"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="E:\\workspace\\demo_0502\\log\\logs.log" />
+		<param name="MaxFileSize" value="6048KB" />
+		<param name="Threshold" value="ALL" />
+		<param name="MaxBackupIndex" value="512" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d][%p,%c{3}.%M(%L)] %m%n" />
+		</layout>
+	</appender>
+    <logger name="quartz">
+        <level value="ERROR" />
+    </logger>
+	<logger name="com">
+		<level value="warn" />
+	</logger>
+	<logger name="org.apache">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.apache.axis">
+		<level value="ERROR" />
+	</logger>
+	<logger name="org.springframework">
+		<level value="ERROR" />
+	</logger>
+	<root>
+    <appender-ref ref="CONSOLE" />  
+		<appender-ref ref="FILE" />
+	</root>
+</log4j:configuration>

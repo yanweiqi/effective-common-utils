@@ -208,5 +208,6 @@
 	  <module>concurrent-task</module>
 	  <module>dbutils-example</module>
 	  <module>xml-parser</module>
+	  <module>netty-demo</module>
   </modules>
 </project>
