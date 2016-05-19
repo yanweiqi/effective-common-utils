@@ -205,7 +205,8 @@
   </dependencyManagement>
 
   <modules>
-    <module>xml-parser</module>
-    <module>dbutils-example</module>
+	  <module>concurrent-task</module>
+	  <module>dbutils-example</module>
+	  <module>xml-parser</module>
   </modules>
 </project>
