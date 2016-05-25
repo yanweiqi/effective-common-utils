@@ -37,7 +37,6 @@
   <dependencyManagement>
   
      <dependencies>
-     
      		<!-- JSON begin -->
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
@@ -200,7 +199,6 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-		
      </dependencies>
   </dependencyManagement>
 
@@ -209,5 +207,6 @@
 	  <module>dbutils-example</module>
 	  <module>xml-parser</module>
 	  <module>netty-demo</module>
+	  <module>mybatis-redis-cache</module>
   </modules>
 </project>

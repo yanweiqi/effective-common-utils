@@ -177,57 +177,7 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-			<!-- 打jar包时候过滤掉dubbo.properties文件，使用最后发布包里conf下的属性文件 -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<excludes>
-						<excludes>**/conf/**</excludes>
-						<excludes>**/assembly.xml</excludes>
-					</excludes>
-				</configuration>
-			</plugin>
 
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>package</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.ginkgocap.ywxt</groupId>
-									<artifactId>phoenix-util</artifactId>
-									<version>${util.dependencied}</version>
-									<outputDirectory>${project.build.directory}/dubbo</outputDirectory>
-									<includes>META-INF/assembly/**</includes>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<configuration>
-					<descriptor>src/main/assembly/assembly.xml</descriptor>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
   </build>
   
