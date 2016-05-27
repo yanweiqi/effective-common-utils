@@ -7,7 +7,11 @@ import java.util.concurrent.RecursiveTask;
  */
 public class MyTask extends RecursiveTask<Integer> {
 
-    private int i;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1379194934968891038L;
+	private int i;
     private int j;
 
     /**

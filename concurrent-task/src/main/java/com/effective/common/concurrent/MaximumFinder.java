@@ -10,7 +10,12 @@ import java.util.concurrent.RecursiveTask;
  */
 public class MaximumFinder extends RecursiveTask<Integer> {
 
-    private static final int SEQUENTIAL_THRESHOLD = 5;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6438997477419676192L;
+
+	private static final int SEQUENTIAL_THRESHOLD = 5;
 
     private final int[] data;
     private final int start;
