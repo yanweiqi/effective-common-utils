@@ -1,23 +1,18 @@
 package com.effective.common.xml.xdb.config;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.List;
-
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.effective.common.xml.SpringContextTestCase;
-import com.effective.common.xml.xdb.config.datasorce.model.DataSource;
+import com.effective.common.xml.xdb.config.datasorce.model.*;
 import com.effective.common.xml.xdb.config.datasorce.xml.DataSourceXmlParserHandler;
 import com.effective.common.xml.xdb.config.group.model.Group;
 import com.effective.common.xml.xdb.config.group.xml.GroupXmlParserHandler;
 import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
+import org.junit.Test;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.*;
+import java.util.List;
 
 /**
 * @author yanweiqi
@@ -37,7 +32,8 @@ public class XmlParserFactoryTest extends SpringContextTestCase {
 	
 	@Test
 	public void testDataSourceXmlParserHandler() {
-		for (DataSource ds : dataSourceXmlParserHandler.getDatasources()) {
+	    DataSources dataSources = dataSourceXmlParserHandler.getDataSources();
+		for (DataSource ds :dataSources.getDataSourceList()) {
 			logger.info(ds.toString());
 		}
 	}

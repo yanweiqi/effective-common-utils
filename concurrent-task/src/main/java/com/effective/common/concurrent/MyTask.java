@@ -1,5 +1,6 @@
 package com.effective.common.concurrent;
 
+import java.util.*;
 import java.util.concurrent.RecursiveTask;
 
 /**
@@ -31,5 +32,21 @@ public class MyTask extends RecursiveTask<Integer> {
         MyTask newTask2 = new MyTask(i + 1,j);
         newTask2.fork();
         return i*i + newTask2.join();
+    }
+
+
+    public static void main(String[] args){
+        List list = new ArrayList();
+        list.add("12");
+        list.add("44");
+        String arrayStr = list.toString();
+        System.out.println(arrayStr);
+
+        List<String> list2 = new ArrayList<String>();
+        Collections.addAll(list2,arrayStr.split(","));
+        for (String s:list2) {
+          System.out.println(s);
+        }
+
     }
 }

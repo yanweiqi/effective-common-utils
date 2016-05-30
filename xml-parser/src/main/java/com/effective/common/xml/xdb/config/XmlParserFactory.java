@@ -1,14 +1,11 @@
 package com.effective.common.xml.xdb.config;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.effective.common.xml.xdb.config.datasorce.xml.DataSourceXmlParserHandler;
 import com.effective.common.xml.xdb.config.group.xml.GroupXmlParserHandler;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.*;
 
 
 /**

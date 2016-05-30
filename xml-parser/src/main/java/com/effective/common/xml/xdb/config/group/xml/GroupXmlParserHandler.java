@@ -1,27 +1,15 @@
 package com.effective.common.xml.xdb.config.group.xml;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
-
 import com.effective.common.xml.xdb.config.AbstarctXmlParserHandler;
-import com.effective.common.xml.xdb.config.datasorce.model.DataSource;
-import com.effective.common.xml.xdb.config.datasorce.model.Master;
-import com.effective.common.xml.xdb.config.datasorce.model.Slave;
+import com.effective.common.xml.xdb.config.datasorce.model.*;
 import com.effective.common.xml.xdb.config.datasorce.xml.DataSourceXmlParserHandler;
-import com.effective.common.xml.xdb.config.group.model.Group;
-import com.effective.common.xml.xdb.context.FileConfigService;
+import com.effective.common.xml.xdb.config.group.model.*;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.xml.sax.*;
+
+import javax.inject.Named;
+import java.util.*;
 
 /**
 * @author yanweiqi
@@ -37,18 +25,9 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
 	private static List<Group> groups = new ArrayList<Group>();
 	
 	private Group group;
-	
-	@Autowired
-	private FileConfigService fileConfigService; 
-	
+
 	@Autowired
 	private DataSourceXmlParserHandler dataSourceXmlParserHandler;
-	
-	@Inject
-	public InputStream getResourceStream(){
-		InputStream xmlInputStream = getClass().getResourceAsStream(fileConfigService.getGroup());
-		return xmlInputStream;
-	}
 
 	@Override
     public void startElement(String uri, String localName,String qName, Attributes attributes) throws SAXException {
@@ -150,28 +129,6 @@ public class GroupXmlParserHandler extends AbstarctXmlParserHandler<Group>{
         }
     	logger.info("-------->endElement()  uri:"+uri+",localName:"+localName+",qName:"+qName);
     }
-    
-    @Override
-	public void buildBean(InputStream xmlInputStream){
-        try {
-        	SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser  saxParser = factory.newSAXParser();
-            saxParser.parse(xmlInputStream, this);
-        } catch (Throwable e) {
-            logger.error(e.getMessage(),e);
-        }
-	}
-    
-    @Override
-	public void buildBean(){
-        try {
-        	SAXParserFactory factory = SAXParserFactory.newInstance();
-            SAXParser  saxParser = factory.newSAXParser();
-            saxParser.parse(getResourceStream(), this);
-        } catch (Throwable e) {
-            logger.error(e.getMessage(),e);
-        }
-	}
 
 	public List<Group> getGroups() {
 		return groups;

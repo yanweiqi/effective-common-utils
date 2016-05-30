@@ -1,13 +1,10 @@
 package com.effective.common.xml.xdb.context;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.effective.common.xml.PropertiesAccessor;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.effective.common.xml.PropertiesAccessor;
+import javax.inject.*;
 
 /**
 * @author yanweiqi
@@ -16,7 +13,7 @@ import com.effective.common.xml.PropertiesAccessor;
 * @Copyright Copyright©2015   
 */
 @Named
-public class  FileConfigService{
+public class FileConfigService{
 	
 	@SuppressWarnings("unused")
 	private static final Logger logger = LoggerFactory.getLogger(FileConfigService.class);
@@ -24,12 +21,12 @@ public class  FileConfigService{
     @Autowired
 	private PropertiesAccessor propertiesAccessor;
 	
-	private String group       = "group.xml";
-	private String datasource  = "ds.xml";
-	private String ehcache     = "ehcache.xml";
-	private String redis       = "redis.xml";
-	private String memcache    = "memcache.xml";
-	private String sqlmap      = "sqlmap.xml";
+	private String group      = "group.xml";
+	private String datasource = "ds.xml";
+	private String ehcache    = "ehcache.xml";
+	private String redis      = "redis.xml";
+	private String memcache   = "memcache.xml";
+	private String sqlmap     = "sqlmap.xml";
 	
 	@Inject
 	public void loadingXmlFilePath(){
@@ -53,18 +50,12 @@ public class  FileConfigService{
 		}
 	}
 
-	public PropertiesAccessor getPropertiesAccessor() {
-		return propertiesAccessor;
-	}
-
-	public void setPropertiesAccessor(PropertiesAccessor propertiesAccessor) {
-		this.propertiesAccessor = propertiesAccessor;
-	}
+	public PropertiesAccessor getPropertiesAccessor() {	return propertiesAccessor;}
+	public void setPropertiesAccessor(PropertiesAccessor propertiesAccessor) {this.propertiesAccessor = propertiesAccessor;}
 
 	public String getGroup() {
 		return group;
 	}
-
 	public void setGroup(String group) {
 		this.group = group;
 	}
@@ -72,7 +63,6 @@ public class  FileConfigService{
 	public String getDatasource() {
 		return datasource;
 	}
-
 	public void setDatasource(String datasource) {
 		this.datasource = datasource;
 	}
@@ -80,7 +70,6 @@ public class  FileConfigService{
 	public String getEhcache() {	
 		return ehcache;
 	}
-
 	public void setEhcache(String ehcache) {
 		this.ehcache = ehcache;
 	}
@@ -88,7 +77,6 @@ public class  FileConfigService{
 	public String getRedis() {
 		return redis;
 	}
-
 	public void setRedis(String redis) {
 		this.redis = redis;
 	}
@@ -96,7 +84,6 @@ public class  FileConfigService{
 	public String getMemcache() {
 		return memcache;
 	}
-
 	public void setMemcache(String memcache) {
 		this.memcache = memcache;
 	}
@@ -104,7 +91,6 @@ public class  FileConfigService{
 	public String getSqlmap() {
 		return sqlmap;
 	}
-
 	public void setSqlmap(String sqlmap) {
 		this.sqlmap = sqlmap;
 	}

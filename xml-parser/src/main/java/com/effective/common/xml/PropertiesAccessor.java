@@ -1,14 +1,11 @@
 package com.effective.common.xml;
 
+import org.slf4j.*;
+import org.springframework.beans.factory.support.AbstractBeanFactory;
+
+import javax.inject.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.support.AbstractBeanFactory;
 
 @Named
 public class PropertiesAccessor {
@@ -16,12 +13,11 @@ public class PropertiesAccessor {
 	private static final Logger logger = LoggerFactory.getLogger(PropertiesAccessor.class);
 
 	private final AbstractBeanFactory beanFactory;
-
     private final Map<String,String> cache = new ConcurrentHashMap<String, String>(); 
 
     @Inject 
     protected PropertiesAccessor(AbstractBeanFactory beanFactory) {
-        this.beanFactory = beanFactory; 
+        this.beanFactory = beanFactory;
     } 
 
     public String getProperty(String key) { 

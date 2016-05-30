@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="GB2312"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <groups>
 	
 	<group name="g1" class="com.effective.common.xml.xdb.config.group.model.Group">
-	   <master name="m1" class="com.effective.common.xml.xdb.config.datasorce.model.Master"> 
+	   <master name="m1" class="com.effective.common.xml.xdb.config.group.model.Master">
 	      <datasource name="ds1" ref="ds1"/>
 	   </master>
 	    
-	   <slave name="s1" class="com.effective.common.xml.xdb.config.datasorce.model.Slave">	
+	   <slave name="s1" class="com.effective.common.xml.xdb.config.group.model.Slave">
 		  <list name="datasources">
 		     <datasource name="ds2" ref="ds2"/>
 		     <datasource name="ds3" ref="ds3"/>

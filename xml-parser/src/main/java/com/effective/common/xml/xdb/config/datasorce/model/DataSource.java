@@ -3,9 +3,9 @@
  */
 package com.effective.common.xml.xdb.config.datasorce.model;
 
-import java.io.Serializable;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -25,7 +25,6 @@ public class DataSource implements Serializable {
     private String maxActive;
     private String maxIdle;
     private String maxWait;
-
     
 	public String getName() {
 		return name;
@@ -33,42 +32,49 @@ public class DataSource implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDriverClassName() {
 		return driverClassName;
 	}
 	public void setDriverClassName(String driverClassName) {
 		this.driverClassName = driverClassName;
 	}
+
 	public String getUrl() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public String getMaxActive() {
 		return maxActive;
 	}
 	public void setMaxActive(String maxActive) {
 		this.maxActive = maxActive;
 	}
+
 	public String getMaxIdle() {
 		return maxIdle;
 	}
 	public void setMaxIdle(String maxIdle) {
 		this.maxIdle = maxIdle;
 	}
+
 	public String getMaxWait() {
 		return maxWait;
 	}

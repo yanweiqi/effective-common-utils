@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="GB2312"?>
-<datasources>
-	<ds name="ds1" 
+<datasources name="dataSourceArray" class="com.effective.common.xml.xdb.config.datasorce.model.DataSources">
+	<datasource name="ds1"
 	    driverClassName="com.mysql.jdbc.Driver" 
 	    url="jdbc:mysql://127.0.0.1:3306/test"
 		username="root"
@@ -10,7 +10,7 @@
 	    maxWait="" 
 	/>
 	
-	<ds name="ds2" 
+	<datasource name="ds2"
 		driverClassName="com.mysql.jdbc.Driver" 
 		url="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8"
 		username="root" 
@@ -19,7 +19,8 @@
 		maxIdle="" 
 		maxWait="" 
 	/>
-	<ds name="ds3" 
+
+	<datasource name="ds3"
 		driverClassName="com.mysql.jdbc.Driver" 
 		url="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8"
 		username="root" 
@@ -28,14 +29,15 @@
 		maxIdle="" 
 		maxWait="" 
 	/>
-		<ds name="ds4" 
-		driverClassName="com.mysql.jdbc.Driver" 
+
+	<datasource name="ds4"
+		driverClassName="com.mysql.jdbc.Driver"
 		url="jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8"
-		username="root" 
+		username="root"
 		password="123456"
-		maxActive="" 
-		maxIdle="" 
-		maxWait="" 
+		maxActive=""
+		maxIdle=""
+		maxWait=""
 	/>
 	
 </datasources>

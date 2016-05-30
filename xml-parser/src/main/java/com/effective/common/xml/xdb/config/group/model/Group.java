@@ -1,11 +1,8 @@
 package com.effective.common.xml.xdb.config.group.model;
 
-import java.io.Serializable;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.effective.common.xml.xdb.config.datasorce.model.Master;
-import com.effective.common.xml.xdb.config.datasorce.model.Slave;
+import java.io.Serializable;
 
 /**
 * @author yanweiqi
@@ -19,42 +16,23 @@ public class Group implements Serializable{
 	
     private String name;
     private Master master;
-    private Slave slave;
-    private String className;
-    
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+    private Slave  slave;
+	private String className;
+
+	public String getName() {return name;}
+	public void setName(String name) {this.name = name;}
 	
-	public Master getMaster() {
-		return master;
-	}
+	public Master getMaster() {return master;}
+	public void setMaster(Master master) {this.master = master;}
 	
-	public void setMaster(Master master) {
-		this.master = master;
-	}
-	
-	public Slave getSlave() {
-		return slave;
-	}
-	
-	public void setSlave(Slave slave) {
-		this.slave = slave;
-	}
-	public String getClassName() {
-		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
-	}
-	
+	public Slave getSlave() {return slave;}
+	public void setSlave(Slave slave) {this.slave = slave;}
+
+	public void setClassName(String className) {this.className = className;}
+	public String getClassName() {return className;}
+
 	@Override
 	public String toString(){
 		return ToStringBuilder.reflectionToString(this);
 	}
-	
-
 }
