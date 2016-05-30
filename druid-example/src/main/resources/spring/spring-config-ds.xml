@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd"
        default-autowire="byName">
 
-    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+    <bean id="dataSource" class="com.sun.xml.internal.org.jvnet.staxex.Base64Data$Base64DataSource" init-method="init" destroy-method="close">
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.user}" />
         <property name="password" value="${jdbc.password}" />
