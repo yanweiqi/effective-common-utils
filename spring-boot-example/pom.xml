@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.effective.common</groupId>
+		<artifactId>effective-common-utils</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+  	</parent>
+
+	<!--
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.5.RELEASE</version>
+	</parent>
+ 	-->
+
+  	<artifactId>spring-boot-example</artifactId>
+    <name>spring-boot-example</name>
+	<packaging>war</packaging>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<log4j.path>e:/tmp/logs</log4j.path>
+		<druid.version>1.0.20</druid.version>
+		<java.version>1.8</java.version>
+	</properties>
+
+  	<dependencies>
+		
+		<!-- spring boot start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+        <!-- spring boot end -->
+	</dependencies>
+
+	<build>
+		<finalName>spring-boot-example</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<log4j.level>info</log4j.level>
+				<log4j.path>e:/tmp/logs</log4j.path>
+				<env.property>dev</env.property>
+			</properties>
+		</profile>
+	</profiles>
+</project>

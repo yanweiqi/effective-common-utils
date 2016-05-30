@@ -11,31 +11,32 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-     <jackson.version>2.4.0</jackson.version>
-     
-     <junit.version>4.12</junit.version>
-	 <assertj.version>1.6.1</assertj.version>
-	 <mockito.version>1.9.5</mockito.version>
-	 <powermock.version>1.5.5</powermock.version>
-	 <hamcrest.version>1.3</hamcrest.version>
-     
-	 <slf4j.version>1.7.7</slf4j.version>
-	 <logback.version>1.1.2</logback.version>
-	 <jackson.version>2.4.0</jackson.version>     
-     <googlecode.log4jdbc.version>1.2</googlecode.log4jdbc.version>
-     <mysql.version>5.1.36</mysql.version>
-     <commons-dbutils.version>1.6</commons-dbutils.version>
-     <commons-lang3.version>3.2.1</commons-lang3.version>
-     
-     <javax.inject.version>1</javax.inject.version>
-     
-     <spring.version>4.2.1.RELEASE</spring.version>
-     <aspectj.version>1.7.3</aspectj.version>
+	  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	  <jackson.version>2.4.0</jackson.version>
+	  <junit.version>4.12</junit.version>
+	  <assertj.version>1.6.1</assertj.version>
+	  <mockito.version>1.9.5</mockito.version>
+	  <powermock.version>1.5.5</powermock.version>
+	  <hamcrest.version>1.3</hamcrest.version>
+
+	  <slf4j.version>1.7.7</slf4j.version>
+	  <logback.version>1.1.2</logback.version>
+	  <jackson.version>2.4.0</jackson.version>
+
+	  <googlecode.log4jdbc.version>1.2</googlecode.log4jdbc.version>
+
+	  <mysql.version>5.1.36</mysql.version>
+	  <commons-dbutils.version>1.6</commons-dbutils.version>
+	  <commons-lang3.version>3.2.1</commons-lang3.version>
+
+	  <javax.inject.version>1</javax.inject.version>
+
+	  <spring.version>4.2.1.RELEASE</spring.version>
+      <aspectj.version>1.7.3</aspectj.version>
+	  <spring.boot.version>1.3.5.RELEASE</spring.boot.version>
   </properties>
 
   <dependencyManagement>
-  
      <dependencies>
      		<!-- JSON begin -->
 			<dependency>
@@ -199,7 +200,15 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>${aspectj.version}</version>
 		</dependency>
-     </dependencies>
+
+		 <dependency>
+			 <groupId>org.springframework.boot</groupId>
+			 <artifactId>spring-boot-dependencies</artifactId>
+			 <version>${spring.boot.version}</version>
+			 <type>pom</type>
+			 <scope>import</scope>
+		 </dependency>
+	 </dependencies>
   </dependencyManagement>
 
   <modules>
@@ -208,5 +217,7 @@
 	  <module>xml-parser</module>
 	  <module>netty-demo</module>
 	  <module>mybatis-redis-cache</module>
+	  <module>druid-example</module>
+	  <module>spring-boot-example</module>
   </modules>
 </project>

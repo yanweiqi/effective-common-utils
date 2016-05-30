@@ -1,19 +1,21 @@
 <?xml version="1.0"?>
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.effective.common</groupId>
-    <artifactId>effective-common-utils</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  <artifactId>xml-parser</artifactId>
-  <name>xml-parser</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-    <dependencies>
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+    	<groupId>com.effective.common</groupId>
+    	<artifactId>effective-common-utils</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+  	</parent>
+  	<artifactId>xml-parser</artifactId>
+  	<name>xml-parser</name>
+  	<url>http://maven.apache.org</url>
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
    		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -145,10 +147,9 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
-		
-  </dependencies>
+	</dependencies>
   
-  <build>
+  	<build>
 		<finalName>xml-parser</finalName>
 		<resources>		
 			<resource>
@@ -186,29 +187,6 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>package</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.ginkgocap.ywxt</groupId>
-									<artifactId>phoenix-util</artifactId>
-									<version>${util.dependencied}</version>
-									<outputDirectory>${project.build.directory}/dubbo</outputDirectory>
-									<includes>META-INF/assembly/**</includes>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<descriptor>src/main/assembly/assembly.xml</descriptor>
@@ -224,9 +202,9 @@
 				</executions>
 			</plugin>
 		</plugins>
-  </build>
+  	</build>
   
-  <profiles>
+ 	<profiles>
 		<profile>
 			<id>dev</id>
 			<activation>
@@ -237,6 +215,6 @@
 				<log4j.path>e:/tmp/logs</log4j.path>
 			</properties>
 		</profile>
-  </profiles>
+  	</profiles>
 </project>
 
