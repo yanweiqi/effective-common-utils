@@ -12,7 +12,7 @@
   <url>http://maven.apache.org</url>
   
   <dependencies>
-		<!-- LOGGING begin -->
+		<!-- LOGGING begin 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -42,7 +42,7 @@
 			<groupId>com.googlecode.log4jdbc</groupId>
 			<artifactId>log4jdbc</artifactId>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>  -->
 		<!-- LOGGING end --> 
 		 
 	    <dependency>
@@ -64,6 +64,13 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>		
+		
+		<!-- spring boot start -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+        <!-- spring boot end -->
 		
   </dependencies>
   

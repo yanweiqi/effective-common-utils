@@ -31,7 +31,7 @@
 
 	  	<javax.inject.version>1</javax.inject.version>
 
-	  	<spring.version>4.2.1.RELEASE</spring.version>
+	  	<spring.version>4.2.6.RELEASE</spring.version>
       	<aspectj.version>1.7.3</aspectj.version>
 	  	<spring.boot.version>1.3.5.RELEASE</spring.boot.version>
   	</properties>
@@ -53,10 +53,10 @@
 				<groupId>com.fasterxml.jackson.module</groupId>
 				<artifactId>jackson-module-jaxb-annotations</artifactId>
 				<version>${jackson.version}</version>
-			</dependency>
+			</dependency> 
 			<!-- JSON end -->
 			
-			<!-- LOGGING begin -->
+			<!-- LOGGING begin 
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
@@ -85,15 +85,15 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
-			</dependency>
-
+			</dependency>-->
+			<!-- LOGGING end -->     
+			
 			<dependency>
 				<groupId>com.googlecode.log4jdbc</groupId>
 				<artifactId>log4jdbc</artifactId>
 				<version>${googlecode.log4jdbc.version}</version>
 				<scope>runtime</scope>
-			</dependency> 
-			<!-- LOGGING end -->     
+			</dependency>
      
        		<dependency>
 				<groupId>mysql</groupId>
@@ -107,7 +107,7 @@
 				<version>${commons-dbutils.version}</version>
 			</dependency>
 		
-			<!-- utils -->
+		
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
@@ -115,7 +115,6 @@
 			</dependency>		
 		
 			<!-- TEST begin -->
-			<!-- junit -->
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
@@ -130,7 +129,7 @@
 				<scope>test</scope>
 			</dependency>
 			
-			<!-- assertj -->
+
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
@@ -138,7 +137,6 @@
 				<scope>test</scope>
 			</dependency>
 			
-			<!-- mockito -->
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
@@ -171,16 +169,16 @@
 			    <artifactId>spring-test</artifactId>
 			    <version>${spring.version}</version>
 			    <scope>test</scope>	
-			</dependency>
+			</dependency> 
 			<!-- TEST end -->
 			
 			<dependency>
 				<groupId>javax.inject</groupId>
 				<artifactId>javax.inject</artifactId>
 				<version>${javax.inject.version}</version>
-			</dependency>
+			</dependency> 
 			
-			<!-- spring 4.2.1.RELEASE -->
+			<!-- spring 4.2.6.RELEASE -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
@@ -189,11 +187,12 @@
 				<scope>import</scope>
 			</dependency>
 			
+			
 			<dependency>
 				<groupId>org.aspectj</groupId>
 				<artifactId>aspectjweaver</artifactId>
 				<version>${aspectj.version}</version>
-			</dependency>
+			</dependency> 
 	
 			 <dependency>
 				 <groupId>org.springframework.boot</groupId>
