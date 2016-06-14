@@ -211,6 +211,5 @@
 	  <module>netty-demo</module>
 	  <module>mybatis-redis-cache</module>
 	  <module>druid-example</module>
-	  <module>spring-boot-example</module>
   </modules>
 </project>
