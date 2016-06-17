@@ -1,0 +1,42 @@
+17:22:42.149 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.<init>(LoadCpu.java:18)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+17:24:04.174 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.<init>(LoadCpu.java:18)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+17:25:12.052 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.cpu(LoadCpu.java:19)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+17:28:26.584 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.cpu(LoadCpu.java:19)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+17:28:45.528 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.cpu(LoadCpu.java:19)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+17:45:51.496 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.cpu(LoadCpu.java:19)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
+18:17:06.124 [main] DEBUG Sigar - no sigar-amd64-winnt.dll in java.library.path
+org.hyperic.sigar.SigarException: no sigar-amd64-winnt.dll in java.library.path
+	at org.hyperic.sigar.Sigar.loadLibrary(Sigar.java:172)
+	at org.hyperic.sigar.Sigar.<clinit>(Sigar.java:100)
+	at com.effective.common.even.LoadCpu.cpu(LoadCpu.java:19)
+	at com.effective.common.even.LoadCpu.main(LoadCpu.java:12)
