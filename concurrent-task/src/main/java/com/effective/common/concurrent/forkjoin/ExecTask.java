@@ -1,4 +1,4 @@
-package com.effective.common.concurrent;
+package com.effective.common.concurrent.forkjoin;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;

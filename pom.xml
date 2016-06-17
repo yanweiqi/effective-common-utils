@@ -211,5 +211,6 @@
 	  <module>netty-demo</module>
 	  <module>mybatis-redis-cache</module>
 	  <module>druid-example</module>
+	  <module>lambda</module>
   </modules>
 </project>

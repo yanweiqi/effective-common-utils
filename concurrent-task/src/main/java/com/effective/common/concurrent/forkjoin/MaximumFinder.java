@@ -1,4 +1,4 @@
-package com.effective.common.concurrent;
+package com.effective.common.concurrent.forkjoin;
 
 import java.util.Arrays;
 import java.util.Random;
