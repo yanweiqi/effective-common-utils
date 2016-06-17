@@ -212,5 +212,6 @@
 	  <module>mybatis-redis-cache</module>
 	  <module>druid-example</module>
 	  <module>lambda</module>
+	  <module>app-report</module>
   </modules>
 </project>
