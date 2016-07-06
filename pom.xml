@@ -213,5 +213,6 @@
 	  <module>druid-example</module>
 	  <module>lambda</module>
 	  <module>app-report</module>
+	  <module>base</module>
   </modules>
 </project>
