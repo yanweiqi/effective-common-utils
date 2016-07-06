@@ -8,7 +8,7 @@ public class ResourceUtils {
 	private static OSType oSType;
 	private static String PROJECT_NAME = "hyperic-sigar-1.6.4";
 	private static String PROJECT_BIN = "sigar-bin";
-	private static String CLASS_PATH = "java.library.path";
+	public  static String CLASS_PATH = "java.library.path";	
 
 	/**
 	 * 在项目中获取“hyperic-sigar-1.6.4”的绝对路径
@@ -48,8 +48,8 @@ public class ResourceUtils {
 	
 	/**
 	 * 添加系统环境变量
-	 * @param name 
-	 * @param path
+	 * @param name 环境变量的key
+	 * @param path 新添加path的value
 	 */
 	public static void addSystemEnv(String name,String path,OSType oSType){
 		String classPath = getClassPath();

@@ -29,10 +29,10 @@ public class ServerTest {
 	            new NioServerSocketChannelFactory( 
 	                    Executors.newCachedThreadPool(), 
 	                    Executors.newCachedThreadPool())); 
-	    ServerPipelineFactory httpServerPipelineFactory=(ServerPipelineFactory)factory.getBean("serverPipelineFactory");
+	    ServerPipelineFactory httpServerPipelineFactory = (ServerPipelineFactory) factory.getBean("serverPipelineFactory");
 	    bootstrap.setPipelineFactory(httpServerPipelineFactory); 
-	    //启动端口 8888
-	    bootstrap.bind(new InetSocketAddress(8888)); 
+	    
+	    bootstrap.bind(new InetSocketAddress(8888)); //启动端口 8888
 	    System.out.print("8888  server is starting……");
 
 	    

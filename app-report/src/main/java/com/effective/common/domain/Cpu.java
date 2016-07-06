@@ -1,12 +1,14 @@
 package com.effective.common.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.NumberFormat;
 
-public class Cpu extends ArrayList<Cpu> implements Serializable{
+public class Cpu implements Serializable{
    
 
 	private static final long serialVersionUID = 6342528380772926961L;
+	
+	private static NumberFormat format = NumberFormat.getPercentInstance();
 	
 	/**
 	 * 索引
@@ -17,6 +19,11 @@ public class Cpu extends ArrayList<Cpu> implements Serializable{
 	 * 处理频率
 	 */
 	private double totalMhz;
+	
+	/**
+	 * 生产商
+	 */
+	private String productFactory;
 	
 	/**
 	 * 类别
@@ -136,6 +143,23 @@ public class Cpu extends ArrayList<Cpu> implements Serializable{
 
 	public void setTotalUse(double totalUse) {
 		this.totalUse = totalUse;
+	}
+		
+	public String getProductFactory() {
+		return productFactory;
+	}
+
+	public void setProductFactory(String productFactory) {
+		this.productFactory = productFactory;
+	}
+
+	/**
+	 * 百分比格式化
+	 * @param d
+	 * @return
+	 */
+	public String format(double d){
+		return format.format(d);
 	}
 	
 	

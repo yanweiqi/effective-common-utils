@@ -9,11 +9,10 @@ import com.cp.netty.domain.GameResponse;
 
 public class InitHandler extends ServerMainHandler {
 	@Override
-	public void execute(GameRequest request, GameResponse response,
-			Map<String, Object> model) throws GameRunTimeException {
+	public void execute(GameRequest request, GameResponse response,Map<String, Object> model) throws GameRunTimeException {
 		
 		log.error("client sendMessage:"+request.readLong());
-		//返回协议的协议体数据
-		response.putLong(System.currentTimeMillis());
+		
+		response.putLong(System.currentTimeMillis()); //返回协议的协议体数据
 	}
 }

@@ -7,51 +7,57 @@ import java.util.concurrent.Executor;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.cp.game.domain.MessageQueue;
 import com.cp.netty.domain.GameRequest;
 import com.cp.netty.domain.GameResponse;
 
 /** 
-* 	作者:chenpeng  
-*	E-mail:46731706@qq.com  
-* 	创建时间：2012-7-12 上午11:30:54  
-* 	游戏逻辑逻辑处理器  
-*/ 
+ * 	游戏逻辑逻辑处理器  
+ */ 
+@Service("HandlerDispatcher")
 public class HandlerDispatcher implements Runnable {
 
-	private Logger logger = Logger.getLogger(getClass());
+	private static final  Logger logger = Logger.getLogger(HandlerDispatcher.class);
+	
+	@Autowired
 	private Executor messageExecutor;
+	
 	private Map<Integer, MessageQueue> sessionMsgQ;
+	
 	private Map<Integer, GameHandler> handlerMap;
-	private boolean running;
-	private long sleepTime = 200;
+	
+	private volatile boolean isRunning;
+	
+	private long sleepTime;
 
 	public void setHandlerMap(Map<Integer, GameHandler> handlerMap) {
 		this.handlerMap = handlerMap;
 	}
 
 	public void init() {
-		if (!running) {
-			running = true;
+		if (!isRunning) {
+			isRunning = true;
 			sessionMsgQ = new ConcurrentHashMap<Integer, MessageQueue>();
 		}
 	}
 
-	public void stop() {
-		running = false;
+	public synchronized void stop() {
+		isRunning = false;
 	}
 
 	public void run() {
-		while (running) {
+		while (isRunning) {
 			Set<Integer> keySet = sessionMsgQ.keySet();
 			for (Integer key : keySet) {
 				MessageQueue messageQueue = sessionMsgQ.get(key);
-				if (messageQueue == null || messageQueue.size() <= 0
-						|| messageQueue.isRunning())
+				if (messageQueue == null || messageQueue.size() <= 0 || messageQueue.isRunning())
 					continue;
 				MessageWorker messageWorker = new MessageWorker(messageQueue);
-				this.messageExecutor.execute(messageWorker);
+				messageExecutor.execute(messageWorker);
 			}
 			try {
 				Thread.sleep(sleepTime);
@@ -101,8 +107,6 @@ public class HandlerDispatcher implements Runnable {
 
 	/**
 	 * 消息队列处理线程实现
-	 * 
-	 * @author liliang
 	 * 
 	 */
 	private final class MessageWorker implements Runnable {
@@ -165,7 +169,9 @@ public class HandlerDispatcher implements Runnable {
 		this.messageExecutor = messageExecutor;
 	}
 
+	@Value("${app.dispatcher.sleepTime}")
 	public void setSleepTime(long sleepTime) {
 		this.sleepTime = sleepTime;
+		System.out.println(sleepTime);
 	}
 }

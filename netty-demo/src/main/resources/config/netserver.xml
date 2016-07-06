@@ -3,55 +3,70 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation=" 
-            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
-            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd 
-            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
-
-	<bean id="serverPipelineFactory"
-		class="com.cp.netty.ServerPipelineFactory"
-		scope="prototype">
-		<property name="serverHandler" ref="appHandler"></property>
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+            
+    
+    <context:component-scan base-package="com.cp"/>     
+    <!--  
+	<bean id="serverPipelineFactory" class="com.cp.netty.ServerPipelineFactory"	scope="prototype">
+		<property name="serverHandler" ref="appHandler"/>
 	</bean>
-
-	<bean id="appHandler" class="com.cp.netty.ServerHandler"
-		init-method="init">
+    
+	<bean id="appHandler" class="com.cp.netty.ServerHandler" init-method="init">
 		<property name="handlerDispatcher" ref="handlerDispatcher" />
 	</bean>
-	<bean id="handlerDispatcher"
-		class="com.cp.game.HandlerDispatcher" init-method="init"
-		destroy-method="stop">
+	
+	-->
+	<bean id="messageExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	    <property name="corePoolSize"     value="${app.dispatcher.pool.corePoolSize}"/>
+	    <property name="maxPoolSize"      value="${app.dispatcher.pool.maximumPoolSize}"/>
+	    <property name="keepAliveSeconds" value="${app.dispatcher.pool.keepAliveSecond}"/>
+	    <property name="queueCapacity"    value="200"/>
+	</bean>
+	
+	<!--  
+	<bean id="messageExecutor" class="com.cp.netty.domain.FiexThreadPoolExecutor" destroy-method="shutdown">
+	    <constructor-arg value="${app.dispatcher.pool.corePoolSize}"/>
+	    <constructor-arg value="${app.dispatcher.pool.maximumPoolSize}"/>
+	    <constructor-arg value="${app.dispatcher.pool.keepAliveSecond}"/>
+	</bean>
+	-->
+
+	<bean id="handlerDispatcher" class="com.cp.game.HandlerDispatcher" init-method="init" destroy-method="stop">
+		<!--  
 		<property name="messageExecutor">
-			<bean class="com.cp.netty.domain.FiexThreadPoolExecutor"
-				destroy-method="shutdown">
-				<constructor-arg
-					value="${app.dispatcher.pool.corePoolSize}" />
-				<constructor-arg
-					value="${app.dispatcher.pool.maximumPoolSize}" />
-				<constructor-arg
-					value="${app.dispatcher.pool.keepAliveSecond}" />
+			<bean class="com.cp.netty.domain.FiexThreadPoolExecutor" destroy-method="shutdown">
+				<constructor-arg value="${app.dispatcher.pool.corePoolSize}" />
+				<constructor-arg value="${app.dispatcher.pool.maximumPoolSize}" />
+				<constructor-arg value="${app.dispatcher.pool.keepAliveSecond}" />
 			</bean>
 		</property>
 		<property name="sleepTime" value="${app.dispatcher.sleepTime}" />
+		
+		<property name="messageExecutor" ref="messageExecutor"/>
+		-->
 		<property name="handlerMap" ref="serverHandlerMapping" />
 	</bean>
 
-	<bean id="serverMainController" class="com.cp.game.ServerMainHandler"
-        abstract="true">
-    </bean>
 	
-	   <bean id="serverHandlerMapping" class="java.util.HashMap">
+	<bean id="serverHandlerMapping" class="java.util.HashMap">
         <constructor-arg>
             <map>
                 <!-- 测试协议 -->
                 <entry key="1000">
-                    <bean
-                        class="com.cp.game.handler.common.InitHandler"
-                        parent="serverMainController">
-                    </bean>
+                    <bean  class="com.cp.game.handler.common.InitHandler" parent="serverMainController"/>
                 </entry>
             </map>
         </constructor-arg>
     </bean>
-
+    
+    
+    <bean id="serverMainController" class="com.cp.game.ServerMainHandler" abstract="true"/>	
+     
+     
 </beans>
