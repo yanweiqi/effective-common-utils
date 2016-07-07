@@ -8,14 +8,14 @@ import java.io.*;
 public class DeepCopy<T> {
 
 
-	public static <T> T deepClone(T t) throws Exception{
+	public static <T> T clone(T t) throws Exception{
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(t);
             ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bis);
-            return (T)ois.readObject();
+            return (T) ois.readObject();
         }
         catch (Exception e) {
             e.printStackTrace();
