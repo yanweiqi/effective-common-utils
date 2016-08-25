@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/activemq-util.iml" filepath="$PROJECT_DIR$/activemq-util/activemq-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app-report/app-report.iml" filepath="$PROJECT_DIR$/app-report/app-report.iml" />
+      <module fileurl="file://$PROJECT_DIR$/arithmetic/arithmetic.iml" filepath="$PROJECT_DIR$/arithmetic/arithmetic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/concurrent-task/concurrent-task.iml" filepath="$PROJECT_DIR$/concurrent-task/concurrent-task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dbutils-example/dbutils-example.iml" filepath="$PROJECT_DIR$/dbutils-example/dbutils-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/druid-example/druid-example.iml" filepath="$PROJECT_DIR$/druid-example/druid-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/effective-common-utils.iml" filepath="$PROJECT_DIR$/effective-common-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lambda/lambda.iml" filepath="$PROJECT_DIR$/lambda/lambda.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mybatis-redis-cache/mybatis-redis-cache.iml" filepath="$PROJECT_DIR$/mybatis-redis-cache/mybatis-redis-cache.iml" />
+      <module fileurl="file://$PROJECT_DIR$/netty-demo/netty-demo.iml" filepath="$PROJECT_DIR$/netty-demo/netty-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ1/springMQ1.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ1/springMQ1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ2/springMQ2.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ2/springMQ2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ3/springMQ3.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ3/springMQ3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ4/springMQ4.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ4/springMQ4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ5/springMQ5.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ5/springMQ5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ6/springMQ6.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ6/springMQ6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ6/springMQ6 (1).iml" filepath="$PROJECT_DIR$/activemq-util/springMQ6/springMQ6 (1).iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ6/springMQ6 (2).iml" filepath="$PROJECT_DIR$/activemq-util/springMQ6/springMQ6 (2).iml" />
+      <module fileurl="file://$PROJECT_DIR$/activemq-util/springMQ7/springMQ7.iml" filepath="$PROJECT_DIR$/activemq-util/springMQ7/springMQ7.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xml-parser/xml-parser.iml" filepath="$PROJECT_DIR$/xml-parser/xml-parser.iml" />
+    </modules>
+  </component>
+</project>

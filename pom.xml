@@ -227,5 +227,7 @@
 	  <module>lambda</module>
 	  <module>app-report</module>
 	  <module>base</module>
+	  <module>arithmetic</module>
+	  <module>activemq-util</module>
   </modules>
 </project>
