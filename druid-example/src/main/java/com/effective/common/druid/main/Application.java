@@ -1,17 +1,12 @@
 package com.effective.common.druid.main;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-
-import java.util.Arrays;
-
 /**
  * Created by yanweiqi on 2016/5/30.
  */
-@SpringBootApplication
+//@SpringBootApplication
 public class Application {
 
+    /**
     public static void main(String[] args){
         ApplicationContext ctx = SpringApplication.run(Application.class,args);
         System.out.println("Let's inspect the beans provided by Spring Boot:");
@@ -20,6 +15,6 @@ public class Application {
         for(String beanName : beanNames){
             System.out.println(beanName);
         }
-    }
+    }**/
 
 }
