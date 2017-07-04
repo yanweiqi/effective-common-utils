@@ -17,8 +17,8 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
     private static final Logger logger = LoggerFactory.getLogger(RoutingDataSource.class);
     
     protected Object determineCurrentLookupKey() {
-        logger.info(">>> determineCurrentLookupKey thread: {}", Thread.currentThread().getName() );
-        logger.info(">>> RoutingDataSource: {}", DynamicDataSourceHolder.getRouteKey());
+        logger.info("determineCurrentLookupKey thread: {}", Thread.currentThread().getName() );
+        logger.info("RoutingDataSource: {}", DynamicDataSourceHolder.getRouteKey());
         return DynamicDataSourceHolder.getRouteKey();
     }
 }

@@ -38,17 +38,16 @@ public class ReadOnlyConnectionInterceptor implements Ordered {
     public int getOrder() {
         return 0;
     }
-
-    //@Pointcut(value="execution(public * *(..))")
+    
     @Pointcut("@annotation(com.effective.common.druid.annotation.ReadOnlyConnection)")
     public void anyPublicMethod() { }
 
 
-    @Around("@annotation(readOnlyConnection) && anyPublicMethod()")
+    @Around("@annotation(readOnlyConnection)")
     public Object proceed(ProceedingJoinPoint pjp, ReadOnlyConnection readOnlyConnection) throws Throwable {
-        logger.info("------进入数据切换-----");
         try {
             DynamicDataSourceHolder.setRouteKey(DataSourceEnum.SLAVE);
+            logger.info("use DB {}",DynamicDataSourceHolder.getRouteKey());
             Object result = pjp.proceed();
             return result;
         } finally {

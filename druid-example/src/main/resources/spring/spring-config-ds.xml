@@ -42,7 +42,7 @@
     
     <bean id="dataSourceSlave" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 数据库基本信息配置 -->
-        <property name="url" value="${jdbc.url}" />
+        <property name="url" value="${jdbc.url.salve}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <property name="driverClassName" value="${jdbc.driverClassName}" />
@@ -80,7 +80,6 @@
                 <entry key="SLAVE" value-ref="dataSourceSlave"></entry>
             </map>
         </property>
-       
         <!-- 默认数据源 -->
         <property name="defaultTargetDataSource" ref="dataSourceMaster">
         </property>

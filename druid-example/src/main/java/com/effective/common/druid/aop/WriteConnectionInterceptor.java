@@ -38,8 +38,7 @@ public class WriteConnectionInterceptor implements Ordered {
     public int getOrder() {
         return order;
     }
-
-    //@Pointcut(value="execution(public * *(..))")
+    
     @Pointcut("@annotation(com.effective.common.druid.annotation.WriteConnection)")
     public void anyPublicMethod() { }
 

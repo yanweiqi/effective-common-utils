@@ -31,7 +31,7 @@ public class EmployeeService {
     @WriteConnection
     public void updateByName(){
         Employee employee =  employeeRepository.findOne(10001);
-        employee.setFirstName("weiqi");
+        employee.setFirstName("zhiyan");
         employee.setLastName("yan");
         employeeRepository.save(employee);
     }
