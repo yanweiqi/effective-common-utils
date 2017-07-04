@@ -17,6 +17,7 @@ public class ProducerConsumerTest {
 
     @Autowired
     private ProducerService producerService;
+    
     @Autowired
     @Qualifier("queueDestination")
     private Destination destination;

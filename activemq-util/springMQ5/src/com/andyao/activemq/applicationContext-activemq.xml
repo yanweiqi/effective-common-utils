@@ -47,6 +47,7 @@
 		<property name="template" ref="jmsTemplate" />
 		<property name="destination" ref="TOPIC" />
 	</bean>
+	
 	<bean id="queueMessageProducer" class="com.andyao.activemq.QueueMessageProducer">
 		<property name="template" ref="jmsTemplate" />
 		<property name="destination" ref="QUEUE" />
