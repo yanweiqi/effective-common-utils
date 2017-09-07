@@ -78,7 +78,7 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
     security measures on the REST service - which are only available for the enterprise-edition of the
     service.  The location should be the URL to the Terracotta Management Server that is being used to
     manage the ehcache instance. Enabling security requires that the management REST service be provided with
-    a terracotta keychain in the default location C:\\Users\\yanweiqi/.tc/mgmt/keychain or as defined by the system property
+    a terracotta keychain in the default location /Users/yanweiqi/.tc/mgmt/keychain or as defined by the system property
     com.tc.management.keychain.file. The keychain is expected to hold a secret shared by the management client
     and keyed with this REST service's URI.
 
@@ -88,14 +88,14 @@ Here is an example of CacheManager level resource tuning, which will use up to 4
 
     If the 'sslEnabled' attribute is set to true, this will enable a non-blocking ssl connection to the management
     REST service. Turning this ssl connection on requires an identity store be provided at the default location
-    C:\\Users\\yanweiqi/.tc/mgmt/keystore and that the JKS passphrase be included in the REST service keychain, keyed with
+    /Users/yanweiqi/.tc/mgmt/keystore and that the JKS passphrase be included in the REST service keychain, keyed with
     the identity store file URI, or that the keystore and passphrase be identified with the ssl system properties
     javax.net.ssl.keyStore and javax.net.ssl.keyStorePassword.
 
     The 'needClientAuth' attribute requires ssl client certificate authorization if the 'sslEnabled' attribute has been
     set to true. Otherwise, it will be ignored.  Setting this attribute to true will require that the client's
     identity is imported as trusted into a truststore which is provided in the default location
-    C:\\Users\\yanweiqi/.tc/mgmt/keystore and that the JKS passphrase be included in the REST service keychain, keyed with
+    /Users/yanweiqi/.tc/mgmt/keystore and that the JKS passphrase be included in the REST service keychain, keyed with
     the trust store file URI, or that the truststore and passphrase be identified with the ssl system properties
     javax.net.ssl.trustStore and javax.net.ssl.trustStorePassword.
 

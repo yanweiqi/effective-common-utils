@@ -1,5 +1,5 @@
-com\effective\common\concurrent\execute\Schedule.class
-com\effective\common\concurrent\forkjoin\MaximumFinder.class
-com\effective\common\concurrent\forkjoin\MyTask.class
-com\effective\common\concurrent\forkjoin\ExecTask.class
-com\effective\common\concurrent\execute\EchoServer.class
+com/effective/common/concurrent/forkjoin/MaximumFinder.class
+com/effective/common/concurrent/execute/Schedule.class
+com/effective/common/concurrent/forkjoin/MyTask.class
+com/effective/common/concurrent/execute/EchoServer.class
+com/effective/common/concurrent/forkjoin/ExecTask.class
