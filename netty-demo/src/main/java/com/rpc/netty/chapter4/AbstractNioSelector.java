@@ -13,9 +13,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 抽象selector线程类
- * 
- * @author -琴兽-
- * 
  */
 public abstract class AbstractNioSelector implements Runnable {
 
@@ -37,7 +34,7 @@ public abstract class AbstractNioSelector implements Runnable {
 	/**
 	 * 任务队列
 	 */
-	private final Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<Runnable>();
+	private final Queue<Runnable> taskQueue = new ConcurrentLinkedQueue();
 
 	/**
 	 * 线程名称
@@ -53,7 +50,7 @@ public abstract class AbstractNioSelector implements Runnable {
 		this.executor = executor;
 		this.threadName = threadName;
 		this.selectorRunnablePool = selectorRunnablePool;
-		openSelector();
+		this.openSelector();
 	}
 
 	/**
@@ -83,7 +80,7 @@ public abstract class AbstractNioSelector implements Runnable {
 
 				process(selector);
 			} catch (Exception e) {
-				// ignore
+				e.printStackTrace();
 			}
 		}
 

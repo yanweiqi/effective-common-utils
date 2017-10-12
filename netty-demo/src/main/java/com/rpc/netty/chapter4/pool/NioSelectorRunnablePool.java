@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * selector线程管理者
- * @author -琴兽-
  *
  */
 public class NioSelectorRunnablePool {
@@ -61,8 +60,7 @@ public class NioSelectorRunnablePool {
 	 * @return
 	 */
 	public Worker nextWorker() {
-		 return workeres[Math.abs(workerIndex.getAndIncrement() % workeres.length)];
-
+		return workeres[Math.abs(workerIndex.getAndIncrement() % workeres.length)];
 	}
 
 	/**
