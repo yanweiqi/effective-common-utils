@@ -52,7 +52,7 @@ public class ZookeeperInstance implements Watcher {
      * @throws InterruptedException
      */
     public String createNode(String path, byte[] data) throws KeeperException, InterruptedException {
-        return this.zooKeeper.create(path, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        return this.zooKeeper.create(path, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
     }
 
     /**
