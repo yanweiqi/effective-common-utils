@@ -177,7 +177,7 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-			<!-- 打jar包时候过滤掉dubbo.properties文件，使用最后发布包里conf下的属性文件 -->
+			<!-- 打jar包时候过滤掉dubbo.properties文件，使用最后发布包里conf下的属性文件
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -189,7 +189,7 @@
 					</excludes>
 				</configuration>
 			</plugin>
-
+-->
 		</plugins>
   	</build>
   
