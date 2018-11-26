@@ -28,12 +28,39 @@
 			<groupId>com.effective.common</groupId>
 			<artifactId>effective-apache-pom</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.effective.common</groupId>
+			<artifactId>effective-springboot-pom</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.effective.common</groupId>
+			<artifactId>effective-jackson-pom</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>pom</type>
 		</dependency>
 
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>${javax.inject.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.7.4</version>
 		</dependency>
 	</dependencies>
   

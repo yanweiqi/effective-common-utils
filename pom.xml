@@ -11,73 +11,19 @@
     <name>effective-common-utils</name>
     <url>http://maven.apache.org</url>
 
-    <properties>
-    </properties>
-
-
-    <dependencies>
-
-
-        <!-- LOGGING begin
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback.version}</version>
-        </dependency>
-        LOGGING end -->
-
-        <!--
-    <dependency>
-        <groupId>com.googlecode.log4jdbc</groupId>
-        <artifactId>log4jdbc</artifactId>
-        <version>${googlecode.log4jdbc.version}</version>
-        <scope>runtime</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>mysql</groupId>
-        <artifactId>mysql-connector-java</artifactId>
-        <version>${mysql.version}</version>
-    </dependency>
-
-    <dependency>
-        <groupId>commons-dbutils</groupId>
-        <artifactId>commons-dbutils</artifactId>
-        <version>${commons-dbutils.version}</version>
-    </dependency>
-
-
-
-    -->
-
-
-
-
-    </dependencies>
+    <modules>
+        <module>effective-base</module>
+        <module>effective-bookstore</module>
+        <module>effective-lambda</module>
+        <module>effective-concurrent</module>
+        <module>effective-xml</module>
+        <module>effective-zookeeper</module>
+        <module>effective-zeromq</module>
+        <module>effective-protobuf</module>
+        <module>effective-mybatis-redis</module>
+        <module>effective-druid</module>
+        <module>effective-pom</module>
+    </modules>
 
 
     <build>
@@ -93,20 +39,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <modules>
-        <module>effective-base</module>
-        <module>effective-bookstore</module>
-        <module>effective-lambda</module>
-        <module>effective-concurrent</module>
-        <module>effective-xml</module>
-        <module>effective-zookeeper</module>
-        <module>effective-zeromq</module>
-        <module>effective-protobuf</module>
-        <!--
-        <module>effective-mybatis-redis</module>
-        -->
-        <module>effective-druid</module>
-        <module>effective-pom</module>
-    </modules>
 </project>

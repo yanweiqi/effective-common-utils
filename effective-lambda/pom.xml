@@ -4,22 +4,16 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-    	<groupId>com.effective.common</groupId>
-    	<artifactId>effective-common-utils</artifactId>
-    	<version>0.0.1-SNAPSHOT</version>
-  	</parent>
-
+	<groupId>com.effective.common</groupId>
   	<artifactId>effective-lambda</artifactId>
-  	<name>lambda</name>
+	<version>0.0.1-SNAPSHOT</version>
+
   	<url>http://maven.apache.org</url>
   	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
 	<dependencies>
-
-
-
 		<dependency>
 			<groupId>com.effective.common</groupId>
 			<artifactId>effective-pom</artifactId>
@@ -27,7 +21,20 @@
 			<type>pom</type>
 		</dependency>
 	</dependencies>
-  
 
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
 
