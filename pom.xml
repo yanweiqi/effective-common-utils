@@ -23,9 +23,9 @@
         <module>effective-mybatis-redis</module>
         <module>effective-druid</module>
         <module>effective-pom</module>
+        <module>effective-httpclient</module>
     </modules>
-
-
+    
     <build>
         <plugins>
             <plugin>

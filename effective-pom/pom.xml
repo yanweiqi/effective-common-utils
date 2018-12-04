@@ -33,6 +33,7 @@
         <module>effective-google-pom</module>
         <module>effective-apache-pom</module>
         <module>effective-test-pom</module>
+        <module>effective-httpclient-pom</module>
     </modules>
 
 
