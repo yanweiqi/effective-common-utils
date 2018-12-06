@@ -7,12 +7,18 @@
     <groupId>com.effective.common</groupId>
     <artifactId>effective-slf4j-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <parent>
         <groupId>com.effective.common</groupId>
         <artifactId>effective-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
+    <properties>
+        <slf4j.version>1.7.21</slf4j.version>
+        <logback.version>1.1.7</logback.version>
+    </properties>
 
     <dependencies>
         <!-- LOGGING begin-->

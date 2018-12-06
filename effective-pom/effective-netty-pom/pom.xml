@@ -7,6 +7,15 @@
     <groupId>com.effective.common</groupId>
     <artifactId>effective-netty-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>5.0.0.Alpha2</version>
+        </dependency>
+    </dependencies>
+
+
 </project>

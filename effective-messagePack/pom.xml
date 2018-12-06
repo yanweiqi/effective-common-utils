@@ -11,36 +11,37 @@
     </parent>
 
     <groupId>com.effective.common</groupId>
-    <artifactId>effective-httpclient</artifactId>
+    <artifactId>effective-messagePack</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-httpclient-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>0.6.12</version>
         </dependency>
 
         <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-springboot-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-apache-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.asynchttpclient</groupId>
-            <artifactId>async-http-client</artifactId>
-            <version>2.0.29</version>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.24.0-GA</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>5.0.0.Alpha2</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.effective.common</groupId>
+            <artifactId>effective-junit5-pom</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
-
 
     <build>
         <plugins>
@@ -53,6 +54,9 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+
         </plugins>
     </build>
+    
 </project>

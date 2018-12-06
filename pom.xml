@@ -24,6 +24,9 @@
         <module>effective-druid</module>
         <module>effective-pom</module>
         <module>effective-httpclient</module>
+        <module>effective-netty</module>
+        <module>effective-messagePack</module>
+        <module>effective-junit5</module>
     </modules>
     
     <build>

@@ -5,6 +5,9 @@ import com.effective.common.http.base.Worker;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClients;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by yanweiqi on 2018/11/30.
  */
@@ -25,15 +28,22 @@ public class PoolingHttpClient extends BaseHttpClient {
     public static void main(String[] args) throws InterruptedException {
         PoolingHttpClient poolingHttpClient = new PoolingHttpClient();
 
-        Worker w1 = new Worker(poolingHttpClient, url);
-        Thread t1 = new Thread(w1);
+        List<Worker> set = new ArrayList();
+        for (int i = 0; i < 100; i++) {
+            Worker w1 = new Worker(poolingHttpClient, url);
+            Thread t1 = new Thread(w1);
+            t1.start();
+            set.add(w1);
+        }
 
-        t1.start();
         while (true) {
-            Thread.sleep(1000);
-            System.out.println("running ...");
-            synchronized (w1) {
-                w1.notify();
+            //Thread.sleep(1000);
+            //System.out.println("running ...");
+
+            for (Worker w : set) {
+                synchronized (w) {
+                    w.notify();
+                }
             }
         }
     }

@@ -7,7 +7,6 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
 
@@ -18,7 +17,12 @@ import java.io.IOException;
  */
 public abstract class BaseHttpClient implements IBaseHttpClient {
 
-    protected static HttpClientConnectionManager poolingConnManager = new PoolingHttpClientConnectionManager();
+    protected static PoolingHttpClientConnectionManager poolingConnManager = new PoolingHttpClientConnectionManager();
+
+    static {
+        poolingConnManager.setMaxTotal(200);
+        poolingConnManager.setDefaultMaxPerRoute(3); //每个连接的路由
+    }
 
     protected static RequestConfig requestConfig = RequestConfig.custom()
             .setConnectTimeout(2000)
@@ -34,7 +38,7 @@ public abstract class BaseHttpClient implements IBaseHttpClient {
         return getContent(response);
     }
 
-    public String getContent(HttpResponse response) {
+    public  String getContent(HttpResponse response) {
         HttpEntity entity = response.getEntity();// 获取响应实体
         String content = null;
         try {

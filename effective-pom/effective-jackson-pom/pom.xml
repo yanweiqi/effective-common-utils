@@ -7,6 +7,12 @@
     <groupId>com.effective.common</groupId>
     <artifactId>effective-jackson-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <fastjson.version>1.2.7</fastjson.version>
+        <jackson.version>2.4.0</jackson.version>
+    </properties>
 
     <parent>
         <groupId>com.effective.common</groupId>

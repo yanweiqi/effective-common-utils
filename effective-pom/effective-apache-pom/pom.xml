@@ -7,6 +7,7 @@
     <groupId>com.effective.common</groupId>
     <artifactId>effective-apache-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
         <commons-dbutils.version>1.6</commons-dbutils.version>

@@ -12,13 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SystemInfoController {
 
     /**
-     *
      * @param isOpen
      * @return
      */
     @RequestMapping(value = "/status")
     @ResponseBody
-    public Object status(@RequestParam(required = false) String isOpen){
+    public Object status(@RequestParam(required = false) String isOpen) {
 
         System.out.println(isOpen);
 
@@ -27,8 +26,15 @@ public class SystemInfoController {
 
     @RequestMapping(value = "/ready")
     @ResponseBody
-    public Object ready(){
+    public Object ready() {
         return "OK";
     }
 
+
+    @RequestMapping(value = "/ready/timeout")
+    @ResponseBody
+    public Object readyTimeOut() throws InterruptedException {
+        Thread.sleep(1000 * 10);
+        return "OK";
+    }
 }
