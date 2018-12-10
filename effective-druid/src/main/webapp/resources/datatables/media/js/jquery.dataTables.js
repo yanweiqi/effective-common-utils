@@ -11945,7 +11945,7 @@
 		 *      are provided between the brackets, the original array source is
 		 *      returned.
 		 *    * `()` - Function notation. Adding `()` to the end of a parameter will
-		 *      execute a function of the name given. For example: `browser()` for a
+		 *      pool a function of the name given. For example: `browser()` for a
 		 *      simple function on the data source, `browser.version()` for a
 		 *      function in a nested property or even `browser().version` to get an
 		 *      object property if the function called returns an object. Note that
@@ -12121,7 +12121,7 @@
 		 *      are provided between the brackets, the original array source is
 		 *      returned.
 		 *    * `()` - Function notation. Adding `()` to the end of a parameter will
-		 *      execute a function of the name given. For example: `browser()` for a
+		 *      pool a function of the name given. For example: `browser()` for a
 		 *      simple function on the data source, `browser.version()` for a
 		 *      function in a nested property or even `browser().version` to get an
 		 *      object property if the function called returns an object.

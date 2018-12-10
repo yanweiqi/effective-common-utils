@@ -18,15 +18,22 @@ public class TimeServer {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+        startUp(args);
+    }
+
+    public static void startUp(String[] args) throws Exception {
+        System.out.println("TimeServer startup begin.");
         int port = 8080;
         if (args != null && args.length > 0) {
             try {
                 port = Integer.valueOf(args[0]);
             } catch (NumberFormatException e) {
                 // 采用默认值
+                e.printStackTrace();
             }
         }
         new TimeServer().bind(port);
+
     }
 
     public void bind(int port) throws Exception {
@@ -42,6 +49,7 @@ public class TimeServer {
             // 绑定端口，同步等待成功
             ChannelFuture f = b.bind(port).sync();
 
+            System.out.println("TimeServer " + port + " startup success.");
             // 等待服务端监听端口关闭
             f.channel().closeFuture().sync();
         } finally {
@@ -49,11 +57,12 @@ public class TimeServer {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
+
     }
 
     private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
         @Override
-        protected void initChannel(SocketChannel arg0) throws Exception {
+        protected void initChannel(SocketChannel arg0) {
             arg0.pipeline().addLast(new TimeServerHandler());
         }
     }
@@ -69,7 +78,6 @@ public class TimeServer {
             String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new java.util.Date(System.currentTimeMillis()).toString() : "BAD ORDER";
             ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
             ctx.writeAndFlush(resp);
-
         }
 
         @Override

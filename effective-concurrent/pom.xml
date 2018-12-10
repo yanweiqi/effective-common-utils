@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>com.effective.common</groupId>
-            <artifactId>effective-pom</artifactId>
+            <artifactId>effective-junit5-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>pom</type>
         </dependency>

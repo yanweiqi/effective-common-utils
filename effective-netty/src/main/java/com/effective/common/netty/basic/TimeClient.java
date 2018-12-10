@@ -8,16 +8,55 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  * Created by yanweiqi on 2018/12/4.
  */
 public class TimeClient {
+
+    private static BlockingQueue<byte[]> sendCache = new LinkedBlockingDeque<>();
+    private static BlockingQueue<Object> receiveQueue = new LinkedBlockingDeque<>();
+
 
     /**
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+        new Thread(() -> {
+            while (true) {
+                try {
+                    Object obj = receiveQueue.take();
+                    if (obj != null) {
+                        ByteBuf buf = (ByteBuf) obj;
+                        byte[] req = new byte[buf.readableBytes()];
+                        buf.readBytes(req);
+                        String body = new String(req, "UTF-8");
+                        System.out.println("Now is : " + body);
+                        Thread.sleep(1000);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                byte[] req = "QUERY TIME ORDER".getBytes();
+                sendCache.offer(req);
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        startUp(args);
+    }
+
+    private static void startUp(String[] args) throws Exception {
         int port = 8080;
         if (args != null && args.length > 0) {
             try {
@@ -38,7 +77,7 @@ public class TimeClient {
                     .option(ChannelOption.TCP_NODELAY, true)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch) throws Exception {
+                        public void initChannel(SocketChannel ch) {
                             ch.pipeline().addLast(new TimeClientHandler());
                         }
                     });
@@ -56,48 +95,73 @@ public class TimeClient {
 
     class TimeClientHandler extends ChannelHandlerAdapter {
 
-        private int loop;
-
-        /**
-         * Creates a client-side handler.
-         */
-        public TimeClientHandler(int loop) {
-            this.loop = loop;
-        }
-
         @Override
         public void channelActive(ChannelHandlerContext ctx) {
-            while (loop > 0) {
-                try {
-                    byte[] req = "QUERY TIME ORDER".getBytes();
+            try {
+                byte[] req = sendCache.take();
+                if (req != null) {
                     final ByteBuf firstMessage = Unpooled.buffer(req.length);
                     firstMessage.writeBytes(req);
                     ctx.writeAndFlush(firstMessage);
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
         @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-            //do {
-            ByteBuf buf = (ByteBuf) msg;
-            byte[] req = new byte[buf.readableBytes()];
-            buf.readBytes(req);
-            String body = new String(req, "UTF-8");
-            System.out.println("Now is : " + body);
-            //} while (true);
-
+        public void channelRead(ChannelHandlerContext ctx, Object msg) {
+            receiveQueue.offer(msg);
         }
 
         @Override
         public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
-            // 释放资源
             ctx.close();
         }
     }
-
-
 }
+
+
+/**
+ * new Thread(() -> {
+ * try {
+ * TimeServer.startUp(args);
+ * } catch (Exception e) {
+ * e.printStackTrace();
+ * }
+ * }).start();
+ * <p>
+ * <p>
+ * new Thread(() -> {
+ * try {
+ * startUp(args);
+ * } catch (Exception e) {
+ * e.printStackTrace();
+ * }
+ * }).start();
+ * <p>
+ * new Thread(()->{
+ * while (true){
+ * try {
+ * String req = "QUERY TIME ORDER";
+ * TimeClientHandler.send(req);
+ * Thread.sleep(1000);
+ * } catch (InterruptedException e) {
+ * e.printStackTrace();
+ * }
+ * }
+ * }).start();
+ * <p>
+ * new Thread(()->{
+ * try {
+ * TimeClientHandler.receive();
+ * } catch (UnsupportedEncodingException e) {
+ * e.printStackTrace();
+ * }
+ * }).start();
+ * <p>
+ * <p>
+ * while (true) {
+ * Thread.sleep(1000);
+ * }
+ **/

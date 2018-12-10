@@ -1,4 +1,4 @@
-package com.effective.common.concurrent.execute;
+package com.effective.common.concurrent.pool;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,7 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class Schedule {
+public class ScheduledExecutor {
 	
 	private static DateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 	private static DateFormat dayFormat = new SimpleDateFormat("yy-MM-dd");
@@ -20,7 +20,7 @@ public class Schedule {
 	 * 初始化延迟0ms开始执行，每隔5ms重新执行一次任务。
 	 */
 	public void fixedRate(){
-		excutor.scheduleAtFixedRate(new EchoServer(), //执行线程
+		excutor.scheduleAtFixedRate(new TimeServer(), //执行线程
 									0,  //初始化延迟
 									5000, //两次开始的执行的最小时间间隔
 									TimeUnit.MILLISECONDS //计时单位
@@ -28,10 +28,10 @@ public class Schedule {
 	}
 	
 	/**
-	 * 
+	 * 前一次执行结束到下一次执行开始的间隔时间
 	 */
 	public void fixDelay(){
-		excutor.scheduleWithFixedDelay(new EchoServer(),//执行线程 
+		excutor.scheduleWithFixedDelay(new TimeServer(),//执行线程
 				0, //初始化延迟
 				5000, //前一次执行结束到下一次执行开始的间隔时间
 				TimeUnit.MILLISECONDS);
@@ -46,7 +46,7 @@ public class Schedule {
         long initDelay  = getTimeMillis("20:00:00") - System.currentTimeMillis();  
         initDelay = initDelay > 0 ? initDelay : oneDay + initDelay;  
         executor.scheduleAtFixedRate(  
-                new EchoServer(),  
+                new TimeServer(),
                 initDelay,  
                 oneDay,  
                 TimeUnit.MILLISECONDS); 
@@ -55,7 +55,7 @@ public class Schedule {
         
     /**
      * 获取给定时间对应的毫秒数
-     * @param string "HH:mm:ss"
+     * @param time "HH:mm:ss"
      * @return
      */
 	private static long getTimeMillis(String time) {        
@@ -70,10 +70,29 @@ public class Schedule {
 
 	public static void main(String[] args){
 		
-		Schedule schedule = new Schedule();
+		ScheduledExecutor schedule = new ScheduledExecutor();
 		schedule.fixedRate();
-		schedule.fixDelay();
+		//schedule.fixDelay();
 		
 	}
-    
+
+
+
+	class TimeServer implements Runnable {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+		@Override
+		public void run() {
+
+			try {
+				System.out.println("当前线程:"+Thread.currentThread().getName()+",执行时间:"+sdf.format(new Date()));
+				Thread.sleep(1000);
+
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 }

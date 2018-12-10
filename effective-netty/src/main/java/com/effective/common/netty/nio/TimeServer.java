@@ -140,8 +140,7 @@ public class TimeServer {
             }
         }
 
-        private void doWrite(SocketChannel channel, String response)
-                throws IOException {
+        private void doWrite(SocketChannel channel, String response) throws IOException {
             if (response != null && response.trim().length() > 0) {
                 byte[] bytes = response.getBytes();
                 ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);

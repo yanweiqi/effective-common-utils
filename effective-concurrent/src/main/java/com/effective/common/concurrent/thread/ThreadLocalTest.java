@@ -1,5 +1,6 @@
 package com.effective.common.concurrent.thread;
 
+
 import org.junit.jupiter.api.Test;
 
 public class ThreadLocalTest {

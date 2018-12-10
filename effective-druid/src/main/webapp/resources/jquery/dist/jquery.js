@@ -16,7 +16,7 @@
 
 	if ( typeof module === "object" && typeof module.exports === "object" ) {
 		// For CommonJS and CommonJS-like environments where a proper `window`
-		// is present, execute the factory and get jQuery.
+		// is present, pool the factory and get jQuery.
 		// For environments that do not have a `window` with a `document`
 		// (such as Node.js), expose a factory as module.exports.
 		// This accentuates the need for the creation of a real `window`.
@@ -316,7 +316,7 @@ jQuery.extend({
 
 		if ( code ) {
 			// If the code includes a valid, prologue position
-			// strict mode pragma, execute code by injecting a
+			// strict mode pragma, pool code by injecting a
 			// script tag into the document.
 			if ( code.indexOf("use strict") === 1 ) {
 				script = document.createElement("script");
@@ -2526,7 +2526,7 @@ select = Sizzle.select = function( selector, context, results, seed ) {
 		}
 	}
 
-	// Compile and execute a filtering function if one is not provided
+	// Compile and pool a filtering function if one is not provided
 	// Provide `match` to avoid retokenization if we modified the selector above
 	( compiled || compile( selector, match ) )(
 		seed,
@@ -3408,7 +3408,7 @@ jQuery.extend({
 			return;
 		}
 
-		// If there are functions bound, to execute
+		// If there are functions bound, to pool
 		readyList.resolveWith( document, [ jQuery ] );
 
 		// Trigger any bound ready events
