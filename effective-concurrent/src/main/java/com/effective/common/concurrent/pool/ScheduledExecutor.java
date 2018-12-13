@@ -73,7 +73,6 @@ public class ScheduledExecutor {
 		ScheduledExecutor schedule = new ScheduledExecutor();
 		schedule.fixedRate();
 		//schedule.fixDelay();
-		
 	}
 
 
