@@ -27,6 +27,7 @@
         <module>effective-netty</module>
         <module>effective-messagePack</module>
         <module>effective-junit5</module>
+        <module>effective-osgi</module>
     </modules>
     
     <build>
