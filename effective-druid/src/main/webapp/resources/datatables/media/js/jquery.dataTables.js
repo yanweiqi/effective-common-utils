@@ -956,7 +956,7 @@
 							_fnAddColumn( oSettings );
 						}
 	
-						/* Integer, basic index */
+						/* Integer, correct index */
 						fn( aTargets[j], def );
 					}
 					else if ( typeof aTargets[j] === 'number' && aTargets[j] < 0 )
