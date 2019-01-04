@@ -22,7 +22,7 @@ public class TimeServer {
     }
 
     public static void startUp(String[] args) throws Exception {
-        System.out.println("TimeServer startup begin.");
+        System.out.println("EchoServer startup begin.");
         int port = 8080;
         if (args != null && args.length > 0) {
             try {
@@ -49,7 +49,7 @@ public class TimeServer {
             // 绑定端口，同步等待成功
             ChannelFuture f = b.bind(port).sync();
 
-            System.out.println("TimeServer " + port + " startup success.");
+            System.out.println("EchoServer " + port + " startup success.");
             // 等待服务端监听端口关闭
             f.channel().closeFuture().sync();
         } finally {

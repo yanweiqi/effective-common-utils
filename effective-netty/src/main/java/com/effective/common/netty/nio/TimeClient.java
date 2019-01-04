@@ -28,7 +28,7 @@ public class TimeClient {
                 // 采用默认值
             }
         }
-        Thread t1 = new Thread(new TimeClientHandle("127.0.0.1", port), "TimeClient-001");
+        Thread t1 = new Thread(new TimeClientHandle("127.0.0.1", port), "EchoClient-001");
         t1.start();
         t1.join();
     }

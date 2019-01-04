@@ -24,7 +24,7 @@ import io.netty.handler.logging.LoggingHandler;
  *
  *  4) 更复杂的应用协议
  */
-public class TimeServer {
+public class EchoServer {
 
     public void bind(int port) throws Exception {
         // 配置服务端的NIO线程组
@@ -53,8 +53,17 @@ public class TimeServer {
         @Override
         protected void initChannel(SocketChannel channel) {
             ChannelPipeline p = channel.pipeline();
+            /**
+             * 此处为了解决粘包问题
+             */
             p.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(65535, 0, 2, 0, 2));
             p.addLast("msgpack decoder", new MsgPackDecoder());
+            /**
+             * 在MessagePack编码器之前增加LengthFiledPrepender，它将在ByteBuf之前增加2个字节的消息长度，其原理就是
+             * +--------------+     +---------+--------------+
+             * | "hello,world"| --> | 0x000c  | "hello,world"|
+             * +--------------+     +---------+--------------+
+             */
             p.addLast("frameEncoder", new LengthFieldPrepender(2));
             p.addLast("msgpack encoder", new MsgPackEncoder());
             p.addLast(new TimeServerHandler());
@@ -96,6 +105,6 @@ public class TimeServer {
                 // 采用默认值
             }
         }
-        new TimeServer().bind(port);
+        new EchoServer().bind(port);
     }
 }

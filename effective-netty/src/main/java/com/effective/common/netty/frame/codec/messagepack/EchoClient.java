@@ -13,7 +13,7 @@ import io.netty.handler.logging.LoggingHandler;
 
 import java.util.logging.Logger;
 
-public class TimeClient {
+public class EchoClient {
 
     public void connect(int port, String host) throws Exception {
         // 配置客户端NIO线程组
@@ -30,6 +30,12 @@ public class TimeClient {
                             ChannelPipeline p =  channel.pipeline();
                             p.addLast("frameDecoder", new LengthFieldBasedFrameDecoder(65535, 0, 2, 0, 2));
                             p.addLast("msgpack decoder", new MsgPackDecoder());
+                            /**
+                             * 在MessagePack编码器之前增加LengthFiledPrepender，它将在ByteBuf之前增加2个字节的消息长度，其原理就是
+                             * +--------------+     +---------+--------------+
+                             * | "hello,world"| --> | 0x000c  | "hello,world"|
+                             * +--------------+     +---------+--------------+
+                             */
                             p.addLast("frameEncoder", new LengthFieldPrepender(2));
                             p.addLast("msgpack encoder", new MsgPackEncoder());
                             p.addLast(new TimeClientHandler());
@@ -94,6 +100,6 @@ public class TimeClient {
                 // 采用默认值
             }
         }
-        new TimeClient().connect(port, "127.0.0.1");
+        new EchoClient().connect(port, "127.0.0.1");
     }
 }

@@ -125,7 +125,7 @@ public class TimeClient {
 /**
  * new Thread(() -> {
  * try {
- * TimeServer.startUp(args);
+ * EchoServer.startUp(args);
  * } catch (Exception e) {
  * e.printStackTrace();
  * }
