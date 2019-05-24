@@ -28,6 +28,7 @@
         <module>effective-messagePack</module>
         <module>effective-junit5</module>
         <module>effective-osgi</module>
+        <module>effective-arithmetic</module>
     </modules>
     
     <build>

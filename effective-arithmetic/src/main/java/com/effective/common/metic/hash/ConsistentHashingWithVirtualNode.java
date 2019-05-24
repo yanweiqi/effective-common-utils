@@ -17,7 +17,8 @@ public class ConsistentHashingWithVirtualNode{
     /**
      * 待添加入Hash环的服务器列表
      */
-    private static String[] servers = {"192.168.0.0:111", 
+    private static String[] servers = {
+            "192.168.0.0:111",
             "192.168.0.1:111", 
             "192.168.0.2:111",
             "192.168.0.3:111", 
@@ -27,12 +28,12 @@ public class ConsistentHashingWithVirtualNode{
     /**
      * 真实结点列表,考虑到服务器上线、下线的场景，即添加、删除的场景会比较频繁，这里使用LinkedList会更好
      */
-    private static List<String> realNodes = new LinkedList<String>();
+    private static List<String> realNodes = new LinkedList();
 
     /**
      * 虚拟节点，key表示虚拟节点的hash值，value表示虚拟节点的名称
      */
-    private static SortedMap<Integer, String> virtualNodes = new TreeMap<Integer, String>();
+    private static SortedMap<Integer, String> virtualNodes = new TreeMap();
 
     /**
      * 虚拟节点的数目，这里写死，为了演示需要，一个真实结点对应5个虚拟节点
@@ -41,8 +42,9 @@ public class ConsistentHashingWithVirtualNode{
 
     static{
         // 先把原始的服务器添加到真实结点列表中
-        for (int i = 0; i < servers.length; i++)
+        for (int i = 0; i < servers.length; i++) {
             realNodes.add(servers[i]);
+        }
 
         // 再添加虚拟节点，遍历LinkedList使用foreach循环效率会比较高
         for (String str : realNodes){
@@ -62,7 +64,9 @@ public class ConsistentHashingWithVirtualNode{
     private static int getHash(String str){
         final int p = 16777619;
         int hash = (int)2166136261L;
-        for (int i = 0; i < str.length(); i++) hash = (hash ^ str.charAt(i)) * p;
+        for (int i = 0; i < str.length(); i++) {
+            hash = (hash ^ str.charAt(i)) * p;
+        }
         hash += hash << 13;
         hash ^= hash >> 7;
         hash += hash << 3;
@@ -70,8 +74,9 @@ public class ConsistentHashingWithVirtualNode{
         hash += hash << 5;
 
         // 如果算出来的值为负数则取其绝对值
-        if (hash < 0)
+        if (hash < 0) {
             hash = Math.abs(hash);
+        }
         return hash;
     }
 
@@ -79,10 +84,17 @@ public class ConsistentHashingWithVirtualNode{
      * 得到应当路由到的结点
      */
     private static String getServer(String node){
-        int hash = getHash(node); // 得到带路由的结点的Hash值
-        SortedMap<Integer, String> subMap = virtualNodes.tailMap(hash); // 得到大于该Hash值的所有Map
-        Integer i = subMap.firstKey(); // 第一个Key就是顺时针过去离node最近的那个结点
-        String virtualNode = subMap.get(i);// 返回对应的虚拟节点名称，这里字符串稍微截取一下
+        // 得到带路由的结点的Hash值
+        int hash = getHash(node);
+
+        // 得到大于该Hash值的所有Map
+        SortedMap<Integer, String> subMap = virtualNodes.tailMap(hash);
+
+        // 第一个Key就是顺时针过去离node最近的那个结点
+        Integer i = subMap.firstKey();
+
+        // 返回对应的虚拟节点名称，这里字符串稍微截取一下
+        String virtualNode = subMap.get(i);
         return virtualNode.substring(0, virtualNode.indexOf("&&"));
     }
 
