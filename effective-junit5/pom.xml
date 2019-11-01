@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.makotojava.learn</groupId>
-	<artifactId>HelloJUnit5</artifactId>
+	<artifactId>effective-junit5</artifactId>
 	<version>1.0.2</version>
 	<packaging>jar</packaging>
 
-	<name>HelloJUnit5</name>
+	<name>effective-junit5</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

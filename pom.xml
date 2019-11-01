@@ -29,6 +29,7 @@
         <module>effective-junit5</module>
         <module>effective-osgi</module>
         <module>effective-arithmetic</module>
+        <module>effective-akka</module>
     </modules>
     
     <build>

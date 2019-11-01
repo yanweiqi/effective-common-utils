@@ -18,9 +18,7 @@ public class SystemInfoController {
     @RequestMapping(value = "/status")
     @ResponseBody
     public Object status(@RequestParam(required = false) String isOpen) {
-
         System.out.println(isOpen);
-
         return "OK";
     }
 

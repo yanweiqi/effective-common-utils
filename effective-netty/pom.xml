@@ -20,12 +20,14 @@
             <groupId>com.effective.common</groupId>
             <artifactId>effective-netty-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
             <groupId>com.effective.common</groupId>
             <artifactId>effective-apache-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
     </dependencies>
 

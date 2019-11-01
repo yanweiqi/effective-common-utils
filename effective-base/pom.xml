@@ -51,10 +51,9 @@
 
         <dependency>
             <groupId>com.effective.common</groupId>
-            <artifactId>effective-test-pom</artifactId>
+            <artifactId>effective-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>pom</type>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
