@@ -1,127 +1,142 @@
 package com.effective.common.akka.part1;
 
 import akka.actor.*;
-import akka.event.Logging;
 import akka.event.LoggingAdapter;
 import akka.japi.Function;
+import akka.japi.pf.DeciderBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import scala.Option;
-import scala.concurrent.duration.Duration;
+import scala.concurrent.Await;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import static akka.pattern.Patterns.ask;
 
 /**
  * @Dessciption TODO
  * @Author yanweiqi
  * @Date 2019-11-03 1:30 PM
  */
-public class SupervisorActor extends UntypedActor {
-
-    private LoggingAdapter log = Logging.getLogger(this.getContext().system(), this);
-    private static ActorSystem system = ActorSystem.create("testSystem");
+public class SupervisorActor8 {
 
 
-    @Override
-    public void preStart() throws Exception {
-        //创建子Actor
-        ActorRef child = getContext().actorOf(Props.create(WorkerStrategyActor.class), "child");
-        //监控生命周期
-        getContext().watch(child);
-    }
+    static class Supervisor extends AbstractActor {
 
-    /**
-     * 定义监督策略
-     */
-    @Override
-    public SupervisorStrategy supervisorStrategy() {
-        return new OneForOneStrategy(3, Duration.create("1 minute"), new Function<Throwable, SupervisorStrategy.Directive>() {
+        private static LoggingAdapter log;
+
+        {
+            log = getContext().getSystem().log();
+        }
+
+        private static SupervisorStrategy strategy = new OneForOneStrategy(
+                10,
+                Duration.ofMinutes(1), new Function<Throwable, SupervisorStrategy.Directive>() {
             @Override
             public SupervisorStrategy.Directive apply(Throwable param) throws Exception {
 
-                if (param instanceof IOException) {
-                    log.error("IoException");
+                if (param instanceof NullPointerException) {
+                    log.error("收到NullPointerException,执行resume");
                     return SupervisorStrategy.resume();
-                } else if (param instanceof IndexOutOfBoundsException) {
-                    log.error("IndexOutOfBoundsException");
+                } else if (param instanceof IOException) {
+                    log.error("收到IOException，执行restart");
                     return SupervisorStrategy.restart();
                 } else {
                     return SupervisorStrategy.escalate();
                 }
             }
+        });
+
+                /*
+                DeciderBuilder.match(ArithmeticException.class, new App)
+                        .match(NullPointerException.class, e -> SupervisorStrategy.restart())
+                        .match(IllegalArgumentException.class, e -> SupervisorStrategy.stop())
+                        .matchAny(o -> SupervisorStrategy.escalate()).build());*/
+
+        @Override
+        public SupervisorStrategy supervisorStrategy() {
+            return strategy;
         }
 
-        );
-    }
+        @Override
+        public Receive createReceive() {
+            return receiveBuilder().match(Props.class,
+                    props -> {
+                        //以下代码是必须要执行的，不执行就会报错
+                        getSender().tell(getContext().actorOf(props), getSelf());
+                    }).build();
+        }
 
-    @Override
-    public void onReceive(Object message) throws Throwable {
-
-        if (message instanceof Terminated) {
-            Terminated ter = (Terminated) message;
-            log.info("{}已经终止", ter.getActor());
-        } else {
-            log.info(" status {}", message);
+        @Override
+        public void preStart() throws Exception {
+            super.preStart();
+            log.info("watcher 执行preStart");
         }
     }
 
+    static class Child extends AbstractActor {
 
-    public static void main(String[] args) {
+        private static LoggingAdapter log;
 
-        ActorRef workerActor = system.actorOf(Props.create(SupervisorActor.class), "SupervisorActor");
+        {
+            log = getContext().getSystem().log();
+        }
 
-        workerActor.tell(new IOException(), workerActor);
+        int state = 0;
 
-        workerActor.tell(new SQLException("sql exception"), workerActor);
+        @Override
+        public void preStart() throws Exception {
+            super.preStart();
+            log.info("child 执行preStart");
+        }
 
-        workerActor.tell(new IndexOutOfBoundsException(), workerActor);
-
-        workerActor.tell("getValue", workerActor);
-    }
-}
-
-
-class WorkerStrategyActor extends UntypedActor {
-
-    private LoggingAdapter log = getContext().system().log();
-
-    private int count = 1;
-
-    @Override
-    public void preStart() throws Exception {
-        super.receive();
-        log.info("workerActor,执行了preStart");
-    }
-
-    @Override
-    public void postStop() throws Exception {
-        super.postStop();
-        log.info("workerActor,执行了postStop");
-    }
-
-
-    @Override
-    public void preRestart(Throwable reason, Option<Object> message) throws Exception {
-        log.info("workerActor preRestart begin {}", this.count);
-        super.preRestart(reason, message);
-        log.info("workerActor reRestart end {}", this.count);
-    }
-
-    @Override
-    public void postRestart(Throwable reason) throws Exception {
-        log.info("workerActor postRestart {}", this.count);
-        super.postRestart(reason);
-        log.info("workerActor postRestart begin {}", this.count);
-    }
-
-    @Override
-    public void onReceive(Object message) throws Throwable {
-        this.count++;
-        if (message instanceof Exception) {
-            throw (Exception) message;
-        } else if ("getValue".equals(message)) {
-            getSender().tell(count, getSelf());
-        } else {
-            unhandled(message);
+        @Override
+        public Receive createReceive() {
+            return receiveBuilder()
+                    .match(Integer.class, i -> {
+                        state = i;
+                        log.info("接收到数字为:{}", state);
+                    })
+                    .match(String.class, s -> {
+                        log.info("接收到字符串:{}", s);
+                    })
+                    .matchAny(o -> {
+                        throw (Exception) o;
+                    })
+                    .build();
         }
     }
 }
+
+
+class App {
+
+    private static final Logger log = LoggerFactory.getLogger(App.class);
+
+    private static ActorSystem system = ActorSystem.create("testSystem");
+
+    private static scala.concurrent.duration.Duration timeout = scala.concurrent.duration.Duration.create(2, TimeUnit.SECONDS);
+
+    public static void main(String[] args) throws Exception {
+
+        Props superpros = Props.create(SupervisorActor8.Supervisor.class);
+        ActorRef supervisor = system.actorOf(superpros, "supervisor");
+        ActorRef child = (ActorRef) Await.result(ask(supervisor, Props.create(SupervisorActor8.Child.class), 5000), timeout);
+        child.tell(10, ActorRef.noSender());
+
+        child.tell("文本消息体", ActorRef.noSender());
+
+        //child.tell(new NullPointerException(), ActorRef.noSender());
+
+        child.tell(new IOException(), ActorRef.noSender());
+
+        child.tell("文本消息体", ActorRef.noSender());
+
+    }
+
+}
+
+
+

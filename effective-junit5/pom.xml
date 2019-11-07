@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.makotojava.learn</groupId>
+	<groupId>com.effective.common.junit5</groupId>
 	<artifactId>effective-junit5</artifactId>
 	<version>1.0.2</version>
 	<packaging>jar</packaging>
@@ -35,14 +35,9 @@
 				<version>2.19</version>
 				<dependencies>
 					<dependency>
-						<groupId>org.junit.platform</groupId>
-						<artifactId>junit-platform-surefire-provider</artifactId>
-						<version>${junit.platform.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.junit.jupiter</groupId>
-						<artifactId>junit-jupiter-engine</artifactId>
-						<version>${junit.jupiter.version}</version>
+						<groupId>com.effective.common</groupId>
+						<artifactId>effective-junit5-pom</artifactId>
+						<version>0.0.1-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -75,29 +70,20 @@
 	</build>
 
 	<dependencies>
+
 		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit.jupiter.version}</version>
+			<groupId>com.effective.common</groupId>
+			<artifactId>effective-junit5-pom</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-runner</artifactId>
-			<version>${junit.platform.version}</version>
-			<scope>test</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>${logback.version}</version>
 		</dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-console-standalone</artifactId>
-      <version>${junit.platform.version}</version>
-      <scope>test</scope>
-    </dependency>
+
 	</dependencies>
 
 </project>

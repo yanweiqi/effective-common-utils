@@ -51,6 +51,7 @@
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
         </dependency>
+
         <!--LOGGING end -->
     </dependencies>
 </project>
