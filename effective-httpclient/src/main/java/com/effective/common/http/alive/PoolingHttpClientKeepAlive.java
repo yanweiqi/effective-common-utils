@@ -12,6 +12,8 @@ public class PoolingHttpClientKeepAlive extends BaseHttpClient {
 
     private static String url = "http://127.0.0.1:8080/ready";
 
+    private static String url_timeOut = "http://127.0.0.1:8080/ready/timeout";
+
     @Override
     public HttpClient getHttpClient() {
         return HttpClients
@@ -29,7 +31,7 @@ public class PoolingHttpClientKeepAlive extends BaseHttpClient {
         new Thread(() -> {
             try {
                 for (int i = 0; i < 3; i++) {
-                    String status = poolingHttpClient.httpGet(url);
+                    String status = poolingHttpClient.httpGet(url_timeOut);
                     System.out.println(Thread.currentThread().getName() + ":" + status);
                 }
                 Thread.sleep(oneTime);

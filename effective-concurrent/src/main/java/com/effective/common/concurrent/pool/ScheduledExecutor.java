@@ -71,8 +71,8 @@ public class ScheduledExecutor {
 	public static void main(String[] args){
 		
 		ScheduledExecutor schedule = new ScheduledExecutor();
-		schedule.fixedRate();
-		//schedule.fixDelay();
+		//schedule.fixedRate();
+		schedule.fixDelay();
 	}
 
 

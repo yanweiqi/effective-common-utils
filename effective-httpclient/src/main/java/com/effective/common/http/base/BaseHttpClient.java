@@ -26,8 +26,8 @@ public abstract class BaseHttpClient implements IBaseHttpClient {
 
     protected static RequestConfig requestConfig = RequestConfig.custom()
             .setConnectTimeout(2000)
-            .setSocketTimeout(2000)
-            .setConnectionRequestTimeout(2000)
+            .setConnectionRequestTimeout(50)
+            .setSocketTimeout(1050)
             .build();
 
     public abstract HttpClient getHttpClient();
@@ -38,7 +38,7 @@ public abstract class BaseHttpClient implements IBaseHttpClient {
         return getContent(response);
     }
 
-    public  String getContent(HttpResponse response) {
+    public String getContent(HttpResponse response) {
         HttpEntity entity = response.getEntity();// 获取响应实体
         String content = null;
         try {

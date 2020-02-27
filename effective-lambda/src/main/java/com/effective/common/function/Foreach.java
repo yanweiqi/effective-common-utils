@@ -3,6 +3,7 @@ package com.effective.common.function;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Foreach {
 
@@ -13,7 +14,10 @@ public class Foreach {
 		
 		List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp");
 		filter(languages, (str)->str.startsWith("J"));
-		
+
+		Supplier<String>  supplier = () -> new String();
+
+		Supplier<String>  supplier2 = String:: new;
 	}
 	
 	

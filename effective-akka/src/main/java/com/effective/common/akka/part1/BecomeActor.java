@@ -19,7 +19,7 @@ public class BecomeActor {
     private static ActorSystem system = ActorSystem.create("testSystem");
 
     public static void main(String[] args) {
-        // testCase1();
+        //testCase1();
 
         testCase2();
     }

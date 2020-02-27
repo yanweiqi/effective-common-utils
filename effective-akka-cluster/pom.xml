@@ -5,8 +5,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.effective.common</groupId>
-    <artifactId>effective-akka</artifactId>
+    <artifactId>effective-akka-cluster</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <url>http://maven.apache.org</url>
     <properties>
@@ -18,10 +19,37 @@
 
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-actor_2.12</artifactId>
-            <version>2.5.26</version>
+            <artifactId>akka-actor-typed_2.13</artifactId>
+            <version>2.6.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-cluster-typed_2.13</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-serialization-jackson_2.13</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor-testkit-typed_2.13</artifactId>
+            <version>2.6.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.effective.common</groupId>
+            <artifactId>effective-slf4j-pom</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
+        </dependency>
+<!--
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -33,16 +61,24 @@
             <groupId>com.effective.common</groupId>
             <artifactId>effective-junit5-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>
             <groupId>com.effective.common</groupId>
-            <artifactId>effective-slf4j-pom</artifactId>
+            <artifactId>effective-jackson-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <type>pom</type>
         </dependency>
 
+
+-->
     </dependencies>
 
+
+    <modules>
+        <module>effective-akka-cluster01</module>
+    </modules>
 
     <build>
         <plugins>

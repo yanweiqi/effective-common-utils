@@ -32,7 +32,10 @@ public class SystemInfoController {
     @RequestMapping(value = "/ready/timeout")
     @ResponseBody
     public Object readyTimeOut() throws InterruptedException {
-        Thread.sleep(1000 * 10);
+        long start = System.currentTimeMillis();
+        Thread.sleep(1000);
+        long end = System.currentTimeMillis() - start;
+        System.out.println("执行："+ end);
         return "OK";
     }
 }

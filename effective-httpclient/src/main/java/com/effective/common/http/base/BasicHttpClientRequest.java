@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class BasicHttpClientRequest extends BaseHttpClient {
 
-    private static String url = "http://127.0.0.1:8080/ready";
+    private static String url = "http://127.0.0.1:8080/ready/timeout";
     private static BasicHttpClientConnectionManager connManager =new BasicHttpClientConnectionManager();
 
     @Override
@@ -26,9 +26,16 @@ public class BasicHttpClientRequest extends BaseHttpClient {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         BasicHttpClientRequest basicHttpClientRequest = new BasicHttpClientRequest();
-        Thread t1 = new Thread(new Worker(basicHttpClientRequest,url));
-        t1.start();
-        while (true){
+
+        String status = basicHttpClientRequest.httpGet(url);
+
+        System.out.println(status);
+
+        /**
+         *
+         Thread t1 = new Thread(new Worker(basicHttpClientRequest,url));
+         t1.start();
+         while (true){
             System.out.println( t1.getName() + " stattus " + t1.isAlive() );
             Thread.sleep(1000 * 2);
             if(t1.isAlive()){
@@ -36,7 +43,7 @@ public class BasicHttpClientRequest extends BaseHttpClient {
             } else {
                 t1.notify();
             }
-        }
+        }**/
     }
 
 

@@ -26,6 +26,7 @@ public class AskActorDemo {
 
         ActorSystem system = ActorSystem.create("testSystem");
         LoggingAdapter log = system.log();
+        
         ActorRef actorRef = system.actorOf(Props.create(AskActor.class), "askActor");
         log.info("引用Actor的路径:{}", actorRef.path());
         Timeout timeout = new Timeout(Duration.create(2, TimeUnit.SECONDS));
