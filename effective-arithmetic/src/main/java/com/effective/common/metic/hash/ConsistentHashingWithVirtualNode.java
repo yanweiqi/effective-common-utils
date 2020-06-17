@@ -101,12 +101,11 @@ public class ConsistentHashingWithVirtualNode{
     public static void main(String[] args){
         String[] nodes = {"127.3.0.1:1111", "221.226.0.1:2222", "10.211.0.1:3333"};
         for (int i = 0; i < nodes.length; i++) {
-            System.out.println("[" + nodes[i] + "]的hash值为" + getHash(nodes[i]) + ", 被路由到结点[" + getServer(nodes[i]) + 
-                    "],哈希值"+getHash(getServer(nodes[i])));
+            System.out.println("[" + nodes[i] + "]的hash值为" + getHash(nodes[i]) + ", 被路由到结点[" + getServer(nodes[i]) + "],哈希值"+getHash(getServer(nodes[i])));
         }
-
+        /*
         for (int i = 0; i < nodes.length; i++) {
             System.out.println("[" + nodes[i] + "]的hash值为" + getHash(nodes[i]) + ", 被路由到结点[" + getServer(nodes[i]) + "]");
-        }
+        }*/
     }
 }

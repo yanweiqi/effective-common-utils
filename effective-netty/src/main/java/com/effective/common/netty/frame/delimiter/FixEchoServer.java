@@ -8,15 +8,16 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * 分割符解码器
+ * 定长解码器
  *
  */
-public class EchoServer {
+public class FixEchoServer {
 
     public void bind(int port) throws Exception {
         // 配置服务端的NIO线程组
@@ -32,13 +33,9 @@ public class EchoServer {
                         @Override
                         public void initChannel(SocketChannel ch) {
                             /**
-                             * 以$_为结束符
-                             */
-                            ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
-                            /**
                              * DelimiterBasedFrameDecoder,自动以分割符作为结束标志的消息进行分割
                              */
-                            ch.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, delimiter));
+                            ch.pipeline().addLast(new FixedLengthFrameDecoder(3));
                             ch.pipeline().addLast(new StringDecoder());
                             ch.pipeline().addLast(new EchoServerHandler());
                         }
@@ -64,7 +61,7 @@ public class EchoServer {
         public void channelRead(ChannelHandlerContext ctx, Object msg) {
             String body = (String) msg;
             System.out.println("This is " + ++counter + " times receive client : [" + body + "]");
-            body += "$_";
+            body += "\r";
             ByteBuf echo = Unpooled.copiedBuffer(body.getBytes());
             ctx.writeAndFlush(echo);
         }
@@ -85,6 +82,6 @@ public class EchoServer {
                 // 采用默认值
             }
         }
-        new EchoServer().bind(port);
+        new FixEchoServer().bind(port);
     }
 }
