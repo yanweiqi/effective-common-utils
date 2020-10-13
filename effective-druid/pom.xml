@@ -12,7 +12,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.9.RELEASE</spring.version>
 		<commons.dbcp>1.4</commons.dbcp>
