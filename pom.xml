@@ -30,6 +30,7 @@
         <module>effective-osgi</module>
         <module>effective-arithmetic</module>
         <module>effective-akka</module>
+        <module>effective-shell</module>
     </modules>
     
     <build>
