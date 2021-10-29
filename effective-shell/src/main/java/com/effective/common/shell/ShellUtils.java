@@ -57,7 +57,7 @@ public class ShellUtils {
      * @param splitSize  单位 kb，mb，gb
      *                   return json
      */
-    public Result<String> splitFile(String sourcePath, String fileName, String targetPath, String fileSuffix, int splitSize) {
+    public Result<String> splitFile(String sourcePath, String fileName, String targetPath, String fileSuffix, Integer splitSize) {
         Result result = Result.builder().resultCode(ResultCode.SUCCESS).build();
         splitSize = Optional.ofNullable(splitSize).orElse(100);
         if (StringUtils.isBlank(sourcePath)) {
@@ -142,10 +142,23 @@ public class ShellUtils {
         return result;
     }
 
-
+/*
     public static void main(String[] args) {
         ShellUtils shellUtils = new ShellUtils();
-        shellUtils.splitFile("/tmp/shell", "ff.txt", "/tmp/shell", "ff_", 100);
+        shellUtils.splitFile("/tmp/shell", "ff.txt", "/tmp/shell", "ff_", null);
+    }
+*/
+    public static void main(String[] args) {
+        Queue<String> q = new LinkedList<>();
+
+
+        q.offer("a");
+        q.offer("b");
+
+        while(!q.isEmpty()){
+            String s = q.poll();
+            System.out.println(s);
+        }
     }
 
     public class FileBean {
