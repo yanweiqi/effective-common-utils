@@ -21,6 +21,12 @@
             <version>0.0.1-SNAPSHOT</version>
             <type>pom</type>
         </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.67.Final</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 
