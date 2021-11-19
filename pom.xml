@@ -13,9 +13,9 @@
 
     <modules>
         <!--<module>effective-base</module>
-        <module>effective-bookstore</module>
+        <module>effective-bookstore</module>-->
         <module>effective-lambda</module>
-        <module>effective-concurrent</module>
+       <!-- <module>effective-concurrent</module>
         <module>effective-xml</module>
         <module>effective-zookeeper</module>
         <module>effective-zeromq</module>
@@ -28,8 +28,8 @@
         <module>effective-messagePack</module>
         <module>effective-junit5</module>
         <module>effective-osgi</module>
-        <module>effective-arithmetic</module>
-        <module>effective-akka</module>-->
+        <module>effective-arithmetic</module>-->
+        <module>effective-akka</module>
         <module>effective-shell</module>
         <module>effective-frequency</module>
         <module>mybatis-plus-sample-crud</module>

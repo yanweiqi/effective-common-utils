@@ -6,7 +6,7 @@ import java.util.function.Consumer;
  * Created by yanweiqi on 2017/9/13.
  */
 @FunctionalInterface
-public interface CustomLamda<T> {
+public interface CustomLambda<T> {
 
-    T testCustomFunction(Consumer<T> cunsumer);
+    T testCustomFunction(Consumer<T> consumer);
 }

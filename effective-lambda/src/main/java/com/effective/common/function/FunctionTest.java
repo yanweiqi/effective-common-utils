@@ -28,7 +28,6 @@ public class FunctionTest {
         Consumer<String> c1 = (x) -> System.out.println("c1:"+x);
         Consumer<String> c2 = (x) -> System.out.println("c2:"+x);
         c1.andThen(c2).accept("-888-");
-
         c1.accept("222");
     }
 
@@ -39,24 +38,29 @@ public class FunctionTest {
     }
 
     @Test
-    public void testFunction() {
-        Function<String, String> f1 = (x) -> "f1: " + x;
-        Function<String, String> f2 = (x) -> "f2: " + x;
-        //先执行参数,再执行调用者
-        System.out.println(f1.compose(f2).apply("8888"));
-
-        //先执行调用者，再执行参数，和compose相反。
-        System.out.println(f1.andThen(f2).apply("8888"));
+    public void testCompose() {
+        Function<Integer, Integer> f1 = (x) -> x * 2;
+        Function<Integer, Integer> f2 = (x) -> x * x;
+        //先执行参数,再执行调用者 16 * 2 = 32
+        System.out.println(f1.compose(f2).apply(4));
     }
 
     @Test
-    public void testCustomLamda() {
+    public void testAndThen(){
+        Function<Integer, Integer> f1 = (x) -> x * 2;
+        Function<Integer, Integer> f2 = (x) -> x * x;
+        //先执行调用者，再执行参数，和compose相反。8 * 8 =64
+        System.out.println(f1.andThen(f2).apply(4));
+    }
+
+    @Test
+    public void testCustomLambda() {
         Consumer<String> consumer = (x) -> System.out.println("test" + x);
 
-        CustomLamda<String> customLamda = (x) -> {
-            x.accept("6");
+        CustomLambda<String> customLambda = (x) -> {
+            //x.accept("6");
             return "6";
         };
-        customLamda.testCustomFunction(consumer);
+        customLambda.testCustomFunction(consumer);
     }
 }
