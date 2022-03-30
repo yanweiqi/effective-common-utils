@@ -93,7 +93,7 @@ public class TimeClient {
         }
     }
 
-    class TimeClientHandler extends ChannelHandlerAdapter {
+    class TimeClientHandler extends ChannelDuplexHandler {
 
         @Override
         public void channelActive(ChannelHandlerContext ctx) {

@@ -53,7 +53,7 @@ public class EchoClient {
         }
     }
 
-    class TimeClientHandler extends ChannelHandlerAdapter {
+    class TimeClientHandler extends ChannelDuplexHandler {
 
         private final Logger logger = Logger.getLogger(TimeClientHandler.class.getName());
 

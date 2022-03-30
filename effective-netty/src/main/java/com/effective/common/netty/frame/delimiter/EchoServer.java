@@ -56,7 +56,7 @@ public class EchoServer {
         }
     }
 
-    class EchoServerHandler extends ChannelHandlerAdapter {
+    class EchoServerHandler extends ChannelDuplexHandler {
 
         int counter = 0;
 

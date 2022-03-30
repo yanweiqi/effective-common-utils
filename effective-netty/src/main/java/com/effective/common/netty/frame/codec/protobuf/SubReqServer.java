@@ -47,7 +47,7 @@ public class SubReqServer {
         }
     }
 
-    class SubReqServerHandler extends ChannelHandlerAdapter {
+    class SubReqServerHandler extends ChannelDuplexHandler {
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) {

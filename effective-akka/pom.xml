@@ -28,7 +28,7 @@
             <version>1.18.10</version>
             <scope>provided</scope>
         </dependency>
-
+<!--
         <dependency>
             <groupId>com.effective.common</groupId>
             <artifactId>effective-junit5-pom</artifactId>
@@ -40,7 +40,7 @@
             <artifactId>effective-slf4j-pom</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
+-->
     </dependencies>
 
 

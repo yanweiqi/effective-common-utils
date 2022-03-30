@@ -38,7 +38,7 @@ public class TimeClient {
     }
 
 
-   static class TimeClientHandler extends ChannelHandlerAdapter {
+   static class TimeClientHandler extends ChannelDuplexHandler {
 
         private static final Logger logger = Logger.getLogger(TimeClientHandler.class.getName());
 

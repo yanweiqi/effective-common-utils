@@ -44,7 +44,7 @@ public class SubReqClient {
         }
     }
 
-    class SubReqClientHandler extends ChannelHandlerAdapter {
+    class SubReqClientHandler extends ChannelDuplexHandler {
 
         /**
          * Creates a client-side handler.

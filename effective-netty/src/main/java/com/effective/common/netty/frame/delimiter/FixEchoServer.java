@@ -53,7 +53,7 @@ public class FixEchoServer {
         }
     }
 
-    class EchoServerHandler extends ChannelHandlerAdapter {
+    class EchoServerHandler extends ChannelDuplexHandler {
 
         int counter = 0;
 

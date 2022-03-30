@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Builder
 @Data
 public class Trade {
-    private String id;//id
-    private String name;//名称
+    private String id;   //id
+    private String name;  //名称
     private double price;//金额
     private AtomicInteger count = new AtomicInteger(0);
 }

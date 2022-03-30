@@ -47,7 +47,7 @@ public class EchoClient {
     }
 
 
-    class EchoClientHandler extends ChannelHandlerAdapter {
+    class EchoClientHandler extends ChannelDuplexHandler {
 
         private int counter;
 

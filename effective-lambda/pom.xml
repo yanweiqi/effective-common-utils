@@ -14,12 +14,14 @@
 	</properties>
 
 	<dependencies>
+		<!--
 		<dependency>
 			<groupId>com.effective.common</groupId>
 			<artifactId>effective-pom</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>pom</type>
 		</dependency>
+		-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

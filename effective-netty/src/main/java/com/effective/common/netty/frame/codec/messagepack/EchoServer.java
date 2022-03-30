@@ -70,7 +70,7 @@ public class EchoServer {
         }
     }
 
-    class TimeServerHandler extends ChannelHandlerAdapter {
+    class TimeServerHandler extends ChannelDuplexHandler {
 
         public TimeServerHandler() {
         }

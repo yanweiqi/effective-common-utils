@@ -61,7 +61,7 @@ public class TimeServer {
         }
     }
 
-    class TimeServerHandler extends ChannelHandlerAdapter {
+    class TimeServerHandler extends ChannelDuplexHandler {
 
         private int counter;
 
