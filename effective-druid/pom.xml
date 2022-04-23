@@ -14,7 +14,7 @@
 	<properties>
 		<junit.version>4.12</junit.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.9.RELEASE</spring.version>
+		<spring.version>5.3.19</spring.version>
 		<commons.dbcp>1.4</commons.dbcp>
 		<log4j.version>1.1.2</log4j.version>
 		<aspectj.version>1.6.11</aspectj.version>
