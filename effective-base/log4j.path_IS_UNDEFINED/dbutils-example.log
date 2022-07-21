@@ -1,6 +1,0 @@
-10:37:32.077 [main] INFO  com.effective.common.base.json.jackson.JacksonUtilsTest - Mahesh
-10:37:32.132 [main] INFO  com.effective.common.base.json.jackson.JacksonUtilsTest - <LinkedHashMap xmlns=""><name>Mahesh</name><age>10</age></LinkedHashMap>
-10:37:32.154 [main] INFO  com.effective.common.base.json.jackson.JacksonUtilsTest - {
-  "name" : null,
-  "age" : 0
-}

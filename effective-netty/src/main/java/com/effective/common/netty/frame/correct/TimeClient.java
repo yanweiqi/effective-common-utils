@@ -19,7 +19,8 @@ public class TimeClient {
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             Bootstrap b = new Bootstrap();
-            b.group(group).channel(NioSocketChannel.class)
+            b.group(group)
+                    .channel(NioSocketChannel.class)
                     .option(ChannelOption.TCP_NODELAY, true)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
@@ -62,7 +63,15 @@ public class TimeClient {
             for (int i = 0; i < 100; i++) {
                 message = Unpooled.buffer(req.length);
                 message.writeBytes(req);
-                ctx.writeAndFlush(message);
+                ctx.writeAndFlush(message).addListener(new ChannelFutureListener() {
+                    @Override
+                    public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                        System.out.println("=====isDone");
+                        if (channelFuture.isSuccess()) {
+                            System.out.println("=====isSuccess");
+                        }
+                    }
+                });
             }
         }
 

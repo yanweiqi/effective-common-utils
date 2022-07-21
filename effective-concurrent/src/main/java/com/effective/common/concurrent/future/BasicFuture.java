@@ -69,7 +69,7 @@ public class BasicFuture {
     @Test
     public void t1() throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
-            int i = 1/0;
+            int i = 1/1;
             return 100;
         });
         future.getNow(00);//有点特殊，如果结果已经计算完则返回结果或者抛出异常，否则返回给定的valueIfAbsent值

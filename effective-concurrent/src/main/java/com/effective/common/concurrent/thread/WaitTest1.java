@@ -7,6 +7,25 @@ package com.effective.common.concurrent.thread;
  */
 public class WaitTest1 {
 
+    public static void main(String[] args) throws InterruptedException {
+        final WaitTest1 test1 = new WaitTest1();
+
+        /**
+         * wait1/notify1
+         */
+        //test1.notify1(test1);
+
+        /**
+         * wait2/notify2
+         */
+        //test1.notify2(test1);
+
+        /**
+         * wait1/notify3
+         */
+        test1.notify3(test1);
+    }
+
 
     /**
      * 通过wait自动结束
@@ -100,22 +119,5 @@ public class WaitTest1 {
     }
 
 
-    public static void main(String[] args) throws InterruptedException {
-        final WaitTest1 test1 = new WaitTest1();
 
-        /**
-         * wait1/notify1
-         */
-        //test1.notify1(test1);
-
-        /**
-         * wait2/notify2
-         */
-        //test1.notify2(test1);
-
-        /**
-         * wait1/notify3
-         */
-        test1.notify3(test1);
-    }
 }
