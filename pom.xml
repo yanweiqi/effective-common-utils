@@ -23,7 +23,7 @@
         <module>effective-mybatis-redis</module>
         <module>effective-druid</module>
 
-        <module>effective-httpclient</module>
+
 
         <module>effective-messagePack</module>
         <module>effective-osgi</module>
@@ -35,6 +35,7 @@
         <module>effective-akka</module>
         <module>effective-disruptor</module>
         -->
+        <module>effective-httpclient</module>
         <module>effective-springboot</module>
         <module>effective-annotation</module>
         <module>effective-base</module>

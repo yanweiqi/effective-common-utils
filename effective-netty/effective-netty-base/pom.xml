@@ -6,35 +6,17 @@
 
     <parent>
         <groupId>com.effective.common</groupId>
-        <artifactId>effective-common-utils</artifactId>
+        <artifactId>effective-netty</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.effective.common</groupId>
-    <artifactId>effective-httpclient</artifactId>
+    <artifactId>effective-netty-base</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-httpclient-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-springboot-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.effective.common</groupId>
-            <artifactId>effective-apache-pom</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-    </dependencies>
-
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
 
     <build>
         <plugins>
@@ -49,4 +31,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
