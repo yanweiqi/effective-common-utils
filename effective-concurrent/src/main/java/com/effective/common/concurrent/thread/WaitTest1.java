@@ -13,7 +13,7 @@ public class WaitTest1 {
         /**
          * wait1/notify1
          */
-        //test1.notify1(test1);
+        test1.notify1(test1);
 
         /**
          * wait2/notify2
@@ -23,7 +23,7 @@ public class WaitTest1 {
         /**
          * wait1/notify3
          */
-        test1.notify3(test1);
+        //test1.notify3(test1);
     }
 
 
@@ -33,11 +33,22 @@ public class WaitTest1 {
     public synchronized void wait1() {
         System.out.println(Thread.currentThread().getName() + " Start-----");
         try {
-            wait(1000);
+            wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + " End-------");
+    }
+
+    public synchronized void notify1(WaitTest1 test1) {
+       new Thread(()->test1.wait1()).start();
+
+       new Thread(()->{
+           synchronized (test1) {
+               test1.notify();
+           }
+       }).start();
+
     }
 
 
@@ -49,6 +60,25 @@ public class WaitTest1 {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + " End-------");
+    }
+
+    /**
+     * 启用5个线程，通过notify()唤醒一个线程，notifyall()唤醒所有线程
+     * @param test1
+     */
+    public void notify2(WaitTest1 test1) {
+        for (int i = 0; i < 5; i++) {
+            new Thread(() -> test1.wait2()).start();
+        }
+
+        synchronized (test1) {
+            test1.notify();
+        }
+
+//        System.out.println("-----分割线-----");
+//        synchronized (test1) {
+//            test1.notifyAll();
+//        }
     }
 
     public synchronized void wait3() {
@@ -65,34 +95,6 @@ public class WaitTest1 {
             e.printStackTrace();
         }
         System.out.println(Thread.currentThread().getName() + " End-------");
-    }
-
-    public synchronized void notify1(WaitTest1 test1) {
-        new Thread(()->test1.wait1()).start();
-
-
-        synchronized (test1) {
-            test1.notify();
-        }
-    }
-
-    /**
-     * 启用5个线程，通过notify()唤醒一个线程，notifyall()唤醒所有线程
-     * @param test1
-     */
-    public void notify2(WaitTest1 test1) {
-        for (int i = 0; i < 5; i++) {
-            new Thread(() -> test1.wait2()).start();
-        }
-
-        synchronized (test1) {
-            test1.notify();
-        }
-
-        System.out.println("-----分割线-----");
-        synchronized (test1) {
-            test1.notifyAll();
-        }
     }
 
     /**
