@@ -1,0 +1,14 @@
+syntax = "proto2";
+
+//option java_package = "com.effective.common.frame.frame.codec.protobuf";
+option java_outer_classname = "SubscribeRepProto";
+
+message SubscribeRep {
+
+    required int32 subReqID = 1;
+
+    required int32 respCode = 2;
+
+    required string desc = 3;
+
+}
