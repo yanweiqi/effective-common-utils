@@ -2,7 +2,7 @@
 <!--设置log4j2的自身log级别为warn -->
 <configuration status="warn">
     <properties>
-        <Property name="app_name">effective-shell</Property>
+        <Property name="app_name">effective-cache</Property>
         <Property name="log_path">${system.log.path}/log/${app_name}</Property>
         <Property name="maxfile">50</Property>
     </properties>

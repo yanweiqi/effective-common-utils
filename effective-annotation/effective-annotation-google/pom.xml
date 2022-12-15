@@ -14,7 +14,6 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>com.effective.common</groupId>
             <artifactId>effective-annotation-processing</artifactId>
@@ -39,8 +38,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
                     <annotationProcessors>

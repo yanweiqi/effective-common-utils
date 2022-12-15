@@ -14,7 +14,6 @@
     <modules>
         <!--
         <module>effective-bookstore</module>
-        <module>effective-lambda</module>
         <module>effective-concurrent</module>
         <module>effective-xml</module>
         <module>effective-zookeeper</module>
@@ -22,9 +21,6 @@
         <module>effective-protobuf</module>
         <module>effective-mybatis-redis</module>
         <module>effective-druid</module>
-
-
-
         <module>effective-messagePack</module>
         <module>effective-osgi</module>
         <module>effective-arithmetic</module>
@@ -35,13 +31,18 @@
         <module>effective-akka</module>
         <module>effective-disruptor</module>
         -->
+        <module>effective-lambda</module>
+        <module>effective-annotation</module>
+        <module>effective-flow-control</module>
+        <!--
         <module>effective-httpclient</module>
         <module>effective-springboot</module>
-        <module>effective-annotation</module>
+
         <module>effective-base</module>
         <module>effective-cache</module>
         <module>effective-pom</module>
         <module>effective-netty</module>
+        -->
     </modules>
     
     <build>
@@ -51,8 +52,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
