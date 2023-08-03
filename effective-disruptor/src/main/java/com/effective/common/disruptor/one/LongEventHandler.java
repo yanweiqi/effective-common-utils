@@ -2,10 +2,11 @@ package com.effective.common.disruptor.one;
 
 
 import com.lmax.disruptor.EventHandler;
+import com.lmax.disruptor.WorkHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class LongEventHandler implements EventHandler<LongEvent> {
+public class LongEventHandler implements EventHandler<LongEvent>, WorkHandler<LongEvent> {
 
 
     /**
@@ -15,7 +16,13 @@ public class LongEventHandler implements EventHandler<LongEvent> {
      */
     @Override
     public void onEvent(LongEvent longEvent, long l, boolean b)  {
-        //消费，数据处理
-        log.info(" longEvent:{} sequence:{} endOfBatch:{}", longEvent.getValue(), l, b);
+        log.info("广播模式 线程{} longEvent:{} sequence:{} endOfBatch:{}",Thread.currentThread().getName(), longEvent.getValue(), l, b);
     }
+
+
+    @Override
+    public void onEvent(LongEvent longEvent)  {
+        log.info("集群模式 线程{} longEvent:{}",Thread.currentThread().getName(), longEvent.getValue());
+    }
+
 }
