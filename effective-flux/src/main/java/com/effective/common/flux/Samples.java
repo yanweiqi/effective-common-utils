@@ -41,8 +41,7 @@ public class Samples {
 
             }
         };
-        Flux.just("Howdy", "Word")
-                .subscribe(subscriber);
+        Flux.just("Howdy", "Word").subscribe(subscriber);
     }
 
     @Test
@@ -69,8 +68,7 @@ public class Samples {
 
     @Test
     public void test3() throws InterruptedException, IOException {
-        Flux.just(new Integer[]{1, 2, 3, 4})
-                .subscribe(System.out::println);
+        Flux.just(new Integer[]{1, 2, 3, 4}).subscribe(System.out::println);
 
 
         //使用可变参数创建Flux
@@ -110,10 +108,7 @@ public class Samples {
                 .header("Content-type", "application/json")
                 .GET()
                 .build();
-        final HttpResponse<String> send = httpClient.send(
-                request,
-                HttpResponse.BodyHandlers.ofString()
-        );
+        final HttpResponse<String> send = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(send.body());
 
     }

@@ -38,6 +38,7 @@ public class LongEventTest {
         );
         dis.handleEventsWith(new LongEventHandler()); //设置handle
         dis.start();
+
         LongEventProducer producer = new LongEventProducer(dis.getRingBuffer()); //传入ringBuffer
         ByteBuffer bf = ByteBuffer.allocate(8);
         for (int i = 0; i < 100; i++) {
@@ -45,7 +46,12 @@ public class LongEventTest {
             producer.onData(bf);
         }
         log.info("Producer 完成");
+
+        /**
+         *
+         */
         dis.shutdown();
+
         log.info("Disruptor 完成");
     }
 }

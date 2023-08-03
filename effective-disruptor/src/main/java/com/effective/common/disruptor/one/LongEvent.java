@@ -7,6 +7,9 @@ import lombok.Data;
 @Builder
 public class LongEvent {
 
+    /**
+     * 数值
+     */
     private Long value;
 
 }

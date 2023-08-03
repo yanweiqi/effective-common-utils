@@ -13,20 +13,56 @@ import java.util.concurrent.TimeUnit;
 
 public class FluxC {
 
+    /**
+     * 时间处理器
+     */
     interface MyEventProcessor {
+
+        /**
+         * 注册监听事件
+         *
+         * @param eventListener
+         */
         void register(MyEventListener<String> eventListener);
+
+        /**
+         * @param values 数组
+         */
         void dataChunk(String... values);
+
+        /**
+         *
+         */
         void processComplete();
     }
 
+    /**
+     * 事件监听器
+     *
+     * @param <T>
+     */
     interface MyEventListener<T> {
+
+        /**
+         * 接收数据
+         *
+         * @param chunk
+         */
         void onDataChunk(List<T> chunk);
+
+        /**
+         * 处理完成
+         */
         void processComplete();
     }
 
-    private MyEventProcessor myEventProcessor = new MyEventProcessor() {
+    /**
+     * 事情处理器
+     */
+    public MyEventProcessor myEventProcessor = new MyEventProcessor() {
 
         private MyEventListener<String> eventListener;
+
         private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
         @Override
@@ -36,42 +72,32 @@ public class FluxC {
 
         @Override
         public void dataChunk(String... values) {
-            executor.schedule(() -> eventListener.onDataChunk(Arrays.asList(values)),
-                    500,
-                    TimeUnit.MILLISECONDS
-            );
+            executor.schedule(() -> eventListener.onDataChunk(Arrays.asList(values)), 500, TimeUnit.MILLISECONDS);
         }
 
         @Override
         public void processComplete() {
-            executor.schedule(() -> eventListener.processComplete(),
-                    500,
-                    TimeUnit.MILLISECONDS
-            );
+            executor.schedule(() -> eventListener.processComplete(), 500, TimeUnit.MILLISECONDS);
         }
     };
 
 
-    Flux<String> bridge = Flux.create(sink -> {
-        myEventProcessor.register(
-                new MyEventListener<>() {
-                    public void onDataChunk(List<String> chunk) {
-                        for (String s : chunk) {
-                            System.out.println(s);
-                            sink.next(s);
-                        }
-                    }
-                    public void processComplete() {
-                        System.out.println("执行完毕处理");
-                        sink.complete();
-                    }
-                });
-    });
+    Flux<String> bridge = Flux.create(sink -> myEventProcessor.register(new MyEventListener<>() {
+        public void onDataChunk(List<String> chunk) {
+            for (String s : chunk) {
+                System.out.println(s);
+                sink.next(s);
+            }
+        }
 
-   public void sub() throws InterruptedException {
+        public void processComplete() {
+            System.out.println("执行完毕处理");
+            sink.complete();
+        }
+    }));
 
+    public void sub() throws InterruptedException {
        bridge.subscribe();
-
        Thread.sleep(1000 * 30);
 
    }
@@ -89,28 +115,21 @@ public class FluxC {
        }).start();
 
         System.out.println("---分割线---");
-        //myEventProcessor.dataChunk("foo", "bar", "baz");
-        //myEventProcessor.processComplete();
-        //bridge.subscribe();
-
-        Thread.sleep(1000);
+        myEventProcessor.dataChunk("foo", "bar", "baz");
 
         System.out.println("开始干活");
-
 //        StepVerifier.withVirtualTime(() -> bridge)
 //                .expectSubscription()
 //                .expectNoEvent(Duration.ofSeconds(10))
 //                .then(() -> myEventProcessor.dataChunk("foo", "bar", "baz"))
-//                .expectNext("foo", "bar", "baz")
+//                .expectNext("a", "b", "c")
 //                .expectNoEvent(Duration.ofSeconds(10))
 //                .then(() -> myEventProcessor.processComplete())
 //                .verifyComplete();
 
-        myEventProcessor.dataChunk("1", "2", "3");
-        myEventProcessor.processComplete();
-
-
-        Thread.sleep(1000 * 60);
+        //myEventProcessor.dataChunk("1", "2", "3");
+        //myEventProcessor.processComplete();
+        Thread.sleep(1000 * 5);
 
     }
 

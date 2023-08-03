@@ -8,9 +8,10 @@ import java.nio.ByteBuffer;
 @Slf4j
 public class LongEventProducer {
 
+
     private final RingBuffer<LongEvent> ringBuffer;
 
-    public LongEventProducer(RingBuffer<LongEvent> ringBuffer) {
+    public LongEventProducer(final RingBuffer<LongEvent> ringBuffer) {
         this.ringBuffer = ringBuffer;
     }
 
@@ -19,12 +20,12 @@ public class LongEventProducer {
      * @param bf nio缓冲对象
      */
     public void onData(ByteBuffer bf) {
-        //可以把ringBuffer看做一个事件队列，那么next就是得到下面一个事件槽
+        //ringBuffer是一个事件队列，那么next返回最后一条记录的位置
         long sequence = ringBuffer.next();
         try {
-            //用上面的索引取出一个空的事件用于填充
-            LongEvent l = ringBuffer.get(sequence);
-            l.setValue(bf.getLong(0));
+            //sequence位置取出一个空的事件
+            LongEvent event = ringBuffer.get(sequence);
+            event.setValue(bf.getLong(0));
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         } finally {

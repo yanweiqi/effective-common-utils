@@ -29,11 +29,13 @@
         <module>mybatis-plus-sample-crud</module>
         <module>effective-junit5</module>
         <module>effective-akka</module>
-        <module>effective-disruptor</module>
         -->
+        <module>effective-etcd</module>
+        <module>effective-disruptor</module>
         <module>effective-lambda</module>
         <module>effective-annotation</module>
         <module>effective-flow-control</module>
+        <module>effective-flux</module>
         <!--
         <module>effective-httpclient</module>
         <module>effective-springboot</module>
@@ -44,7 +46,7 @@
         <module>effective-netty</module>
         -->
     </modules>
-    
+
     <build>
         <plugins>
             <plugin>

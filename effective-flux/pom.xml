@@ -7,6 +7,7 @@
     <groupId>com.effective.common</groupId>
     <artifactId>effective-flux</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <build>
         <plugins>
             <plugin>
@@ -21,6 +22,7 @@
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>commons-lang</groupId>
@@ -52,7 +54,8 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
-<!-- -->
+
+        <!-- -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
