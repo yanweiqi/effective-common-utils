@@ -1,5 +1,7 @@
 package com.effective.common.netty.base.frame.codec.serializable;
 
+
+
 import org.msgpack.annotation.Message;
 
 import java.io.Serializable;

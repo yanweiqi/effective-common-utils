@@ -36,14 +36,13 @@
         <module>effective-annotation</module>
         <module>effective-flow-control</module>
         <module>effective-flux</module>
+        <module>effective-netty</module>
         <!--
         <module>effective-httpclient</module>
         <module>effective-springboot</module>
-
         <module>effective-base</module>
         <module>effective-cache</module>
         <module>effective-pom</module>
-        <module>effective-netty</module>
         -->
     </modules>
 
