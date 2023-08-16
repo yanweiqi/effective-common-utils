@@ -20,8 +20,6 @@ import java.io.OutputStream;
 
 /**
  * Command encoder
- *
- *
  */
 @Slf4j
 public class CommandEncoder extends MessageToByteEncoder<BaseCommand> {

@@ -7,17 +7,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Message sync command handler for netty
- *
- * @date 26/1/2020
- */
 @Slf4j
 public class BaseCommandHandler extends SimpleChannelInboundHandler<BaseCommand> {
 
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext,
-                                BaseCommand baseCommand) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, BaseCommand baseCommand) throws Exception {
         if (log.isInfoEnabled()) {
             log.info("[BaseCommand]Received a command from other brokers, command={}", JSONUtil.bean2Json(baseCommand));
         }

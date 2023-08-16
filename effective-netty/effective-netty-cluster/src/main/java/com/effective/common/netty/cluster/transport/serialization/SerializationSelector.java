@@ -12,30 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Serialization Selector
- *
- * @date 2020/3/8
  */
 @Slf4j
-//@Component
-//public class SerializationSelector implements ApplicationContextAware {
 public class SerializationSelector {
 
     private static Map<String, Serialization> serializationMap = new ConcurrentHashMap<>();
 
     private static Map<Byte, Serialization> serializationCodeMap = new ConcurrentHashMap<>();
-
-//    @Override
-//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//        if (applicationContext.getParent() == null ||
-//                applicationContext.getParent().getParent() == null) {
-//            Map<String, Serialization> beans = applicationContext.getBeansOfType(Serialization.class);
-//            beans.forEach((beanName, commandHandler) -> addHandler(commandHandler));
-//            log.info("{} {} Init handler finished, serialization handler count:{}",
-//                    GatewayConstants.SYSTEM_NAME,
-//                    GatewayConstants.SYSTEM_CORE,
-//                    serializationMap.size());
-//        }
-//    }
 
     public static void addHandler(Serialization serialization) {
         serialization.getContentType().forEach(contentType -> {

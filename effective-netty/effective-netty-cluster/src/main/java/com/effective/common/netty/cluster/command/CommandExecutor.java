@@ -17,6 +17,7 @@ public class CommandExecutor implements Runnable {
      */
     private Command command;
 
+
     public CommandExecutor(final CommandHandler<Command> handler, final Command command) {
         this.handler = handler;
         this.command = command;

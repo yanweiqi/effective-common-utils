@@ -1,10 +1,6 @@
 package com.effective.common.netty.cluster.command;
 
-/**
- * Command Class Type
- *
- * @date 2020-01-26
- */
+
 public enum CommandClassType {
 
     /**

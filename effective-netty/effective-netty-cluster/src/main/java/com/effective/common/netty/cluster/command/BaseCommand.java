@@ -12,11 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 
-/**
- * Command
- *
- * @date 11/2/2020
- */
+
 @Slf4j
 @Data
 @Accessors(chain = true)

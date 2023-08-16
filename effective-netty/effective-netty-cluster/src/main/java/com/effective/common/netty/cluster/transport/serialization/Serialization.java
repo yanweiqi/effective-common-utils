@@ -4,9 +4,6 @@ import java.util.List;
 
 /**
  * Serialization
- *
- *
- * @date 2020/3/8
  */
 public interface Serialization {
 

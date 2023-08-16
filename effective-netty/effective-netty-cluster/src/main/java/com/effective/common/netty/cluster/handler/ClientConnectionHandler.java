@@ -7,8 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * ClientConnection Handler
- *
- * @date 2020/2/27
  */
 @Slf4j
 public class ClientConnectionHandler extends ChannelDuplexHandler {

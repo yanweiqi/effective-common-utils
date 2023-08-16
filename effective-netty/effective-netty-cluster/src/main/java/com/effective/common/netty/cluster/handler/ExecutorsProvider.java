@@ -4,8 +4,6 @@ import java.util.concurrent.ExecutorService;
 
 /**
  * Executors provider interface
- *
- *
  */
 public interface ExecutorsProvider {
 

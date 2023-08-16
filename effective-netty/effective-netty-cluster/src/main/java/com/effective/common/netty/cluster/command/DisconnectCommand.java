@@ -11,8 +11,14 @@ public class DisconnectCommand extends BaseCommand<String> {
 
     public static String COMMAND_NAME = "disconnectCommand";
 
+    /**
+     * 客户端id
+     */
     private String clientId;
 
+    /**
+     * 机器id
+     */
     private String brokerId;
 
     public DisconnectCommand() {

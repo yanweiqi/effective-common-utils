@@ -25,9 +25,7 @@ public class CommandHeader implements Header {
 
     /**
      * Command body length
-     * <p>
      * The total length: length of (header+body), not include MEGICCODE
-     * </p>
      */
     protected Integer length;
 
@@ -43,10 +41,8 @@ public class CommandHeader implements Header {
 
     /**
      * Serialization type
-     * <p>
      * 1. json
      * 2. protostuff
-     * </p>
      */
     protected byte serialization = Serialization.PROTOSTUFF_ID;
 
@@ -209,9 +205,9 @@ public class CommandHeader implements Header {
     /**
      * Decode command header
      *
-     * @param in
-     * @return
-     * @throws Exception
+     * @param in 字节流
+     * @return 命令头部解码
+     * @throws Exception 命令异常
      */
     public CommandHeader decode(ByteBuf in) throws Exception {
         if (Objects.nonNull(in)) {
@@ -237,7 +233,7 @@ public class CommandHeader implements Header {
     /**
      * Encode command header
      *
-     * @param out
+     * @param out 字节流编码
      * @throws Exception
      */
     public int encode(ByteBuf out) throws Exception {

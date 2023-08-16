@@ -2,9 +2,6 @@ package com.effective.common.netty.cluster.transport.protocol;
 
 /**
  * Command Protocol
- *
- *
- * @date 2020/3/8
  */
 public class CommandProtocol implements Protocol {
 

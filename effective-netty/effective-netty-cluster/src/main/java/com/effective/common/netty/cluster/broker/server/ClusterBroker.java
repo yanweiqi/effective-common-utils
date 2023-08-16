@@ -23,11 +23,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.context.properties.EnableConfigurationProperties;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
 /**
@@ -36,9 +31,6 @@ import java.util.Objects;
  * @date 2/2/2020
  */
 @Slf4j
-//@Component
-//@Configuration
-//@EnableConfigurationProperties(BrokerProperties.class)
 public class ClusterBroker extends AbstractBroker {
 
     private static volatile boolean running = false;
@@ -55,7 +47,6 @@ public class ClusterBroker extends AbstractBroker {
 
     private Channel serverChannel;
 
-//    @Autowired
     public ClusterBroker(BrokerProperties brokerProperties) {
         this.brokerProperties = brokerProperties;
         if (brokerProperties.isEpoll() && SystemUtil.isLinux()) {
@@ -70,7 +61,6 @@ public class ClusterBroker extends AbstractBroker {
         this.serverBootstrap = new ServerBootstrap();
     }
 
-    //@Override
     public void start() {
         this.serverBootstrap.group(selectorGroup, ioGroup)
                 .channel(clazz)
@@ -111,7 +101,6 @@ public class ClusterBroker extends AbstractBroker {
         running = true;
     }
 
-    //@Override
     public void stop() {
         log.info("Stopping broker!");
         try {
@@ -128,7 +117,6 @@ public class ClusterBroker extends AbstractBroker {
         running = false;
     }
 
-    //@Override
     public boolean isRunning() {
         return running;
     }

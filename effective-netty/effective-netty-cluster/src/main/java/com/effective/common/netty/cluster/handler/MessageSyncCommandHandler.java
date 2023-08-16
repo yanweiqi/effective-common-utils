@@ -11,8 +11,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.timeout.IdleStateEvent;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.IdentityHashMap;
 import java.util.Objects;
 
 /**

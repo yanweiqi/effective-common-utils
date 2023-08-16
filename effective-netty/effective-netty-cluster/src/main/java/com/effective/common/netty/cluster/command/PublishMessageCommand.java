@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @Accessors(chain = true)
 public class PublishMessageCommand<T> extends BaseCommand<T> {
 
+    /**
+     * 发布命令
+     */
     public static String COMMAND_NAME = "publishMessage";
 
     public PublishMessageCommand() {

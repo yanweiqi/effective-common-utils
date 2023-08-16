@@ -70,31 +70,4 @@ public class ServerConnectionHandler extends ChannelDuplexHandler {
          }
          super.exceptionCaught(ctx, cause);
     }
-
-    /**
-     * 监控各个堆积的任务队列中第一个任务的类信息
-     */
-//    public void monitorQueueFirstTask(ChannelHandlerContext ctx) throws NoSuchFieldException, IllegalAccessException {
-//        Field singleThreadField = SingleThreadEventExecutor.class.getDeclaredField("taskQueue");
-//        singleThreadField.setAccessible(true);
-//        for (EventExecutor eventExecutor : ctx.executor().parent()) {
-//            SingleThreadEventExecutor executor = (SingleThreadEventExecutor) eventExecutor;
-//            Runnable task = ((Queue<Runnable>) singleThreadField.get(executor)).peek();
-//            if (null != task) {
-//                if (log.isInfoEnabled()) {
-//                    log.info("任务队列中第一个任务信息：" + task.getClass().getName());
-//                }
-//            }
-//        }
-//    }
-
-    /**
-     * 监控出站消息的队列积压的byteBuf大小
-     */
-//    public void monitorOutboundBufSize(ChannelHandlerContext ctx) {
-//        long outBoundBufSize = ctx.channel().unsafe().outboundBuffer().totalPendingWriteBytes();
-//        if (log.isInfoEnabled()) {
-//            log.info("出站消息队列中积压的buf大小：" + outBoundBufSize);
-//        }
-//    }
 }

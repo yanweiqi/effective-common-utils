@@ -6,8 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * 异步确认，回调接口
- *
- * @date 6/2/2020
  */
 public interface Feedback<T> extends Cloneable {
 

@@ -20,15 +20,10 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
-//import org.springframework.util.Assert;
 
 import java.util.Objects;
 
-/**
- * Broker Client by netty
- *
- * @date 2/2/2020
- */
+
 @Slf4j
 public class DefaultBrokerClient extends AbstractBrokerClient {
 

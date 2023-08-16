@@ -27,8 +27,6 @@ import java.util.Objects;
 
 /**
  * Command decoder
- *
- *
  */
 @Slf4j
 public class CommandDecoder extends LengthFieldBasedFrameDecoder {

@@ -9,9 +9,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * Serializer
- *
- *
- * @date 2020/2/27
  */
 @Slf4j
 public class SerializerUtil {

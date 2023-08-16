@@ -12,8 +12,6 @@ public class KeepaliveHandler extends ChannelDuplexHandler {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        //        if (evt == IdleStateEvent.FIRST_ALL_IDLE_STATE_EVENT) {
-        //        }
         if (log.isInfoEnabled()) {
             log.info("[Client]UserEventTriggered！event type={}", JSONUtil.bean2Json(evt));
         }

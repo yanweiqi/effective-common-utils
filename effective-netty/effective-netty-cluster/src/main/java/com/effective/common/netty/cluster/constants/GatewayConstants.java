@@ -3,12 +3,6 @@ package com.effective.common.netty.cluster.constants;
 import com.effective.common.netty.cluster.utils.UUIDUtil;
 import com.effective.common.netty.cluster.utils.url.URLOption;
 
-/**
- * Gateway Constants
- *
- *
- * @date 2019-07-26
- */
 public class GatewayConstants {
 
     public static final String APP_NAME="Jdt-Iot-Broker";

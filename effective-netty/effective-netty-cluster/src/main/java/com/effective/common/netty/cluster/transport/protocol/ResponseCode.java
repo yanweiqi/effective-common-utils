@@ -3,8 +3,6 @@ package com.effective.common.netty.cluster.transport.protocol;
 /**
  * Response Code
  *
- *
- * @date 2020-01-26
  */
 public enum ResponseCode {
 

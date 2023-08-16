@@ -3,7 +3,10 @@ package com.effective.common.netty.cluster.command;
 
 import java.util.List;
 
-
+/**
+ * 命令执行器
+ * @param <T>
+ */
 public interface CommandHandler<T extends Command> {
 
     /**

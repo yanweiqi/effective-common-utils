@@ -4,14 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-//import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Broker Properties
- *
- * @date 26/1/2020
- */
-//@ConfigurationProperties(prefix = BrokerProperties.CONFIGURATION_PREFIX)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
