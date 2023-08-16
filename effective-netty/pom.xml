@@ -13,10 +13,85 @@
     <modules>
         <module>effective-netty-base</module>
         <module>effective-netty-http2</module>
+        <module>effective-netty-cluster</module>
+        <module>effective-netty-heartbeat</module>
+        <module>effective-netty-common</module>
+        <module>effective-netty-protobuf</module>
     </modules>
 
-    <dependencies>
+    <properties>
+        <netty.version>4.1.96.Final</netty.version>
+        <lombok.version>1.18.24</lombok.version>
+        <log4j.version>2.9.1</log4j.version>
+        <sl4j.version>1.7.25</sl4j.version>
+        <commons-lang3.version>3.2.1</commons-lang3.version>
+        <fastjson.version>1.2.76</fastjson.version>
+        <commons-compress.version>1.23.0</commons-compress.version>
+    </properties>
 
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-transport</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!--log4j2核心包-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <!--用于与slf4j保持桥接-->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+            <!-- slf4j核心包-->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${sl4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>${commons-compress.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 </project>
 
