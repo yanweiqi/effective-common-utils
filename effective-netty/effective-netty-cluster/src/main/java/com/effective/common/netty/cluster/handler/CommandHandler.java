@@ -1,5 +1,7 @@
-package com.effective.common.netty.cluster.command;
+package com.effective.common.netty.cluster.handler;
 
+
+import com.effective.common.netty.cluster.command.api.Command;
 
 import java.util.List;
 
@@ -22,14 +24,14 @@ public interface CommandHandler<T extends Command> {
      * @param command 命令
      * @return true/false
      */
-    boolean supportsCommandType(Class<? extends Command> command);
+    boolean supportsType(Class<? extends Command> command);
 
     /**
-     * 应用命令
+     * 获取命令集合
      *
-     * @return true/false
+     * @return list
      */
-    List<String> getApplyCommands();
+    List<String> getCommands();
 
     /**
      * 保存消息体
@@ -38,7 +40,6 @@ public interface CommandHandler<T extends Command> {
      * @return ture/false
      */
     T restore(String messageBody);
-
 
     /**
      * 执行命令

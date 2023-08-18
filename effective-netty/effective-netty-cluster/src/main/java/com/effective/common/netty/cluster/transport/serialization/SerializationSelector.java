@@ -1,17 +1,14 @@
 package com.effective.common.netty.cluster.transport.serialization;
 
-import com.effective.common.netty.cluster.constants.GatewayConstants;
-import lombok.extern.slf4j.Slf4j;
-//import org.springframework.beans.BeansException;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.ApplicationContextAware;
-//import org.springframework.stereotype.Component;
 
+import com.effective.common.netty.cluster.transport.serialization.json.JsonSerialization;
+import com.effective.common.netty.cluster.transport.serialization.protostuff.ProtostuffSerialization;
+import lombok.extern.slf4j.Slf4j;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Serialization Selector
+ * 序列化选择器
  */
 @Slf4j
 public class SerializationSelector {
@@ -20,24 +17,47 @@ public class SerializationSelector {
 
     private static Map<Byte, Serialization> serializationCodeMap = new ConcurrentHashMap<>();
 
+    /**
+     * 增加序列化处理器
+     *
+     * @param serialization 序列化处理器
+     */
     public static void addHandler(Serialization serialization) {
         serialization.getContentType().forEach(contentType -> {
             if (!serializationMap.containsKey(contentType)) {
                 serializationMap.computeIfAbsent(contentType, s -> serialization);
                 serializationCodeMap.computeIfAbsent(serialization.getContentCode(), b -> serialization);
             } else {
-                log.error("SerializationSelector[{}] has duplicate handlers. This handler will be ignored (invalid)! handler class={}",
-                        contentType, serialization.getClass().getCanonicalName());
+                log.error("添加序列 contentType:{} class:{}", contentType, serialization.getClass().getCanonicalName());
             }
         });
-
     }
 
+    /**
+     * 获取序列化实现类
+     *
+     * @param contentType 类型
+     * @return 序列化实现类
+     */
     public static Serialization select(String contentType) {
+        if(serializationMap.isEmpty()){
+            addHandler(new JsonSerialization());
+            addHandler(new ProtostuffSerialization());
+        }
         return serializationMap.get(contentType);
     }
 
+    /**
+     * 获取序列化实现类
+     *
+     * @param contentType 类型
+     * @return 序列化实现类
+     */
     public static Serialization select(Byte contentType) {
+        if(serializationCodeMap.isEmpty()){
+            addHandler(new JsonSerialization());
+            addHandler(new ProtostuffSerialization());
+        }
         return serializationCodeMap.get(contentType);
     }
 

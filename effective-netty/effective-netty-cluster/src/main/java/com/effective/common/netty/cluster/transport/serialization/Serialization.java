@@ -17,20 +17,24 @@ public interface Serialization {
      */
     byte PROTOSTUFF_ID = 2;
 
-
+    /**
+     * 获取code
+     *
+     * @return code
+     */
     Byte getContentCode();
 
     /**
      * 获取内容格式
      *
-     * @return
+     * @return 类型
      */
     List<String> getContentType();
 
     /**
      * 构建序列化器
      *
-     * @return
+     * @return 序列化接口
      */
     Serializer getSerializer();
 

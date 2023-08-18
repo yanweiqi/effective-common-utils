@@ -1,11 +1,13 @@
-package com.effective.common.netty.cluster.command;
+package com.effective.common.netty.cluster.command.api;
 
 
 import com.effective.common.netty.cluster.feeback.Feedback;
 import com.effective.common.netty.cluster.transport.protocol.Header;
 import io.netty.channel.ChannelHandlerContext;
 
-
+/**
+ *
+ */
 public interface Command {
 
     /**
@@ -56,4 +58,5 @@ public interface Command {
      * @param channelHandlerContext 通道上线文
      */
     void setChannelHandlerContext(ChannelHandlerContext channelHandlerContext);
+
 }

@@ -1,6 +1,9 @@
 package com.effective.common.netty.cluster.transport.compression;
 
-import com.effective.common.netty.cluster.constants.GatewayConstants;
+
+import com.effective.common.netty.cluster.transport.compression.gzip.GzipCompression;
+import com.effective.common.netty.cluster.transport.compression.lz4.Lz4Compression;
+import com.effective.common.netty.cluster.transport.compression.lz4.Lz4FrameCompression;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
@@ -18,19 +21,7 @@ public class CompressionSelector {
     private static Map<String, Compression> compressionMap = new ConcurrentHashMap<>();
 
     private static Map<Byte, Compression> compressionCodeMap = new ConcurrentHashMap<>();
-//
-//    @Override
-//    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//        if (applicationContext.getParent() == null ||
-//                applicationContext.getParent().getParent() == null) {
-//            Map<String, Compression> beans = applicationContext.getBeansOfType(Compression.class);
-//            beans.forEach((beanName, commandHandler) -> addHandler(commandHandler));
-//            log.info("{} {} Init handler finished, compression handler count:{}",
-//                    GatewayConstants.SYSTEM_NAME,
-//                    GatewayConstants.SYSTEM_CORE,
-//                    compressionMap.size());
-//        }
-//    }
+
 
     public static void addHandler(Compression compression) {
         if (!compressionMap.containsKey(compression.getTypeName())) {
@@ -47,6 +38,11 @@ public class CompressionSelector {
     }
 
     public static Compression select(Byte contentType) {
+//        if (compressionCodeMap.isEmpty()) {
+//            addHandler(new GzipCompression());
+//            addHandler(new Lz4Compression());
+//            addHandler(new Lz4FrameCompression());
+//        }
         return compressionCodeMap.get(contentType);
     }
 

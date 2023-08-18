@@ -1,4 +1,4 @@
-package com.effective.common.netty.cluster.handler;
+package com.effective.common.netty.cluster.command.domain;
 
 import com.effective.common.netty.cluster.transport.compression.Compression;
 import com.effective.common.netty.cluster.transport.protocol.Header;
@@ -14,14 +14,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Description
- *
- * @date 2020/2/26
- */
 @Slf4j
 @Data
-public class CommandHeader implements Header {
+public class HeaderCommand implements Header {
 
     /**
      * Command body length
@@ -209,9 +204,9 @@ public class CommandHeader implements Header {
      * @return 命令头部解码
      * @throws Exception 命令异常
      */
-    public CommandHeader decode(ByteBuf in) throws Exception {
+    public HeaderCommand decode(ByteBuf in) throws Exception {
         if (Objects.nonNull(in)) {
-            CommandHeader header = new CommandHeader();
+            HeaderCommand header = new HeaderCommand();
             header.setLength(in.readInt());
             header.setHeaderLength(in.readShort());
             header.setProtocolType(in.readByte());
@@ -331,15 +326,14 @@ public class CommandHeader implements Header {
                     break;
                 default:
                     throw new CodecException("Value of attrs in message header must be byte/short/int/string");
-
             }
         }
         return attributes;
     }
 
     @Override
-    public CommandHeader clone() throws CloneNotSupportedException {
-        CommandHeader header = (CommandHeader) super.clone();
+    public HeaderCommand clone() throws CloneNotSupportedException {
+        HeaderCommand header = (HeaderCommand) super.clone();
         return header;
     }
 }

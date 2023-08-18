@@ -32,7 +32,7 @@ public interface Header extends Cloneable, Serializable {
     /**
      * 设置消息头长度
      *
-     * @param headerLength
+     * @param headerLength 头部长度
      */
     default void setHeaderLength(Short headerLength) {
     }

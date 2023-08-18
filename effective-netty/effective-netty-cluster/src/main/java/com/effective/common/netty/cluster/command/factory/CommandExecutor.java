@@ -1,5 +1,7 @@
-package com.effective.common.netty.cluster.command;
+package com.effective.common.netty.cluster.command.factory;
 
+import com.effective.common.netty.cluster.command.api.Command;
+import com.effective.common.netty.cluster.handler.CommandHandler;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +19,12 @@ public class CommandExecutor implements Runnable {
      */
     private Command command;
 
-
+    /**
+     * 命令执行线程
+     *
+     * @param handler 执行器
+     * @param command 命  令
+     */
     public CommandExecutor(final CommandHandler<Command> handler, final Command command) {
         this.handler = handler;
         this.command = command;
@@ -25,18 +32,14 @@ public class CommandExecutor implements Runnable {
 
     @Override
     public void run() {
-        execute();
-    }
-
-    public void execute() {
         try {
             if (handler != null) {
                 handler.execute(command);
             } else {
-                log.error("Cant find the right command handler to execute! commandName:{}", command.getCommandName());
+                log.error("找不到命令执行器 commandName:{}", command.getCommandName());
             }
         } catch (Throwable th) {
-            log.error("CommandExecutor got exception: ", th);
+            log.error("命令执行线程异常，{}",th.getMessage(), th);
         }
     }
 }

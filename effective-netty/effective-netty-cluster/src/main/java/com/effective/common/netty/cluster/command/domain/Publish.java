@@ -1,24 +1,23 @@
-package com.effective.common.netty.cluster.command;
+package com.effective.common.netty.cluster.command.domain;
 
 
+import com.effective.common.netty.cluster.command.api.AbstractCommand;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * Publish Message Command
- *
- * @date 12/2/2020
  */
 @Slf4j
 @Accessors(chain = true)
-public class PublishMessageCommand<T> extends BaseCommand<T> {
+public class Publish<T> extends AbstractCommand<T> {
 
     /**
      * 发布命令
      */
     public static String COMMAND_NAME = "publishMessage";
 
-    public PublishMessageCommand() {
+    public Publish() {
         super(COMMAND_NAME);
     }
 }

@@ -1,4 +1,4 @@
-package com.effective.common.netty.cluster.handler;
+package com.effective.common.netty.cluster.channel.client;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.timeout.IdleStateEvent;
@@ -8,17 +8,17 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Server Idle Check Handler
+ * Client Idle Check Handler
  *
  * @date 13/9/2020
  */
 @Slf4j
-public class ServerIdleCheckHandler extends IdleStateHandler {
+public class ClientIdleCheckHandler extends IdleStateHandler {
 
     /**
-     * 服务端心跳检测
+     * 客户端心跳检测
      */
-    public ServerIdleCheckHandler() {
+    public ClientIdleCheckHandler() {
         /**
          * 读超时
          * 写超时

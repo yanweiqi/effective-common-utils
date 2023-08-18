@@ -1,12 +1,16 @@
-package com.effective.common.netty.cluster.command;
+package com.effective.common.netty.cluster.command.domain;
 
+import com.effective.common.netty.cluster.command.api.AbstractCommand;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Accessors(chain = true)
-public class ResponseCommand extends BaseCommand<Integer> {
+public class Response extends AbstractCommand<Integer> {
 
+    /**
+     * 命令名称
+     */
     public static String COMMAND_NAME = "responseCommand";
 
     /**
@@ -19,7 +23,7 @@ public class ResponseCommand extends BaseCommand<Integer> {
      */
     private String brokerId;
 
-    public ResponseCommand() {
+    public Response() {
         super(COMMAND_NAME);
     }
 }

@@ -1,16 +1,17 @@
 package com.effective.common.netty.cluster.broker.client;
 
 
+import com.effective.common.netty.cluster.channel.client.ClientConnectionHandler;
+import com.effective.common.netty.cluster.channel.client.ClientIdleCheckHandler;
+import com.effective.common.netty.cluster.channel.client.ClientKeepaliveHandler;
+import com.effective.common.netty.cluster.channel.common.FactoryCommandHandler;
+import com.effective.common.netty.cluster.command.factory.CommandFactory;
 import com.effective.common.netty.cluster.constants.BrokerProperties;
-import com.effective.common.netty.cluster.handler.ClientConnectionHandler;
-import com.effective.common.netty.cluster.handler.ClientIdleCheckHandler;
-import com.effective.common.netty.cluster.handler.KeepaliveHandler;
-import com.effective.common.netty.cluster.handler.ResponseCommandHandler;
+import com.effective.common.netty.cluster.constants.NettyAttrManager;
 import com.effective.common.netty.cluster.transport.codec.CommandDecoder;
 import com.effective.common.netty.cluster.transport.codec.CommandEncoder;
 import com.effective.common.netty.cluster.utils.SystemUtil;
 import com.effective.common.netty.cluster.utils.factory.NamedThreadFactory;
-import com.effective.common.netty.cluster.utils.io.ChannelUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.*;
@@ -27,26 +28,20 @@ import java.util.Objects;
 @Slf4j
 public class DefaultBrokerClient extends AbstractBrokerClient {
 
-    private Bootstrap bootstrap;
+    private final Bootstrap bootstrap;
 
-    private EventLoopGroup ioGroup;
+    private final EventLoopGroup ioGroup;
 
-    private String address;
+    private final String address;
 
     public DefaultBrokerClient(BrokerProperties brokerProperties, String address) {
         this.address = address;
         Class<? extends SocketChannel> clazz;
         if (!brokerProperties.isEpoll() && SystemUtil.isLinux()) {
-            ioGroup = new EpollEventLoopGroup(
-                    brokerProperties.getIoThreadNum(),
-                    new NamedThreadFactory("broker-client-pool")
-            );
+            ioGroup = new EpollEventLoopGroup(brokerProperties.getIoThreadNum(), new NamedThreadFactory("broker-client-pool"));
             clazz = EpollSocketChannel.class;
         } else {
-            ioGroup = new NioEventLoopGroup(
-                    brokerProperties.getIoThreadNum(),
-                    new NamedThreadFactory("broker-client-pool")
-            );
+            ioGroup = new NioEventLoopGroup(brokerProperties.getIoThreadNum(), new NamedThreadFactory("broker-client-pool"));
             clazz = NioSocketChannel.class;
         }
         bootstrap = new Bootstrap();
@@ -64,14 +59,14 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
                                 .addLast("commandEncoder", new CommandEncoder())
                                 .addLast("commandDecoder", new CommandDecoder())
                                 .addLast("clientConnectionHandler", new ClientConnectionHandler(DefaultBrokerClient.this::disconnect))
-                                .addLast("responseCommandHandler", new ResponseCommandHandler())
-                                .addLast("keepaliveHandler", new KeepaliveHandler());
+                                .addLast("factoryCommandHandler", new FactoryCommandHandler())
+                                .addLast("keepaliveHandler", new ClientKeepaliveHandler());
                     }
                 });
         if (brokerProperties.isPooledByteBufAllocatorEnable()) {
             bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
         }
-        bootstrap.remoteAddress(ChannelUtil.string2SocketAddress(address));
+        bootstrap.remoteAddress(NettyAttrManager.string2SocketAddress(address));
     }
 
     @Override
@@ -90,13 +85,13 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
     @Override
     public void disconnect() {
         if (log.isInfoEnabled()) {
-            log.info("客户端链接被断开! remote server address={}", address);
+            log.info("【客户端】链接被断开! remote server address={}", address);
         }
         if (Objects.nonNull(getChannel()) && getChannel().isOpen()) {
             getChannel().disconnect();
         }
         if (ioGroup != null) {
-            log.info("客户端关闭!");
+            log.info("【客户端】优雅关闭，释放端口");
             ioGroup.shutdownGracefully();
         }
         running = false;
@@ -107,9 +102,11 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
         return running;
     }
 
-
     public static void main(String[] args) throws InterruptedException {
         DefaultBrokerClient brokerClient = new DefaultBrokerClient(BrokerProperties.builder().serverPort(8090).build(), "127.0.0.1:8090");
         brokerClient.connect();
+        CommandFactory.loader();
     }
+
+
 }

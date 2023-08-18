@@ -1,12 +1,12 @@
 package com.effective.common.netty.cluster.broker.server;
 
 
+import com.effective.common.netty.cluster.channel.common.FactoryCommandHandler;
+import com.effective.common.netty.cluster.channel.server.LifeCycleHandler;
+import com.effective.common.netty.cluster.channel.server.ServerConnectionHandler;
+import com.effective.common.netty.cluster.channel.server.ServerIdleCheckHandler;
+import com.effective.common.netty.cluster.command.factory.CommandFactory;
 import com.effective.common.netty.cluster.constants.BrokerProperties;
-import com.effective.common.netty.cluster.constants.GatewayConstants;
-import com.effective.common.netty.cluster.handler.BaseCommandHandler;
-import com.effective.common.netty.cluster.handler.MessageSyncCommandHandler;
-import com.effective.common.netty.cluster.handler.ServerConnectionHandler;
-import com.effective.common.netty.cluster.handler.ServerIdleCheckHandler;
 import com.effective.common.netty.cluster.transport.codec.CommandDecoder;
 import com.effective.common.netty.cluster.transport.codec.CommandEncoder;
 import com.effective.common.netty.cluster.utils.IpUtil;
@@ -23,6 +23,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.Objects;
 
 /**
@@ -35,13 +36,13 @@ public class ClusterBroker extends AbstractBroker {
 
     private static volatile boolean running = false;
 
-    private EventLoopGroup selectorGroup;
+    private final EventLoopGroup selectorGroup;
 
-    private EventLoopGroup ioGroup;
+    private final EventLoopGroup ioGroup;
 
-    private Class<? extends ServerChannel> clazz;
+    private final Class<? extends ServerChannel> clazz;
 
-    private ServerBootstrap serverBootstrap;
+    private final ServerBootstrap serverBootstrap;
 
     private final BrokerProperties brokerProperties;
 
@@ -73,13 +74,13 @@ public class ClusterBroker extends AbstractBroker {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast("serverIdleHandler", new ServerIdleCheckHandler())
-                                .addLast("commandDecoder", new CommandDecoder())
-                                .addLast("commandEncoder", new CommandEncoder())
-                                .addLast("serverConnectionHandler", new ServerConnectionHandler())
-                                .addLast("commandServerHandler", new MessageSyncCommandHandler())
-                                .addLast("commonHandler", new BaseCommandHandler()
-                                );
+                        pipeline.addLast("lifeCycleHandler", new LifeCycleHandler())//inbound
+                                .addLast("serverIdleHandler", new ServerIdleCheckHandler())
+                                .addLast("commandDecoder", new CommandDecoder()) //inbound
+                                .addLast("commandEncoder", new CommandEncoder()) //outbound
+                                .addLast("serverConnectionHandler", new ServerConnectionHandler()) //inbound
+                                .addLast("factoryCommandHandler", new FactoryCommandHandler());  //inbound
+                        //.addLast("commonHandler", new BaseCommandHandler()); //inbound
                     }
                 });
         if (brokerProperties.isPooledByteBufAllocatorEnable()) {
@@ -87,16 +88,9 @@ public class ClusterBroker extends AbstractBroker {
         }
         try {
             serverChannel = this.serverBootstrap.bind(brokerProperties.getServerPort()).sync().channel();
-            log.info("{} {} BrokerServer starting success,ip={}, port={}",
-                    GatewayConstants.SYSTEM_NAME,
-                    GatewayConstants.SYSTEM_MQTT_START,
-                    IpUtil.getLocalIp(),
-                    brokerProperties.getServerPort());
+            log.info("【服务端】启动成功,ip={}, port={}", IpUtil.getLocalIp(), brokerProperties.getServerPort());
         } catch (Exception ex) {
-            log.error("{} {} broker Starting failure! cause={}",
-                    GatewayConstants.SYSTEM_NAME,
-                    GatewayConstants.SYSTEM_MQTT_START,
-                    ex.getMessage(), ex);
+            log.error("【服务端】启动失败! cause={}", ex.getMessage(), ex);
         }
         running = true;
     }
@@ -124,5 +118,7 @@ public class ClusterBroker extends AbstractBroker {
     public static void main(String[] args) {
         ClusterBroker clusterBroker = new ClusterBroker(BrokerProperties.builder().serverPort(8090).build());
         clusterBroker.start();
+
+        CommandFactory.loader();
     }
 }
