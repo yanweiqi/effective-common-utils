@@ -10,6 +10,7 @@ import com.effective.common.netty.cluster.constants.BrokerProperties;
 import com.effective.common.netty.cluster.constants.NettyAttrManager;
 import com.effective.common.netty.cluster.transport.codec.CommandDecoder;
 import com.effective.common.netty.cluster.transport.codec.CommandEncoder;
+import com.effective.common.netty.cluster.utils.ObjectUtils;
 import com.effective.common.netty.cluster.utils.SystemUtil;
 import com.effective.common.netty.cluster.utils.factory.NamedThreadFactory;
 import io.netty.bootstrap.Bootstrap;
@@ -23,6 +24,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 
 @Slf4j
@@ -33,6 +35,8 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
     private final EventLoopGroup ioGroup;
 
     private final String address;
+
+    private final Integer connect_max = 5;
 
     public DefaultBrokerClient(BrokerProperties brokerProperties, String address) {
         this.address = address;
@@ -67,18 +71,24 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
             bootstrap.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT);
         }
         bootstrap.remoteAddress(NettyAttrManager.string2SocketAddress(address));
+
+
     }
 
     @Override
-    public void connect() throws InterruptedException {
+    public void connect() {
         try {
-            ChannelFuture channelFuture = bootstrap.connect().sync();
+            ChannelFuture channelFuture = bootstrap.connect().addListener((ChannelFuture futureListener) -> {
+                ObjectUtils.isTrue(!futureListener.isSuccess(), futureListener, f -> {
+                    log.warn("【客户端】连接服务器失败，5s后重新尝试连接！");
+                    f.channel().eventLoop().schedule(this::connect, 5, TimeUnit.SECONDS);
+                });
+            }).sync();
             this.setChannel(channelFuture.channel());
             running = true;
         } catch (Exception e) {
             running = false;
             log.error("Connect to broker error! message={}", e.getMessage(), e);
-            throw e;
         }
     }
 
@@ -91,8 +101,8 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
             getChannel().disconnect();
         }
         if (ioGroup != null) {
-            log.info("【客户端】优雅关闭，释放端口");
-            ioGroup.shutdownGracefully();
+            //log.info("【客户端】优雅关闭，释放端口");
+            //ioGroup.shutdownGracefully(); todo 要不要关闭的问题
         }
         running = false;
     }

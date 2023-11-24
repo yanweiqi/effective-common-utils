@@ -1,8 +1,10 @@
 package com.effective.common.netty.cluster.command.factory;
 
 
-import com.effective.common.netty.cluster.command.api.*;
-import com.effective.common.netty.cluster.command.domain.*;
+import com.effective.common.netty.cluster.command.api.Command;
+import com.effective.common.netty.cluster.command.domain.Disconnect;
+import com.effective.common.netty.cluster.command.domain.Ping;
+import com.effective.common.netty.cluster.command.domain.Pong;
 import com.effective.common.netty.cluster.handler.CommandHandler;
 import com.effective.common.netty.cluster.handler.PingCommandHandler;
 import com.effective.common.netty.cluster.handler.PongCommandHandler;
@@ -18,40 +20,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public enum CommandFactory {
 
     /**
-     * 基础命令
-     */
-    BASE(AbstractCommand.COMMAND_NAME, AbstractCommand.class) {
-        @Override
-        public CommandHandler<Command> getHandler() {
-            return handlerMap.get(AbstractCommand.COMMAND_NAME);
-        }
-    },
-
-    /**
-     * 响应命令
-     */
-    RESPONSE_MESSAGE(Response.COMMAND_NAME, Response.class) {
-        @Override
-        public CommandHandler<Command> getHandler() {
-            return handlerMap.get(Response.COMMAND_NAME);
-        }
-    },
-
-    /**
-     * 发布消息命令
-     */
-    PUBLISH_MESSAGE(Publish.COMMAND_NAME, Publish.class) {
-        @Override
-        public CommandHandler<Command> getHandler() {
-            return handlerMap.get(Publish.COMMAND_NAME);
-        }
-    },
-
-    /**
      * 心跳命令
      */
     PING_MESSAGE(Ping.COMMAND_NAME, Ping.class) {
         @Override
+        @SuppressWarnings("all")
         public CommandHandler<Command> getHandler() {
             return handlerMap.get(PingCommandHandler.class.getSimpleName());
         }
@@ -62,6 +35,7 @@ public enum CommandFactory {
      */
     PONG_MESSAGE(Pong.COMMAND_NAME, Pong.class) {
         @Override
+        @SuppressWarnings("all")
         public CommandHandler<Command> getHandler() {
             return handlerMap.get(PongCommandHandler.class.getSimpleName());
         }
@@ -72,21 +46,21 @@ public enum CommandFactory {
      */
     DISCONNECT_MESSAGE(Disconnect.COMMAND_NAME, Disconnect.class) {
         @Override
+        @SuppressWarnings("all")
         public CommandHandler<Command> getHandler() {
-            //return handlerMap.get(Disconnect.class.getSimpleName());
-            return null;
+            return handlerMap.get(Disconnect.class.getSimpleName());
         }
     };
 
     /**
-     * commandName
+     * 命令名称
      */
     private final String commandName;
 
     /**
-     * class
+     * 命令类
      */
-    private final Class<?> clazz;
+    private final Class<? extends Command> clazz;
 
     /**
      * 获取命令名称
@@ -103,14 +77,14 @@ public enum CommandFactory {
      *
      * @return class
      */
-    @SuppressWarnings("all")
-    public Class<?> getClazz() {
+    public Class<? extends Command> getClazz() {
         return clazz;
     }
 
     /**
      * 命令执行容器
      */
+    @SuppressWarnings("all")
     public final static Map<String, CommandHandler> handlerMap = new ConcurrentHashMap<>();
 
 
@@ -125,34 +99,10 @@ public enum CommandFactory {
      * @param commandName 命令名称
      * @param clazz       类
      */
-    CommandFactory(String commandName, Class<?> clazz) {
+    CommandFactory(String commandName, Class<? extends Command> clazz) {
         this.commandName = commandName;
         this.clazz = clazz;
     }
-
-//    /**
-//     * 注册命令执行器
-//     *
-//     * @param commandHandler 命令执行器
-//     */
-//    @SuppressWarnings("all")
-//    public static void register(@NonNull CommandHandler<Command> commandHandler) {
-//        commandHandler.getCommands().forEach(commandName -> {
-//            if (!handlerMap.containsKey(commandName)) {
-//                handlerMap.computeIfAbsent(commandName, s -> commandHandler);
-//            } else {
-//                log.warn("命令处理器已存在 CommandName:{} class:{}", commandName, commandHandler.getClass().getCanonicalName());
-//            }
-//        });
-//    }
-
-
-//    public static CommandHandler<Command> getHandler(@NonNull String commandName) {
-//        if (handlerMap.isEmpty()) {
-//            log.info("【服务端】命令工厂加载命令实现类");
-//        }
-//        return handlerMap.get(commandName);
-//    }
 
     /**
      * 获取命令执行器

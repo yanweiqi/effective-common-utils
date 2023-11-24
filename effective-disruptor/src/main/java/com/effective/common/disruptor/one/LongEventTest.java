@@ -16,9 +16,9 @@ public class LongEventTest {
 
 
     public static void main(String[] args) {
-//        log.info("------单生产者&单消费者（广播模式）--------");
-//        singleProducer();
-//        log.info("------单生产者&单消费者（广播模式）--------");
+        log.info("------单生产者&单消费者（广播模式）--------");
+        singleProducer();
+        log.info("------单生产者&单消费者（广播模式）--------");
 //
 //        log.info("------单生产者&多消费者(广播模式)--------");
 //        singleProducerMoreConsumer();
@@ -28,9 +28,9 @@ public class LongEventTest {
 //        singleProducerMoreConsumerCluster();
 //        log.info("------单生产者&多消费者(集群模式)--------");
 
-        log.info("------多生产者&多消费者(集群模式)--------");
-        moreProducerMoreConsumerCluster();
-        log.info("------多生产者&多消费者(集群模式)--------");
+//        log.info("------多生产者&多消费者(集群模式)--------");
+//        moreProducerMoreConsumerCluster();
+//        log.info("------多生产者&多消费者(集群模式)--------");
     }
 
     /**
@@ -54,16 +54,16 @@ public class LongEventTest {
      * 单生产者&多消费者(广播模式)
      */
     public static void singleProducerMoreConsumer() {
-        LongEventFactory eventFactory = new LongEventFactory();
-        Disruptor<LongEvent> disruptor = getSingleDisruptor(eventFactory);
-
         EventHandler<LongEvent>[] consumers = new LongEventHandler[4];
         for(int i=0;i<consumers.length;i++){
             consumers[i] = new LongEventHandler();
         }
-        disruptor.handleEventsWith(consumers); //设置多个消费者
 
+        LongEventFactory eventFactory = new LongEventFactory();
+        Disruptor<LongEvent> disruptor = getSingleDisruptor(eventFactory);
+        disruptor.handleEventsWith(consumers); //设置多个消费者
         disruptor.start(); //启动
+
         LongEventProducer producer = new LongEventProducer(disruptor.getRingBuffer());  //设置生产者，传入disruptor的ringBuffer
         ByteBuffer bf = ByteBuffer.allocate(8);
         for (int i = 0; i < 6; i++) {
@@ -77,17 +77,18 @@ public class LongEventTest {
      * 单生产者&多消费者(集群模式)
      */
     public static void singleProducerMoreConsumerCluster() {
-        LongEventFactory eventFactory = new LongEventFactory();
-        Disruptor<LongEvent> disruptor = getSingleDisruptor(eventFactory);
 
         //多消费者集群模式
         WorkHandler<LongEvent>[] consumers = new LongEventHandler[4];
         for(int i=0;i<consumers.length;i++){
             consumers[i] = new LongEventHandler();
         }
-        disruptor.handleEventsWithWorkerPool(consumers); //设置多个消费者
 
+        LongEventFactory eventFactory = new LongEventFactory();
+        Disruptor<LongEvent> disruptor = getSingleDisruptor(eventFactory);
+        disruptor.handleEventsWithWorkerPool(consumers); //设置多个消费者,todo 集群模式 handleEventsWithWorkerPool
         disruptor.start(); //启动
+
         LongEventProducer producer = new LongEventProducer(disruptor.getRingBuffer());  //设置生产者，传入disruptor的ringBuffer
         ByteBuffer bf = ByteBuffer.allocate(8);
         for (int i = 0; i < 6; i++) {

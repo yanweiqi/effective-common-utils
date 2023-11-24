@@ -14,7 +14,7 @@ public class ServerConnectionHandler extends ChannelDuplexHandler {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
          String address = NettyAttrManager.getRemoteAdd(ctx.channel());
          if (log.isInfoEnabled()) {
-             log.info("【服务端】Broker组网成功，远程地址:{}", address);
+             log.info("【服务端】Broker组网请求，远程地址:{}", address);
          }
         super.channelActive(ctx);
         ctx.channel().config().setWriteBufferHighWaterMark(10 * 1024 * 1024);

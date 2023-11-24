@@ -20,7 +20,6 @@ import io.netty.handler.codec.CodecException;
 import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
@@ -42,7 +41,7 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
     }
 
     @Override
-    protected Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
+    protected Object decode(ChannelHandlerContext ctx, ByteBuf in) {
         ByteBuf frame = null;
         try {
             in.markReaderIndex();
@@ -60,7 +59,7 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
             }
             frame = (ByteBuf) super.decode(ctx, in);
             if (Objects.isNull(frame)) {
-                ObjectUtils.isTrue(log.isInfoEnabled(), "", x -> log.info("【解码器】Decode error, frame is null!"));
+                ObjectUtils.isTrue(log.isDebugEnabled(), "", x -> log.info("【解码器】Decode error, frame is null!"));
                 in.resetReaderIndex();
                 return null;
             }
@@ -77,15 +76,16 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
             Compression compression = CompressionSelector.select(header.getCompression());
             InputStream inputStream = new ByteBufInputStream(frame);
             inputStream = compression == null ? inputStream : compression.decompress(inputStream);
-            String className = inputStream.getClass().getCanonicalName();
-
-            ObjectUtils.isTrue(log.isInfoEnabled(), "", x -> log.info("【解码器】Decode compression={}, inputStream={}", header.getCompression(), className));
+            //String className = inputStream.getClass().getCanonicalName();
+            //ObjectUtils.isTrue(log.isDebugEnabled(), "", x -> log.info("【解码器】Decode compression={}, inputStream={}", header.getCompression(), className));
 
             CommandFactory commandFactory = CommandFactory.match(header.getCommandName());
-            AbstractCommand command = (AbstractCommand) commandFactory.getClazz().getConstructor().newInstance();
+            @SuppressWarnings("all")
+            AbstractCommand<Object> command = (AbstractCommand<Object>) commandFactory.getClazz().getConstructor().newInstance();
             command.setHeader(header);
-            command.setCommandBody(deserialize(serialization, inputStream, commandFactory));
-            ObjectUtils.isTrue(log.isInfoEnabled(),"",x -> log.info("【解码器】Decode success, command={}, type={}", JSONUtil.bean2Json(command), command.getClass().getCanonicalName()));
+            Object obj = deserialize(serialization, inputStream, commandFactory);
+            command.setCommandBody(obj);
+            //ObjectUtils.isTrue(log.isDebugEnabled(), "", x -> log.info("【解码器】Decode success, command={}, type={}", JSONUtil.bean2Json(command), command.getClass().getCanonicalName()));
             return command;
         } catch (Exception ex) {
             log.error("【解码器】Decode exception, message={}", ex.getMessage(), ex);
@@ -101,12 +101,12 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
     /**
      * Deserialize
      *
-     * @param serialization
-     * @param inputStream
-     * @param commandFactory
-     * @return
+     * @param serialization  序列化
+     * @param inputStream    输入流
+     * @param commandFactory 命令工厂
+     * @return 反序列化
      */
-    private Object deserialize(Serialization serialization, InputStream inputStream, CommandFactory commandFactory) throws IOException {
+    private Object deserialize(Serialization serialization, InputStream inputStream, CommandFactory commandFactory) {
         return serialization.getSerializer().deserialize(inputStream, getPayloadClass(commandFactory));
     }
 
@@ -116,7 +116,7 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
      * @param type 命令类型
      * @return 包体类
      */
-    protected Class getPayloadClass(final CommandFactory type) {
-        return (Class) ((ParameterizedType) type.getClazz().getGenericSuperclass()).getActualTypeArguments()[0];
+    protected Class<?> getPayloadClass(final CommandFactory type) {
+        return (Class<?>) ((ParameterizedType) type.getClazz().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }
