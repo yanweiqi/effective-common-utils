@@ -21,15 +21,13 @@ import static org.junit.Assert.assertThat;
 @Slf4j
 public class SamplesMono {
 
-    static final Map<String, String> templates = new LinkedHashMap() {
+    static final Map<String, String> templates = new LinkedHashMap<String, String>() {
         {
             put("aDB", "a");
             put("bDB", "b");
             put("cDB", "c");
         }
     };
-
-    private static final int sleep = 1000;
 
 
     /*

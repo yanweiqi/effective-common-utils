@@ -28,7 +28,7 @@ public class ClazzUtils {
                 try {
                     log.info("实例化接口{}，实现类{}", api.getSimpleName(), x.getSimpleName());
                     String handlerName = x.getSimpleName();
-                    T  t = x.newInstance();
+                    T  t = x.getDeclaredConstructor().newInstance();
                     registerMap.putIfAbsent(handlerName,t);
                 } catch (Exception e) {
                     log.error("实例化接口实现类异常 {}", e.getMessage(), e);

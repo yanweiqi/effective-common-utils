@@ -19,7 +19,7 @@ public class AbstractCommand<T> implements Command, Serializable, Cloneable {
 
     private transient HeaderCommand header = new HeaderCommand();
 
-    private transient Feedback feedback;
+    private transient Feedback<T> feedback;
 
     private transient ChannelHandlerContext channelHandlerContext;
 
@@ -30,13 +30,13 @@ public class AbstractCommand<T> implements Command, Serializable, Cloneable {
     }
 
     @Override
-    public Feedback getFeedback() {
+    public Feedback<T> getFeedback() {
         return feedback;
     }
 
     @Override
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
+    public void setFeedback(Feedback<?> feedback) {
+        this.feedback = (Feedback<T>) feedback;
     }
 
     @Override
@@ -55,8 +55,9 @@ public class AbstractCommand<T> implements Command, Serializable, Cloneable {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public AbstractCommand<T> clone() throws CloneNotSupportedException {
-        AbstractCommand abstractCommand = (AbstractCommand<T>) super.clone();
+        AbstractCommand<T> abstractCommand = (AbstractCommand<T>) super.clone();
         abstractCommand.header = header.clone();
         return abstractCommand;
     }

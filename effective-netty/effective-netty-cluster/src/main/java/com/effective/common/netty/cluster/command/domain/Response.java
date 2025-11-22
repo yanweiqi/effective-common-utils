@@ -26,4 +26,36 @@ public class Response extends AbstractCommand<Integer> {
     public Response() {
         super(COMMAND_NAME);
     }
+
+    /**
+     * 获取消息ID
+     * @return messageId
+     */
+    public int getMessageId() {
+        return messageId;
+    }
+
+    /**
+     * 设置消息ID
+     * @param messageId 消息ID
+     */
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
+    /**
+     * 获取机器ID
+     * @return brokerId
+     */
+    public String getBrokerId() {
+        return brokerId;
+    }
+
+    /**
+     * 设置机器ID
+     * @param brokerId 机器ID
+     */
+    public void setBrokerId(String brokerId) {
+        this.brokerId = brokerId;
+    }
 }

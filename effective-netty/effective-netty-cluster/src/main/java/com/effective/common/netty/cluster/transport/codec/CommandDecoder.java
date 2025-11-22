@@ -11,8 +11,6 @@ import com.effective.common.netty.cluster.transport.protocol.CommandProtocol;
 import com.effective.common.netty.cluster.transport.protocol.Protocol;
 import com.effective.common.netty.cluster.transport.serialization.Serialization;
 import com.effective.common.netty.cluster.transport.serialization.SerializationSelector;
-import com.effective.common.netty.cluster.utils.JSONUtil;
-import com.effective.common.netty.cluster.utils.ObjectUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufInputStream;
 import io.netty.channel.ChannelHandlerContext;
@@ -59,7 +57,7 @@ public class CommandDecoder extends LengthFieldBasedFrameDecoder {
             }
             frame = (ByteBuf) super.decode(ctx, in);
             if (Objects.isNull(frame)) {
-                ObjectUtils.isTrue(log.isDebugEnabled(), "", x -> log.info("【解码器】Decode error, frame is null!"));
+                log.info("【解码器】Decode error, frame is null!");
                 in.resetReaderIndex();
                 return null;
             }

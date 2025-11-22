@@ -53,7 +53,6 @@ public class SwitchStream {
                 .and("u")
                 .and("y")
                 .get();
-        int y  = 0;
         System.out.println(s);
     }
 }

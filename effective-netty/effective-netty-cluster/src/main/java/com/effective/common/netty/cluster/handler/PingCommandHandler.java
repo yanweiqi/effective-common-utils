@@ -4,7 +4,6 @@ import com.effective.common.netty.cluster.command.api.Command;
 import com.effective.common.netty.cluster.command.domain.Ping;
 import com.effective.common.netty.cluster.command.domain.Pong;
 import com.effective.common.netty.cluster.utils.IpUtil;
-import com.effective.common.netty.cluster.utils.ObjectUtils;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

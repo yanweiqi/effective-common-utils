@@ -70,12 +70,20 @@ public class ProtostuffSerialization implements Serialization {
          * @param object 对象
          * @throws SerializerException
          */
+        @SuppressWarnings("unchecked")
         @Override
         public <T> void serialize(OutputStream os, T object) throws SerializerException {
             LinkedBuffer linkedBuffer = local.get();
             try {
-                Schema<T> schema = RuntimeSchema.getSchema((Class<T>) object.getClass(), STRATEGY);
+                if (object == null) {
+                    throw new SerializerException("Cannot serialize null object");
+                }
+                Class<T> clazz = (Class<T>) object.getClass();
+                Schema<T> schema = RuntimeSchema.getSchema(clazz, STRATEGY);
                 ProtostuffIOUtil.writeTo(os, object, schema, linkedBuffer);
+            } catch (ClassCastException e) {
+                log.error("Class cast error during serialization: {}", e.getMessage(), e);
+                throw new SerializerException("Class cast error during serialization", e);
             } catch (IOException e) {
                 log.error("Serializing object by protostuff error! message={}", e.getMessage(), e);
                 throw new SerializerException("Error occurred while serializing class " + object.getClass().getName(), e);
@@ -92,6 +100,7 @@ public class ProtostuffSerialization implements Serialization {
          * @return
          * @throws SerializerException
          */
+        @SuppressWarnings("unchecked")
         @Override
         public <T> T deserialize(InputStream is, Type type) throws SerializerException {
             if (!(type instanceof Class)) {
@@ -104,6 +113,9 @@ public class ProtostuffSerialization implements Serialization {
                 T obj = schema.newMessage();
                 ProtostuffIOUtil.mergeFrom(is, obj, schema, linkedBuffer);
                 return obj;
+            } catch (ClassCastException e) {
+                log.error("Class cast error during deserialization: {}", e.getMessage(), e);
+                throw new SerializerException("Class cast error during deserialization", e);
             } catch (IOException e) {
                 log.error("Deserializing object by protostuff error! message={}", e.getMessage(), e);
                 throw new SerializerException("Error occurred while deserializing class " + type, e);
