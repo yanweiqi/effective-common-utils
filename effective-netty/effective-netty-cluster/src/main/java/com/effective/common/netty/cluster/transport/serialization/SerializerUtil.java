@@ -95,10 +95,16 @@ public class SerializerUtil {
     }
 
     public static void write(String value, ByteBuf out) throws Exception {
+        if (value == null) {
+            throw new IllegalArgumentException("Value cannot be null");
+        }
         write(value, out, 4, false);
     }
 
     public static void write(String value, ByteBuf out, int lengthSize) throws Exception {
+        if (value == null) {
+            throw new IllegalArgumentException("Value cannot be null");
+        }
         write(value, out, lengthSize, false);
     }
 
@@ -135,6 +141,9 @@ public class SerializerUtil {
         }
 
         if (length > 0) {
+            if (value == null) {
+                throw new IllegalArgumentException("Value cannot be null");
+            }
             if (value.hasArray()) {
                 out.writeBytes(value.array(), value.arrayOffset() + value.position(), value.remaining());
             } else {

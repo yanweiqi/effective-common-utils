@@ -263,32 +263,29 @@ public class HeaderCommand implements Header {
      * @param attributes
      * @return
      */
-    protected void encodeAttributes(final ByteBuf buffer, final Map<Byte, Object> attributes) throws Exception {
-        int size = attributes == null ? 0 : attributes.size();
-        buffer.writeByte(size);
-        if (size > 0) {
-            byte key;
-            Object val;
-            for (Map.Entry<Byte, Object> attr : attributes.entrySet()) {
-                key = attr.getKey();
-                val = attr.getValue();
-                if (val != null) {
-                    buffer.writeByte(key);
-                    if (val instanceof Integer) {
-                        buffer.writeByte((byte) 1);
-                        buffer.writeInt((Integer) val);
-                    } else if (val instanceof String) {
-                        buffer.writeByte((byte) 2);
-                        SerializerUtil.write((String) val, buffer);
-                    } else if (val instanceof Byte) {
-                        buffer.writeByte((byte) 3);
-                        buffer.writeByte((Byte) val);
-                    } else if (val instanceof Short) {
-                        buffer.writeByte((byte) 4);
-                        buffer.writeShort((Short) val);
-                    } else {
-                        throw new CodecException("Value of attrs in message header must be byte/short/int/string");
-                    }
+    protected void encodeAttributes(final ByteBuf out, final Map<Byte, Object> attributes) throws Exception {
+        if (attributes == null || attributes.isEmpty()) {
+            return; // Skip processing if attributes are null or empty
+        }
+        for (Map.Entry<Byte, Object> attr : attributes.entrySet()) {
+            byte key = attr.getKey();
+            Object val = attr.getValue();
+            if (val != null) {
+                out.writeByte(key);
+                if (val instanceof Integer) {
+                    out.writeByte((byte) 1);
+                    out.writeInt((Integer) val);
+                } else if (val instanceof String) {
+                    out.writeByte((byte) 2);
+                    SerializerUtil.write((String) val, out);
+                } else if (val instanceof Byte) {
+                    out.writeByte((byte) 3);
+                    out.writeByte((Byte) val);
+                } else if (val instanceof Short) {
+                    out.writeByte((byte) 4);
+                    out.writeShort((Short) val);
+                } else {
+                    throw new CodecException("Value of attrs in message header must be byte/short/int/string");
                 }
             }
         }
@@ -335,5 +332,9 @@ public class HeaderCommand implements Header {
     public HeaderCommand clone() throws CloneNotSupportedException {
         HeaderCommand header = (HeaderCommand) super.clone();
         return header;
+    }
+
+    public void setAttributes(Map<Byte, Object> attributes) {
+        this.attributes = attributes;
     }
 }

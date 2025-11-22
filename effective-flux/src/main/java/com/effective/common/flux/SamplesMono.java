@@ -66,7 +66,7 @@ public class SamplesMono {
             300,
             100,
             TimeUnit.SECONDS,
-            new ArrayBlockingQueue(100)
+            new ArrayBlockingQueue<Runnable>(100)
     );
 
     @Test
@@ -87,7 +87,7 @@ public class SamplesMono {
     @Test
     public void monoCreateOnCancel() throws InterruptedException {
         AtomicBoolean cancelled = new AtomicBoolean();
-        Mono m1 = Mono.create(
+        Mono<String> m1 = Mono.create(
                 s -> s.onCancel(() -> cancelled.set(true)).success("test")
         );
         Thread t1 = new Thread(() -> {
@@ -106,7 +106,7 @@ public class SamplesMono {
         System.out.println("美丽的分割线----");
 
         Thread t2 = new Thread(() -> {
-            Mono m2 = Mono.create(s -> s.onCancel(() -> cancelled.set(true)).success("ywq"));
+            Mono<String> m2 = Mono.create(s -> s.onCancel(() -> cancelled.set(true)).success("ywq"));
             m2.block();
 
             m2.subscribe(s -> {
@@ -164,7 +164,7 @@ public class SamplesMono {
 
     protected static CompletableFuture<Integer> getB(Integer m) {
 
-        CompletableFuture<Integer> cp = new CompletableFuture();
+        CompletableFuture<Integer> cp = new CompletableFuture<>();
         Random r = new Random(m);
         Integer y = 0;
         for (int i = 0; i < 10; i++) {

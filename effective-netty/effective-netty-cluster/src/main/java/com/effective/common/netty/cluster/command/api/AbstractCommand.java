@@ -34,6 +34,7 @@ public class AbstractCommand<T> implements Command, Serializable, Cloneable {
         return feedback;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void setFeedback(Feedback<?> feedback) {
         this.feedback = (Feedback<T>) feedback;
