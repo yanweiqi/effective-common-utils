@@ -22,12 +22,12 @@ import java.io.OutputStream;
  * Command encoder
  */
 @Slf4j
-public class CommandEncoder extends MessageToByteEncoder<AbstractCommand<T>> {
+public class CommandEncoder extends MessageToByteEncoder<AbstractCommand<?>> {
 
     private final Protocol protocol = new CommandProtocol();
 
     @Override
-    protected void encode(ChannelHandlerContext channelHandlerContext, AbstractCommand abstractCommand, ByteBuf outByteBuf) throws Exception {
+    protected void encode(ChannelHandlerContext channelHandlerContext, AbstractCommand<?> abstractCommand, ByteBuf outByteBuf) throws Exception {
         try {
             if (outByteBuf != null) {
                 // Write magic code
@@ -81,7 +81,7 @@ public class CommandEncoder extends MessageToByteEncoder<AbstractCommand<T>> {
      * @param os            OutputStream
      * @param abstractCommand   Command
      */
-    protected void serialize(final Serialization serialization, final OutputStream os, final AbstractCommand abstractCommand) {
+    protected void serialize(final Serialization serialization, final OutputStream os, final AbstractCommand<?> abstractCommand) {
         serialization.getSerializer().serialize(os, abstractCommand.getCommandBody());
     }
 }

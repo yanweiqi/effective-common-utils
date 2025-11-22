@@ -2,6 +2,7 @@ package com.effective.common.netty.cluster.broker.client;
 
 
 import com.effective.common.netty.cluster.channel.client.ClientConnectionHandler;
+import java.io.IOException;
 import com.effective.common.netty.cluster.channel.client.ClientIdleCheckHandler;
 import com.effective.common.netty.cluster.channel.client.ClientKeepaliveHandler;
 import com.effective.common.netty.cluster.channel.common.FactoryCommandHandler;
@@ -110,7 +111,7 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
         return running;
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         try (DefaultBrokerClient brokerClient = new DefaultBrokerClient(BrokerProperties.builder().serverPort(8090).build(), "127.0.0.1:8090")) {
             brokerClient.connect();
             CommandFactory.loader();

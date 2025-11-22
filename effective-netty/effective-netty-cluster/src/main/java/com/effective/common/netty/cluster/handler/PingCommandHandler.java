@@ -7,14 +7,16 @@ import com.effective.common.netty.cluster.utils.IpUtil;
 import com.effective.common.netty.cluster.utils.ObjectUtils;
 import io.netty.channel.ChannelHandlerContext;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 @Slf4j
 @Data
+@EqualsAndHashCode(callSuper=false)
+public class PingCommandHandler extends AbstractCommandHandler<Ping> {
 public class PingCommandHandler extends AbstractCommandHandler<Ping> {
 
     @Override

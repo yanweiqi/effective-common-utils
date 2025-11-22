@@ -130,7 +130,7 @@ public final class JSONUtil {
     }
 
     public static HashMap<String, Object> fromJsonToMap(String json) {
-        return json2Object(json, HashMap.class);
+        return json2Object(json, new TypeReference<HashMap<String, Object>>() {});
     }
 
     /**

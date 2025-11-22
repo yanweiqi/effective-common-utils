@@ -38,7 +38,7 @@ public class SerializerUtil {
             byte[] bytes = readBytes(in, length);
             try {
                 if (compressed) {
-                    // TODO 压缩算法
+            
                     // bytes = ZipUtil.decompressByZlib(bytes, 0, bytes.length);
                 }
                 if (charset == null) {
@@ -107,7 +107,6 @@ public class SerializerUtil {
             if (value != null && !value.isEmpty()) {
                 byte[] bytes = getBytes(value, StandardCharsets.UTF_8);
                 if (compressed) {
-                    // TODO 压缩算法
                     // bytes = ZipUtil.compressByZlib(bytes, 0, bytes.length);
                 }
                 write(bytes.length, out, lengthSize);

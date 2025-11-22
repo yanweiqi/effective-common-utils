@@ -23,6 +23,7 @@ public class ObjectUtils {
     private static final ObjectMapper objectMapper = new ObjectMapper();
 
 
+    @SuppressWarnings("unchecked")
     public static <T> T getInstance(T t) {
         try {
             Constructor<?> constructor = t.getClass().getConstructor();

@@ -4,7 +4,6 @@ import com.effective.common.netty.cluster.utils.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.Map;
 import java.util.Set;

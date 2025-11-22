@@ -12,8 +12,6 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-import static com.effective.common.netty.cluster.transport.compression.Compression.GZIP;
-
 /**
  * Gzip Compression
  */
