@@ -19,26 +19,26 @@ public class SamplesFluxTest {
 
     @Test
     public void test1() {
-        Subscriber<String> subscriber = new Subscriber<String>() {
-            @Override
-            public void onSubscribe(Subscription s) {
-            }
+                Subscriber<String> subscriber = new Subscriber<String>() {
+                        @Override
+                        public void onSubscribe(Subscription s) {
+                        }
 
-            @Override
-            public void onNext(String o) {
-                System.out.println(o);
-            }
+                        @Override
+                        public void onNext(String o) {
+                                System.out.println("onNext: " + o);
+                        }
 
-            @Override
-            public void onError(Throwable t) {
-            }
+                        @Override
+                        public void onError(Throwable t) {
+                        }
 
-            @Override
-            public void onComplete() {
-            }
-        };
-        Flux.just("33333", "22222")
-                .subscribe(x -> subscriber.onNext(x));
+                        @Override
+                        public void onComplete() {
+                        }
+                };
+                Flux.just("33333", "22222")
+                                .subscribe(subscriber);
     }
 
     @Test
