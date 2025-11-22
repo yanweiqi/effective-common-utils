@@ -22,7 +22,7 @@ import java.io.OutputStream;
  * Command encoder
  */
 @Slf4j
-public class CommandEncoder extends MessageToByteEncoder<AbstractCommand> {
+public class CommandEncoder extends MessageToByteEncoder<AbstractCommand<T>> {
 
     private final Protocol protocol = new CommandProtocol();
 

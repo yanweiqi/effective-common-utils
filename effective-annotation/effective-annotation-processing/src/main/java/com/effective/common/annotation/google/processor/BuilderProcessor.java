@@ -1,28 +1,7 @@
-package com.effective.common.annotation.google.processor;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.auto.service.AutoService;
-
-import javax.annotation.processing.*;
-import javax.lang.model.SourceVersion;
-import javax.lang.model.element.Element;
-import javax.lang.model.element.TypeElement;
-import javax.lang.model.type.ExecutableType;
-import javax.tools.Diagnostic;
-import javax.tools.JavaFileObject;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 @SupportedAnnotationTypes("com.effective.common.annotation.google.processor.BuilderProperty")
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @AutoService(Processor.class)
 public class BuilderProcessor extends AbstractProcessor {
-
-    //static final ObjectMapper mapper = new ObjectMapper();
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
@@ -35,12 +14,6 @@ public class BuilderProcessor extends AbstractProcessor {
                                     element -> ((ExecutableType) element.asType()).getParameterTypes().size() == 1 && element.getSimpleName().toString().startsWith("set")
                             )
                     );
-
-//            try {
-//                System.out.println(mapper.writeValueAsString(annotatedMethods));
-//            } catch(Exception e){
-//                e.printStackTrace();
-//            }
 
             List<Element> setters = annotatedMethods.get(true);
             List<Element> otherMethods = annotatedMethods.get(false);

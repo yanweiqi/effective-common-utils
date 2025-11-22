@@ -74,7 +74,7 @@ public class ProtostuffSerialization implements Serialization {
         public <T> void serialize(OutputStream os, T object) throws SerializerException {
             LinkedBuffer linkedBuffer = local.get();
             try {
-                Schema schema = RuntimeSchema.getSchema(object.getClass(), STRATEGY);
+                Schema<T> schema = RuntimeSchema.getSchema(object.getClass(), STRATEGY);
                 ProtostuffIOUtil.writeTo(os, object, schema, linkedBuffer);
             } catch (IOException e) {
                 log.error("Serializing object by protostuff error! message={}", e.getMessage(), e);

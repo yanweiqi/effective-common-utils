@@ -116,9 +116,12 @@ public class ClusterBroker extends AbstractBroker {
     }
 
     public static void main(String[] args) {
-        ClusterBroker clusterBroker = new ClusterBroker(BrokerProperties.builder().serverPort(8090).build());
-        clusterBroker.start();
+        try (ClusterBroker clusterBroker = new ClusterBroker(BrokerProperties.builder().serverPort(8090).build())) {
+            clusterBroker.start();
 
-        CommandFactory.loader();
+            CommandFactory.loader();
+        } catch (Exception ex) {
+            log.error("【服务端】启动失败! cause={}", ex.getMessage(), ex);
+        }
     }
 }

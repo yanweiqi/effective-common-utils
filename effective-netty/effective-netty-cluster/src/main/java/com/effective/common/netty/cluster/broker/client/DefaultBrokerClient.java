@@ -36,8 +36,6 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
 
     private final String address;
 
-    private final Integer connect_max = 5;
-
     public DefaultBrokerClient(BrokerProperties brokerProperties, String address) {
         this.address = address;
         Class<? extends SocketChannel> clazz;
@@ -113,9 +111,10 @@ public class DefaultBrokerClient extends AbstractBrokerClient {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        DefaultBrokerClient brokerClient = new DefaultBrokerClient(BrokerProperties.builder().serverPort(8090).build(), "127.0.0.1:8090");
-        brokerClient.connect();
-        CommandFactory.loader();
+        try (DefaultBrokerClient brokerClient = new DefaultBrokerClient(BrokerProperties.builder().serverPort(8090).build(), "127.0.0.1:8090")) {
+            brokerClient.connect();
+            CommandFactory.loader();
+        }
     }
 
 

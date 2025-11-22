@@ -12,5 +12,6 @@ public class Trade {
     private String id;   //id
     private String name;  //名称
     private double price;//金额
+    @Builder.Default
     private AtomicInteger count = new AtomicInteger(0);
 }

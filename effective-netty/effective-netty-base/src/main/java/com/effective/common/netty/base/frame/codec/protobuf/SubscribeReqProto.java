@@ -103,7 +103,7 @@ public final class SubscribeReqProto {
       userName_ = "";
       phoneNumber_ = "";
       productName_ = "";
-      address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      address_ = new com.google.protobuf.LazyStringArrayList();
     }
 
     @java.lang.Override
@@ -641,7 +641,7 @@ public final class SubscribeReqProto {
         bitField0_ = (bitField0_ & ~0x00000004);
         productName_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
-        address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        address_ = new com.google.protobuf.LazyStringArrayList();
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
@@ -1055,7 +1055,7 @@ public final class SubscribeReqProto {
         return this;
       }
 
-      private com.google.protobuf.LazyStringList address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private com.google.protobuf.LazyStringList address_ = new com.google.protobuf.LazyStringArrayList();
       private void ensureAddressIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           address_ = new com.google.protobuf.LazyStringArrayList(address_);
@@ -1129,7 +1129,7 @@ public final class SubscribeReqProto {
        * <code>repeated string address = 4;</code>
        */
       public Builder clearAddress() {
-        address_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        address_ = new com.google.protobuf.LazyStringArrayList();
         bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
