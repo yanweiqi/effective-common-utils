@@ -15,10 +15,105 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 响应式编程案例汇总
+ * 包含背压、错误处理、组合操作符等演示
+ */
 public class SamplesFluxTest {
+            /**
+             * 组合操作符演示：merge、zip、concat、combineLatest
+             */
+            @Test
+            public void testCombineOperators() {
+                System.out.println("--- merge ---");
+                Flux.merge(Flux.just("A", "B"), Flux.just("1", "2"))
+                        .subscribe(x -> System.out.println("merge: " + x));
+
+                System.out.println("--- zip ---");
+                Flux.zip(Flux.just("A", "B"), Flux.just("1", "2"), (a, b) -> a + b)
+                        .subscribe(x -> System.out.println("zip: " + x));
+
+                System.out.println("--- concat ---");
+                Flux.concat(Flux.just("A", "B"), Flux.just("1", "2"))
+                        .subscribe(x -> System.out.println("concat: " + x));
+
+                System.out.println("--- combineLatest ---");
+                Flux.combineLatest(
+                        arr -> arr[0] + "," + arr[1],
+                        Flux.just("A", "B"),
+                        Flux.just("1", "2")
+                ).subscribe(x -> System.out.println("combineLatest: " + x));
+            }
+            /**
+             * 错误处理演示：onErrorReturn、onErrorResume、doOnError
+             */
+            @Test
+            public void testErrorHandling() {
+                Flux<Integer> flux = Flux.just(1, 2, 0, 4)
+                        .map(i -> 10 / i)
+                        .doOnError(e -> System.out.println("doOnError: " + e))
+                        .onErrorResume(e -> {
+                            System.out.println("onErrorResume: " + e);
+                            return Flux.just(-1);
+                        });
+                flux.subscribe(
+                        data -> System.out.println("收到: " + data),
+                        err -> System.out.println("订阅时错误: " + err),
+                        () -> System.out.println("完成")
+                );
+
+                Flux<Integer> flux2 = Flux.just(1, 2, 0, 4)
+                        .map(i -> 10 / i)
+                        .onErrorReturn(-2);
+                flux2.subscribe(
+                        data -> System.out.println("收到: " + data),
+                        err -> System.out.println("订阅时错误: " + err),
+                        () -> System.out.println("完成")
+                );
+            }
+        /**
+         * 背压演示：自定义 Subscriber 控制每次请求 2 个元素
+         */
+        @Test
+        public void testBackpressure() {
+                Flux<Integer> flux = Flux.range(1, 10);
+                flux.subscribe(new Subscriber<Integer>() {
+                        private Subscription subscription;
+                        private int count = 0;
+
+                        @Override
+                        public void onSubscribe(Subscription s) {
+                                this.subscription = s;
+                                s.request(2); // 首次请求 2 个
+                        }
+
+                        @Override
+                        public void onNext(Integer integer) {
+                                System.out.println("收到: " + integer);
+                                count++;
+                                if (count % 2 == 0) {
+                                        subscription.request(2); // 每收到 2 个再请求 2 个
+                                }
+                        }
+
+                        @Override
+                        public void onError(Throwable t) {
+                                System.err.println("错误: " + t);
+                        }
+
+                        @Override
+                        public void onComplete() {
+                                System.out.println("完成");
+                        }
+                });
+        }
 
     @Test
     public void test1() {
+                        // 基础用法：自定义 Subscriber，输出每个元素
+                        // 背压演示：每次请求 2 个元素，控制流速
+                        // 错误处理演示：onErrorResume、onErrorReturn、doOnError
+                        // 组合操作符演示：merge、zip、concat、combineLatest
                 Subscriber<String> subscriber = new Subscriber<String>() {
                         @Override
                         public void onSubscribe(Subscription s) {
@@ -43,6 +138,7 @@ public class SamplesFluxTest {
 
     @Test
     public void test2() {
+                // 字符流处理：去重、排序、行号绑定
         List<String> words = Arrays.asList(
                 "the",
                 "quick",
@@ -65,6 +161,7 @@ public class SamplesFluxTest {
 
     @Test
     public void test3() throws InterruptedException, IOException {
+                // 多种 Flux 创建与异步流演示
         Flux.just(new Integer[]{1, 2, 3, 4})
                 .subscribe(System.out::println);
 
