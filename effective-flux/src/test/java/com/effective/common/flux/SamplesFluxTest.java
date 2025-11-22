@@ -15,34 +15,30 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class SamplesFlux {
+public class SamplesFluxTest {
 
     @Test
     public void test1() {
-        Subscriber subscriber = new Subscriber() {
+        Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onSubscribe(Subscription s) {
-                System.out.println();
             }
 
             @Override
-            public void onNext(Object o) {
-
+            public void onNext(String o) {
+                System.out.println(o);
             }
 
             @Override
             public void onError(Throwable t) {
-
             }
 
             @Override
             public void onComplete() {
-
             }
         };
-        Flux.just("Howdy", "Word")
-                .subscribe(subscriber);
+        Flux.just("33333", "22222")
+                .subscribe(x -> subscriber.onNext(x));
     }
 
     @Test
@@ -71,7 +67,6 @@ public class SamplesFlux {
     public void test3() throws InterruptedException, IOException {
         Flux.just(new Integer[]{1, 2, 3, 4})
                 .subscribe(System.out::println);
-
 
         //使用可变参数创建Flux
         Flux.just(1, 2, 3, 4)
@@ -118,6 +113,3 @@ public class SamplesFlux {
 
     }
 }
-
-
-
