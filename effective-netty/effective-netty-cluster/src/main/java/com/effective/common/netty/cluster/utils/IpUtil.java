@@ -45,8 +45,6 @@ public class IpUtil {
 
     private static volatile InetAddress LOCAL_ADDRESS = null;
 
-    private static final Pattern LOCAL_IP_PATTERN = Pattern.compile("127(\\.\\d{1,3}){3}$");
-
     private static final Pattern ADDRESS_PATTERN = Pattern.compile("^\\d{1,3}(\\.\\d{1,3}){3}\\:\\d{1,5}$");
 
     private static final Pattern IP_PATTERN = Pattern.compile("\\d{1,3}(\\.\\d{1,3}){3,5}$");
@@ -172,18 +170,6 @@ public class IpUtil {
         // return getLocalIp(NET_INTERFACE, MANAGE_IP);
         //return getDefaultLocalIp();
         return getLocalAddress(null).getHostAddress();
-    }
-
-    private static String getDefaultLocalIp() {
-        try {
-            return InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            List<String> ips = getLocalIps();
-            if (null != ips && !ips.isEmpty()) {
-                return ips.get(0);
-            }
-            return "127.0.0.1";
-        }
     }
 
     /**
@@ -645,25 +631,6 @@ public class IpUtil {
         String ip = getLocalIp();
         System.out.println("local ip :" + ip);
 
-
-        String v6Str = "fe80:0:0:0:10af:7794:db80:1ba1";
-        String v4Str = "127.0.0.1";
-        // System.out.println(IPAddressUtil.isIPv4LiteralAddress(v6Str));
-        // System.out.println(IPAddressUtil.isIPv6LiteralAddress(v4Str));
-        // byte[] v4Byte = IPAddressUtil.textToNumericFormatV4(v4Str);
-        // byte[] v6Byte = IPAddressUtil.textToNumericFormatV6(v6Str);
-        // StringBuilder buffer = new StringBuilder();
-        // IpUtil.toAddress(v4Byte, buffer);
-        // System.out.println("buffer_v4:" + buffer.toString());
-        // buffer = new StringBuilder();
-        // IpUtil.toAddress(v6Byte, buffer);
-        // System.out.println("hex_v6:" + Integer.toHexString(v6Byte[0] & 0xFF).toUpperCase());
-        // System.out.println("hex_v6:" + Integer.toHexString(v6Byte[1] & 0xFF).toUpperCase());
-        // System.out.println("buffer_v6:" + buffer.toString());
-        //
-        // InetSocketAddress address = new InetSocketAddress(v6Str, 80);
-        // v6Byte = address.getAddress().getAddress();
-        // System.out.println("hex_v6_1:" + Integer.toHexString(v6Byte[0] & 0xFF).toUpperCase());
 
     }
 

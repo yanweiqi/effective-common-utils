@@ -12,17 +12,6 @@ public class Disconnect extends AbstractCommand<String> {
 
     public static String COMMAND_NAME = "disconnectCommand";
 
-    /**
-     * 客户端id
-     */
-    private String clientId;
-
-    /**
-     * 机器id
-     */
-    private String brokerId;
-
-
     public Disconnect() {
         super(COMMAND_NAME);
     }

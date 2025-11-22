@@ -12,17 +12,6 @@ public class Ping extends AbstractCommand<Integer> {
 
     public static String COMMAND_NAME = "pingCommand";
 
-    /**
-     * 客户端id
-     */
-    private String clientId;
-
-    /**
-     * 机器id
-     */
-    private String brokerId;
-
-
     public Ping() {
         super(COMMAND_NAME);
     }

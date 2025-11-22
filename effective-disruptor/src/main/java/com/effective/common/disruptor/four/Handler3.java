@@ -1,7 +1,6 @@
 package com.effective.common.disruptor.four;
 
 import com.effective.common.disruptor.two.Trade;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lmax.disruptor.EventHandler;
 import com.lmax.disruptor.WorkHandler;
 import lombok.extern.slf4j.Slf4j;

@@ -783,18 +783,17 @@ public final class SubscribeRepProto {
       "\001 \002(\005\022\020\n\010respCode\030\002 \002(\005\022\014\n\004desc\030\003 \002(\tB\023B" +
       "\021SubscribeRepProto"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        new com.google.protobuf.Descriptors.FileDescriptor[] {},
+        new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+            @Override
+            public com.google.protobuf.ExtensionRegistry assignDescriptors(
+                    com.google.protobuf.Descriptors.FileDescriptor root) {
+                descriptor = root;
+                return null;
+            }
+        });
     internal_static_SubscribeRep_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_SubscribeRep_fieldAccessorTable = new

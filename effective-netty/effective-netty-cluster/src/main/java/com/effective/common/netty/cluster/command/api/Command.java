@@ -22,14 +22,14 @@ public interface Command {
      *
      * @param feedback 回调接口
      */
-    void setFeedback(Feedback feedback);
+    void setFeedback(Feedback<?> feedback);
 
     /**
      * 获取回调接口
      *
      * @return Feedback
      */
-    Feedback getFeedback();
+    Feedback<?> getFeedback();
 
     /**
      * 获取头部
