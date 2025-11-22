@@ -13,7 +13,6 @@ import java.util.stream.Stream;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class PongCommandHandler extends AbstractCommandHandler<Pong> {
-public class PongCommandHandler extends AbstractCommandHandler<Pong> {
 
     @Override
     public void handle(Pong pong) {
