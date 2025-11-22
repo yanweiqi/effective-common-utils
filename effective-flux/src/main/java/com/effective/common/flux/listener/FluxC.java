@@ -2,9 +2,6 @@ package com.effective.common.flux.listener;
 
 import org.junit.Test;
 import reactor.core.publisher.Flux;
-import reactor.test.StepVerifier;
-
-import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;

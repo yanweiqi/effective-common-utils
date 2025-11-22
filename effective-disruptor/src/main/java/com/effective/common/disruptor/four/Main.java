@@ -2,9 +2,7 @@ package com.effective.common.disruptor.four;
 
 import com.effective.common.disruptor.two.Trade;
 import com.lmax.disruptor.BusySpinWaitStrategy;
-import com.lmax.disruptor.EventFactory;
 import com.lmax.disruptor.dsl.Disruptor;
-import com.lmax.disruptor.dsl.EventHandlerGroup;
 import com.lmax.disruptor.dsl.ProducerType;
 
 import java.util.concurrent.CountDownLatch;
@@ -22,7 +20,7 @@ public class Main {
         ExecutorService executor = Executors.newFixedThreadPool(8);
         Disruptor<Trade> disruptor = new Disruptor<>(() ->
                 Trade.builder().build(),
-                bufferSize, executor,
+                bufferSize, Executors.defaultThreadFactory(),
                 ProducerType.SINGLE,
                 new BusySpinWaitStrategy()
         );
@@ -72,5 +70,7 @@ public class Main {
         disruptor.shutdown();
         executor.shutdown();
 
+        long endTime = System.currentTimeMillis();
+        System.out.println("Elapsed time: " + (endTime - beginTime) + " ms");
     }
 }

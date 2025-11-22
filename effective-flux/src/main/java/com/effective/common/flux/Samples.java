@@ -20,14 +20,14 @@ public class Samples {
 
     @Test
     public void test1() {
-        Subscriber subscriber = new Subscriber() {
+        Subscriber<String> subscriber = new Subscriber<String>() {
             @Override
             public void onSubscribe(Subscription s) {
                 System.out.println();
             }
 
             @Override
-            public void onNext(Object o) {
+            public void onNext(String o) {
 
             }
 
