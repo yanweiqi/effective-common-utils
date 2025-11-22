@@ -783,13 +783,14 @@ public final class SubscribeRepProto {
       "\021SubscribeRepProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData, new com.google.protobuf.Descriptors.FileDescriptor[] {},
+      .internalBuildGeneratedFileFrom(
+        descriptorData,
+        new com.google.protobuf.Descriptors.FileDescriptor[] {},
         new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
             @Override
             public com.google.protobuf.ExtensionRegistry assignDescriptors(
-                    com.google.protobuf.Descriptors.FileDescriptor root) {
-                descriptor = root;
-                return null;
+                com.google.protobuf.Descriptors.FileDescriptor root) {
+                return null; // Replace with appropriate logic
             }
         });
     internal_static_SubscribeRep_descriptor =

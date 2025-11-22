@@ -70,8 +70,5 @@ public class TestStream {
         Stream<String> stream = Stream.of("a", "b", "c").filter(element -> element.contains("b"));
         Optional<String> anyElement = stream.findAny();
         System.out.println(anyElement.get());
-
-        Optional<String> firstElement = stream.findFirst();
-        //System.out.println(firstElement.get());
     }
 }

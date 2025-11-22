@@ -1215,18 +1215,12 @@ public final class SubscribeReqProto {
       " \002(\t\022\023\n\013productName\030\003 \001(\t\022\017\n\007address\030\004 \003" +
       "(\tB\023B\021SubscribeReqProto"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
     com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+      .internalBuildGeneratedFileFrom(
+        descriptorData,
+        new com.google.protobuf.Descriptors.FileDescriptor[] {},
+        root -> null // Replace deprecated InternalDescriptorAssigner with lambda
+    );
     internal_static_SubscribeReq_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_SubscribeReq_fieldAccessorTable = new
