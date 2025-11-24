@@ -70,7 +70,7 @@ public class SamplesFluxTest {
                 Flux.combineLatest(
                                 arr -> "温度: " + arr[0] + ", 湿度: " + arr[1],
                                 temperature,
-                                humidity).subscribe(x-> System.out.println("  环境监控: " + x));
+                                humidity)
                                 .blockLast(); // 等待完成并输出
                 System.out.println("说明：任何传感器更新时，都输出当前两者的最新组合");
         }
