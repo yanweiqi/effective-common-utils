@@ -133,7 +133,7 @@ public class SamplesFluxTest {
                         }
                 };
                 Flux.just("33333", "22222")
-                                .subscribe(subscriber);
+                                .subscribe(x->subscriber.onNext(x));
     }
 
     @Test
