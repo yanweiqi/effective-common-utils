@@ -114,8 +114,7 @@ public class SamplesFluxTest {
     @Test
     public void testBasicFluxSubscribe() {
         System.out.println("--- 开始测试基础订阅 ---");
-        Flux.just("33333", "22222")
-                .subscribe(x -> System.out.println("接收到: " + x));
+        Flux.just("33333", "22222").subscribe(x -> System.out.println("接收到: " + x));
         System.out.println("--- 测试完成 ---");
     }
 
