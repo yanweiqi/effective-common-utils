@@ -46,13 +46,13 @@ public class FunctionTest {
         AtomicReference<String> r1 = new AtomicReference<>();
         Consumer<String> c1 = (x) -> r1.set(x.toUpperCase(Locale.ROOT));
         c1.accept("ywq");
-        print("1---> 入参 %s,处理后的结果 %s".formatted("ywq", r1.get()));
+        print(String.format("1---> 入参 %s,处理后的结果 %s", "ywq", r1.get()));
 
         //andThen
         AtomicReference<String> r2 = new AtomicReference<>();
         Consumer<String> c2 = (x) -> r2.set("[" + x + "]");
         c1.andThen(c2).accept("jd"); //执行 c1-> c2
-        print("2---> 入参 %s,处理后的结果 %s %s".formatted("jd", r1.get(), r2.get()));
+        print(String.format("2---> 入参 %s,处理后的结果 %s %s", "jd", r1.get(), r2.get()));
     }
 
 
@@ -95,18 +95,18 @@ public class FunctionTest {
          */
         //apply
         Function<Integer, Integer> f1 = (x) -> x * 2;
-        print(("1--->apply(%d) = " + f1.apply(6)).formatted(6));
+        print(String.format("1--->apply(%d) = %d", 6, f1.apply(6)));
 
         //compose 4*4 -> 16 * 2 = 32
         Function<Integer, Integer> f2 = (x) -> x * x;
-        print(("2--->f1.compose(f2).apply(%d) = " + f1.compose(f2).apply(4)).formatted(4));
+        print(String.format("2--->f1.compose(f2).apply(%d) = %d", 4, f1.compose(f2).apply(4)));
 
         //andThen 4 * 2 -> 8 * 8 = 64
-        print(("3--->f1.andThen(f2).apply(%d) = " + f1.andThen(f2).apply(4)).formatted(4));
+        print(String.format("3--->f1.andThen(f2).apply(%d) = %d", 4, f1.andThen(f2).apply(4)));
 
         //static <T> Function<T, T> identity()
         Function<Integer, Integer> f3 = (t) -> t;
-        print(("4--->Function.identity().apply(%d) = " + f3.apply(4)).formatted(4));
+        print(String.format("4--->Function.identity().apply(%d) = %d", 4, f3.apply(4)));
     }
 
 

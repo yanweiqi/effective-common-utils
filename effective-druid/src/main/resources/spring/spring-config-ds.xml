@@ -9,70 +9,49 @@
        default-autowire="byName">
 
     <bean id="dataSourceMaster" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!-- 数据库基本信息配置 -->
         <property name="url" value="${jdbc.url}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <property name="driverClassName" value="${jdbc.driverClassName}" />
         <property name="filters" value="${jdbc.filters}" />
-        <!-- 最大并发连接数 -->
         <property name="maxActive" value="${jdbc.maxActive}" />
-        <!-- 初始化连接数量 -->
         <property name="initialSize" value="${jdbc.initialSize}" />
-        <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="${jdbc.maxWait}" />
-        <!-- 最小空闲连接数 -->
         <property name="minIdle" value="${jdbc.minIdle}" />
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
         <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
         <property name="validationQuery" value="${jdbc.validationQuery}" />
         <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
         <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
         <property name="testOnReturn" value="${jdbc.testOnReturn}" />
         <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}" />
-        <!-- 打开removeAbandoned功能 -->
         <property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
-        <!-- 1800秒，也就是30分钟 -->
         <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
-        <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="${jdbc.logAbandoned}" />
     </bean>
     
     <bean id="dataSourceSlave" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!-- 数据库基本信息配置 -->
         <property name="url" value="${jdbc.url.salve}" />
         <property name="username" value="${jdbc.username}" />
         <property name="password" value="${jdbc.password}" />
         <property name="driverClassName" value="${jdbc.driverClassName}" />
         <property name="filters" value="${jdbc.filters}" />
-        <!-- 最大并发连接数 -->
         <property name="maxActive" value="${jdbc.maxActive}" />
-        <!-- 初始化连接数量 -->
         <property name="initialSize" value="${jdbc.initialSize}" />
-        <!-- 配置获取连接等待超时的时间 -->
         <property name="maxWait" value="${jdbc.maxWait}" />
-        <!-- 最小空闲连接数 -->
         <property name="minIdle" value="${jdbc.minIdle}" />
-        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
         <property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
-        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
         <property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
         <property name="validationQuery" value="${jdbc.validationQuery}" />
         <property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
         <property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
         <property name="testOnReturn" value="${jdbc.testOnReturn}" />
         <property name="maxOpenPreparedStatements" value="${jdbc.maxOpenPreparedStatements}" />
-        <!-- 打开removeAbandoned功能 -->
         <property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
-        <!-- 1800秒，也就是30分钟 -->
         <property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
-        <!-- 关闭abanded连接时输出错误日志 -->
         <property name="logAbandoned" value="${jdbc.logAbandoned}" />
     </bean>
 
-    <!-- 配置多数据源映射 -->
     <bean id="dataSource" class="com.effective.common.druid.routing.RoutingDataSource" >
         <property name="targetDataSources">
             <map key-type="com.effective.common.druid.routing.DataSourceEnum">
@@ -80,7 +59,6 @@
                 <entry key="SLAVE" value-ref="dataSourceSlave"></entry>
             </map>
         </property>
-        <!-- 默认数据源 -->
         <property name="defaultTargetDataSource" ref="dataSourceMaster">
         </property>
     </bean>

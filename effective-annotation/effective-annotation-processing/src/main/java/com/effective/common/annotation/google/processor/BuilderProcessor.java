@@ -43,7 +43,7 @@ public class BuilderProcessor extends AbstractProcessor {
                 continue;
             }
 
-            String className = ((TypeElement) setters.getFirst()
+            String className = ((TypeElement) setters.get(0)
                     .getEnclosingElement())
                     .getQualifiedName()
                     .toString();
@@ -51,7 +51,7 @@ public class BuilderProcessor extends AbstractProcessor {
             Map<String, String> setterMap = setters.stream().collect(
                     Collectors.toMap(
                             setter -> setter.getSimpleName().toString(),
-                            setter -> ((ExecutableType) setter.asType()).getParameterTypes().getFirst().toString()
+                            setter -> ((ExecutableType) setter.asType()).getParameterTypes().get(0).toString()
                     )
             );
             try {

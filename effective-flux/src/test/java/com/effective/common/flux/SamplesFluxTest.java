@@ -627,7 +627,8 @@ public class SamplesFluxTest {
         @Test
         public void testLog() {
                 System.out.println("--- log 操作符演示 ---");
-                Flux<Integer> flux = Flux.range(1, 5).log(); // 记录流的所有事件
+                Flux<Integer> flux = Flux.range(1, 5)
+                .log(); // 记录流的所有事件
                 flux.subscribe(x -> System.out.println("接收到: " + x));
                 System.out.println("log 测试完成");
         }

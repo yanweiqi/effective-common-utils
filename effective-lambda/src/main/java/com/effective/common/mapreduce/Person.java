@@ -15,6 +15,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{name='%s', age=%d}".formatted(name, age);
+        return String.format("Person{name='%s', age=%d}", name, age);
     }
 }
