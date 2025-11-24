@@ -18,7 +18,7 @@
 		<commons.dbcp>1.4</commons.dbcp>
 		<log4j.version>1.1.2</log4j.version>
 		<aspectj.version>1.6.11</aspectj.version>
-		<jdk.version>1.8</jdk.version>
+		<jdk.version>17</jdk.version>
 		<mysql.connector>5.1.38</mysql.connector>
 		<project.name>druid-example</project.name>
 	</properties>
@@ -137,7 +137,8 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.16.16</version>
+			<version>1.18.30</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.inject</groupId>
@@ -165,26 +166,24 @@
 				<directory>src/main/resources</directory>
 			</testResource>
 		</testResources>
-
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.3.1</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.14.1</version>
+              <configuration>
+                  <release>21</release>
+              </configuration>
+          </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-resources-plugin</artifactId>
+              <version>3.3.0</version>
+              <configuration>
+                  <encoding>UTF-8</encoding>
+              </configuration>
+          </plugin>
+      </plugins>
 	</build>
   
 

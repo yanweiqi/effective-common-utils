@@ -22,8 +22,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.14.1</version>
                 <configuration>
-                    <encoding>UTF-8</encoding>
-          <release>21</release>
+                    <release>17</release>
                 </configuration>
             </plugin>
             <plugin>
@@ -118,8 +117,6 @@
             <version>2.9.1</version>
         </dependency>
         -->
-
-
 
         <dependency>
             <groupId>io.projectreactor</groupId>
