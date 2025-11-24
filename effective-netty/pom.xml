@@ -28,7 +28,7 @@
         <commons-lang3.version>3.2.1</commons-lang3.version>
         <fastjson.version>1.2.76</fastjson.version>
         <commons-compress.version>1.23.0</commons-compress.version>
-        <guava.version>29.0-jre</guava.version>
+        <guava.version>32.0.1-jre</guava.version>
         <protostuff.version>1.7.4</protostuff.version>
         <guice.version>5.1.0</guice.version>
         <reflections.version>0.10.2</reflections.version>
