@@ -609,4 +609,26 @@ public class SamplesFluxTest {
 
                 Thread.sleep(1000);
         }
+
+        /**
+         * repeat 操作符演示：重复流指定次数
+         */
+        @Test
+        public void testRepeat() {
+                System.out.println("--- repeat 操作符演示 ---");
+                Flux<Integer> flux = Flux.just(1, 2, 3).repeat(1); // 重复流 1 次
+                flux.subscribe(x -> System.out.println("接收到: " + x));
+                System.out.println("repeat 测试完成");
+        }
+
+        /**
+         * log 操作符演示：记录流事件以便调试
+         */
+        @Test
+        public void testLog() {
+                System.out.println("--- log 操作符演示 ---");
+                Flux<Integer> flux = Flux.range(1, 5).log(); // 记录流的所有事件
+                flux.subscribe(x -> System.out.println("接收到: " + x));
+                System.out.println("log 测试完成");
+        }
 }
