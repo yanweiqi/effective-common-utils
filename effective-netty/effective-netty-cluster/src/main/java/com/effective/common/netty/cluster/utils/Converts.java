@@ -24,9 +24,8 @@ public abstract class Converts {
             return null;
         } else if (value instanceof CharSequence) {
             return value.toString();
-        } else if (value instanceof Collection) {
+        } else if (value instanceof Collection<?> collection) {
             StringBuilder builder = new StringBuilder();
-            Collection<?> collection = (Collection<?>) value;
             int count = 0;
             for (Object item : collection) {
                 if (count++ > 0) {
@@ -81,10 +80,10 @@ public abstract class Converts {
     public static Date getDate(final Object value, final Date def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Date) {
-            return (Date) value;
-        } else if (value instanceof Number) {
-            return new Date(((Number) value).longValue());
+        } else if (value instanceof Date date) {
+            return date;
+        } else if (value instanceof Number number) {
+            return new Date(number.longValue());
         } else if (value instanceof CharSequence) {
             String text = value.toString();
             try {
@@ -118,10 +117,10 @@ public abstract class Converts {
     public static Date getDate(final Object value, final DateParser parser, final Date def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Date) {
-            return (Date) value;
-        } else if (value instanceof Number) {
-            return new Date(((Number) value).longValue());
+        } else if (value instanceof Date date) {
+            return date;
+        } else if (value instanceof Number number) {
+            return new Date(number.longValue());
         } else if (parser == null) {
             return def;
         } else if (value instanceof CharSequence) {
@@ -186,8 +185,8 @@ public abstract class Converts {
     public static Float getFloat(final Object value, final Float def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).floatValue();
+        } else if (value instanceof Number number) {
+            return number.floatValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -222,8 +221,8 @@ public abstract class Converts {
     public static Double getDouble(final Object value, final Double def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).doubleValue();
+        } else if (value instanceof Number number) {
+            return number.doubleValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -258,8 +257,8 @@ public abstract class Converts {
     public static Long getLong(final Object value, final Long def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).longValue();
+        } else if (value instanceof Number number) {
+            return number.longValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -294,8 +293,8 @@ public abstract class Converts {
     public static Integer getInteger(final Object value, final Integer def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).intValue();
+        } else if (value instanceof Number number) {
+            return number.intValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -330,8 +329,8 @@ public abstract class Converts {
     public static Short getShort(final Object value, final Short def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).shortValue();
+        } else if (value instanceof Number number) {
+            return number.shortValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -367,8 +366,8 @@ public abstract class Converts {
     public static Byte getByte(final Object value, final Byte def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).byteValue();
+        } else if (value instanceof Number number) {
+            return number.byteValue();
         } else if (value instanceof CharSequence || value instanceof Character) {
             String text = value.toString();
             if (text == null || text.isEmpty()) {
@@ -403,12 +402,12 @@ public abstract class Converts {
     public static Boolean getBoolean(final Object value, final Boolean def) {
         if (value == null) {
             return def;
-        } else if (value instanceof Number) {
-            return ((Number) value).longValue() != 0;
-        } else if (value instanceof Boolean) {
-            return (Boolean) value;
-        } else if (value instanceof Character) {
-            return ((Character) value) != '0';
+        } else if (value instanceof Number number) {
+            return number.longValue() != 0;
+        } else if (value instanceof Boolean boolean1) {
+            return boolean1;
+        } else if (value instanceof Character character) {
+            return character != '0';
         } else if (value instanceof CharSequence) {
             String text = value.toString();
             if ("true".equalsIgnoreCase(text)) {

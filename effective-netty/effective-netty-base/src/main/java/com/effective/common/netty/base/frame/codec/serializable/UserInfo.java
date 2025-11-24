@@ -4,6 +4,7 @@ package com.effective.common.netty.base.frame.codec.serializable;
 
 import org.msgpack.annotation.Message;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
@@ -12,6 +13,7 @@ public class UserInfo implements Serializable {
     /**
      * 默认的序列号
      */
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String userName;

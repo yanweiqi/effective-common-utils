@@ -10,12 +10,12 @@ public class Operators {
     @Test
     public void testCompare() {
 
-        Integer a0 = new Integer(1);
+        Integer a0 = Integer.valueOf(1);
         assertThat(1 == a0).isTrue();
         System.out.println(String.format(" 1---> new Integer(1) == 1 ? %b",1 == a0));
 
-        Integer a1 = new Integer(1);
-        Integer b1 = new Integer(1);
+        Integer a1 = Integer.valueOf(1);
+        Integer b1 = Integer.valueOf(1);
         assertThat(a1 == b1).isFalse();
         System.out.println(String.format(" 2---> new Integer(1) == new Integer(1) ? %b",a1 == a0));
 

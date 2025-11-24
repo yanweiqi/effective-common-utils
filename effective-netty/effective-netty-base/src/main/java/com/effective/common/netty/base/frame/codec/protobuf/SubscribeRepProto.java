@@ -181,8 +181,8 @@ public final class SubscribeRepProto {
      */
     public java.lang.String getDesc() {
       java.lang.Object ref = desc_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+      if (ref instanceof java.lang.String string) {
+        return string;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
@@ -199,10 +199,10 @@ public final class SubscribeRepProto {
     public com.google.protobuf.ByteString
         getDescBytes() {
       java.lang.Object ref = desc_;
-      if (ref instanceof java.lang.String) {
+      if (ref instanceof java.lang.String string) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                string);
         desc_ = b;
         return b;
       } else {
@@ -519,8 +519,8 @@ public final class SubscribeRepProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SubscribeRepProto.SubscribeRep) {
-          return mergeFrom((SubscribeRepProto.SubscribeRep)other);
+        if (other instanceof SubscribeRepProto.SubscribeRep rep) {
+          return mergeFrom(rep);
         } else {
           super.mergeFrom(other);
           return this;
@@ -671,10 +671,10 @@ public final class SubscribeRepProto {
       public com.google.protobuf.ByteString
           getDescBytes() {
         java.lang.Object ref = desc_;
-        if (ref instanceof String) {
+        if (ref instanceof String string) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  string);
           desc_ = b;
           return b;
         } else {
@@ -779,9 +779,15 @@ public final class SubscribeRepProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tRep.proto\"@\n\014SubscribeRep\022\020\n\010subReqID\030" +
-      "\001 \002(\005\022\020\n\010respCode\030\002 \002(\005\022\014\n\004desc\030\003 \002(\tB\023B" +
-      "\021SubscribeRepProto"
+      """
+      
+      	Rep.proto"@
+      SubscribeRep
+      subReqID\
+       (
+      respCode (
+      desc (	BB\
+      SubscribeRepProto"""
     };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(
@@ -795,7 +801,7 @@ public final class SubscribeRepProto {
             }
         });
     internal_static_SubscribeRep_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+      getDescriptor().getMessageTypes().getFirst();
     internal_static_SubscribeRep_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubscribeRep_descriptor,

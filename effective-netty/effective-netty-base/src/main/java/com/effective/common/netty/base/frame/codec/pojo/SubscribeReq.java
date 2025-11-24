@@ -1,9 +1,11 @@
 package com.effective.common.netty.base.frame.codec.pojo;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class SubscribeReq implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private int subReqID;

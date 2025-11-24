@@ -226,8 +226,8 @@ public final class SubscribeReqProto {
      */
     public java.lang.String getUserName() {
       java.lang.Object ref = userName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+      if (ref instanceof java.lang.String string) {
+        return string;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
@@ -244,10 +244,10 @@ public final class SubscribeReqProto {
     public com.google.protobuf.ByteString
         getUserNameBytes() {
       java.lang.Object ref = userName_;
-      if (ref instanceof java.lang.String) {
+      if (ref instanceof java.lang.String string) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                string);
         userName_ = b;
         return b;
       } else {
@@ -268,8 +268,8 @@ public final class SubscribeReqProto {
      */
     public java.lang.String getPhoneNumber() {
       java.lang.Object ref = phoneNumber_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+      if (ref instanceof java.lang.String string) {
+        return string;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
@@ -286,10 +286,10 @@ public final class SubscribeReqProto {
     public com.google.protobuf.ByteString
         getPhoneNumberBytes() {
       java.lang.Object ref = phoneNumber_;
-      if (ref instanceof java.lang.String) {
+      if (ref instanceof java.lang.String string) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                string);
         phoneNumber_ = b;
         return b;
       } else {
@@ -310,8 +310,8 @@ public final class SubscribeReqProto {
      */
     public java.lang.String getProductName() {
       java.lang.Object ref = productName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+      if (ref instanceof java.lang.String string) {
+        return string;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
@@ -328,10 +328,10 @@ public final class SubscribeReqProto {
     public com.google.protobuf.ByteString
         getProductNameBytes() {
       java.lang.Object ref = productName_;
-      if (ref instanceof java.lang.String) {
+      if (ref instanceof java.lang.String string) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                string);
         productName_ = b;
         return b;
       } else {
@@ -721,8 +721,8 @@ public final class SubscribeReqProto {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof SubscribeReqProto.SubscribeReq) {
-          return mergeFrom((SubscribeReqProto.SubscribeReq)other);
+        if (other instanceof SubscribeReqProto.SubscribeReq req) {
+          return mergeFrom(req);
         } else {
           super.mergeFrom(other);
           return this;
@@ -858,10 +858,10 @@ public final class SubscribeReqProto {
       public com.google.protobuf.ByteString
           getUserNameBytes() {
         java.lang.Object ref = userName_;
-        if (ref instanceof String) {
+        if (ref instanceof String string) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  string);
           userName_ = b;
           return b;
         } else {
@@ -934,10 +934,10 @@ public final class SubscribeReqProto {
       public com.google.protobuf.ByteString
           getPhoneNumberBytes() {
         java.lang.Object ref = phoneNumber_;
-        if (ref instanceof String) {
+        if (ref instanceof String string) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  string);
           phoneNumber_ = b;
           return b;
         } else {
@@ -1010,10 +1010,10 @@ public final class SubscribeReqProto {
       public com.google.protobuf.ByteString
           getProductNameBytes() {
         java.lang.Object ref = productName_;
-        if (ref instanceof String) {
+        if (ref instanceof String string) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  string);
           productName_ = b;
           return b;
         } else {
@@ -1211,10 +1211,18 @@ public final class SubscribeReqProto {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tReq.proto\"m\n\014SubscribeReq\022\020\n\010subReqID\030" +
-      "\001 \002(\005\022\020\n\010userName\030\002 \002(\t\022\023\n\013phoneNumber\030\005" +
-      " \002(\t\022\023\n\013productName\030\003 \001(\t\022\017\n\007address\030\004 \003" +
-      "(\tB\023B\021SubscribeReqProto"
+      """
+      
+      	Req.proto"m
+      SubscribeReq
+      subReqID\
+       (
+      userName (	
+      phoneNumber\
+       (	
+      productName (	
+      address \
+      (	BBSubscribeReqProto"""
     };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(
@@ -1223,7 +1231,7 @@ public final class SubscribeReqProto {
         root -> null // Replace deprecated InternalDescriptorAssigner with lambda
     );
     internal_static_SubscribeReq_descriptor =
-      getDescriptor().getMessageTypes().get(0);
+      getDescriptor().getMessageTypes().getFirst();
     internal_static_SubscribeReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SubscribeReq_descriptor,

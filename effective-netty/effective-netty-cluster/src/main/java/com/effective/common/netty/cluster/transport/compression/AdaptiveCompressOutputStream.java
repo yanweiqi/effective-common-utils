@@ -175,8 +175,8 @@ public class AdaptiveCompressOutputStream extends OutputStream implements Finish
     public void finish() throws IOException {
         if (!finished) {
             finished = true;
-            if (out != null && out instanceof Finishable) {
-                ((Finishable) out).finish();
+            if (out != null && out instanceof Finishable finishable) {
+                finishable.finish();
             }
         }
     }

@@ -27,7 +27,7 @@ public class Segment {
         }
         int pos = ips.indexOf('-');
         if (pos == 0 || pos == ips.length() - 1) {
-            throw new IllegalArgumentException(String.format("ips is invalid. %s", ips));
+            throw new IllegalArgumentException("ips is invalid. %s".formatted(ips));
         } else if (pos > 0) {
             // IP-IP格式
             begin = IpUtil.toLong(ips.substring(0, pos));
@@ -35,12 +35,12 @@ public class Segment {
         } else {
             pos = ips.indexOf('/');
             if (pos == 0 || pos == ips.length() - 1) {
-                throw new IllegalArgumentException(String.format("ips is invalid. %s", ips));
+                throw new IllegalArgumentException("ips is invalid. %s".formatted(ips));
             } else if (pos > 0) {
                 // IP/掩码格式
                 int bits = Integer.parseInt(ips.substring(pos + 1));
                 if (bits < 1 || bits > 32) {
-                    throw new IllegalArgumentException(String.format("ips is invalid. %s", ips));
+                    throw new IllegalArgumentException("ips is invalid. %s".formatted(ips));
                 }
                 long mask = (int) IpUtil.toLong(MASKES[bits - 1]);
                 begin = IpUtil.toLong(ips.substring(0, pos)) & mask;

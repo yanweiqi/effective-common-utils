@@ -57,9 +57,9 @@ public class Uptime extends SigarCommandBase {
 
         try {
             double[] avg = sigar.getLoadAverage();
-            loadAvg[0] = new Double(avg[0]);
-            loadAvg[1] = new Double(avg[1]);
-            loadAvg[2] = new Double(avg[2]);
+            loadAvg[0] = Double.valueOf(avg[0]);
+            loadAvg[1] = Double.valueOf(avg[1]);
+            loadAvg[2] = Double.valueOf(avg[2]);
 
             loadAverage = "load average: " +
                 formatter.sprintf(loadAvg);

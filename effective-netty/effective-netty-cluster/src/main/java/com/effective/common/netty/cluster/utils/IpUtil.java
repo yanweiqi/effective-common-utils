@@ -136,7 +136,7 @@ public class IpUtil {
         List<String> ips = getLocalIps(nic, manageIp);
         if (ips != null && !ips.isEmpty()) {
             if (ips.size() == 1) {
-                return ips.get(0);
+                return ips.getFirst();
             }
             if (!PREFER_IPV6) {
                 for (String ip : ips) {
@@ -145,7 +145,7 @@ public class IpUtil {
                     }
                 }
             }
-            return ips.get(0);
+            return ips.getFirst();
         }
         return null;
     }
@@ -233,7 +233,7 @@ public class IpUtil {
                     }
                 }
             } catch (Exception e) {
-                log.warn(String.format("Failed to retriving local address by connecting to dest host:port(%s:%s) false, e=%s", host,
+                log.warn("Failed to retriving local address by connecting to dest host:port(%s:%s) false, e=%s".formatted(host,
                         port, e));
             }
         }
@@ -291,12 +291,11 @@ public class IpUtil {
         if (address == null) {
             return null;
         }
-        if (address instanceof InetSocketAddress) {
-            InetSocketAddress isa = (InetSocketAddress) address;
+        if (address instanceof InetSocketAddress isa) {
             StringBuilder builder = new StringBuilder(50);
-            if (address instanceof InetSocketAddress) {
+            if (address instanceof InetSocketAddress socketAddress) {
                 builder.append(isa.getAddress().getHostAddress());
-                String separator = isValidIpV4Address(((InetSocketAddress) address).getHostString()) ? IPV4_PORT_SEPARATOR : IPV6_PORT_SEPARATOR;
+                String separator = isValidIpV4Address(socketAddress.getHostString()) ? IPV4_PORT_SEPARATOR : IPV6_PORT_SEPARATOR;
                 builder.append(separator).append(isa.getPort());
             }
             return builder.toString();
@@ -586,7 +585,7 @@ public class IpUtil {
     public static long toLong(final String ip) {
         int[] data = parseIp(ip);
         if (data == null) {
-            throw new IllegalArgumentException(String.format("invalid ip %s", ip));
+            throw new IllegalArgumentException("invalid ip %s".formatted(ip));
         }
         long result = 0;
         result += ((long) data[0]) << 24;

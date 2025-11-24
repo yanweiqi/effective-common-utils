@@ -81,7 +81,7 @@ public class Iostat extends SigarCommandBase {
     }
 
     private String svctm(double val) {
-        return sprintf("%3.2f", new Object[] { new Double(val) });
+        return sprintf("%3.2f", new Object[] { Double.valueOf(val) });
     }
 
     public void output(String[] args) throws SigarException {

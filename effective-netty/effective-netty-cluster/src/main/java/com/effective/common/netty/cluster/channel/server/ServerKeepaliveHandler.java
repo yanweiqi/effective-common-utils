@@ -12,8 +12,7 @@ public class ServerKeepaliveHandler extends ChannelDuplexHandler {
 
     @Override
     public void userEventTriggered(ChannelHandlerContext handlerContext,Object evt) throws Exception{
-        if(evt instanceof IdleStateEvent){
-            IdleStateEvent event = (IdleStateEvent) evt;
+        if(evt instanceof IdleStateEvent event){
             switch (event.state()){
                 case READER_IDLE:
                     log.info("【服务端】{},{}",handlerContext.channel().remoteAddress(),"读空闲");

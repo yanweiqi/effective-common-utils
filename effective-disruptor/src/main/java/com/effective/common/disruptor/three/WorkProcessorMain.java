@@ -23,7 +23,7 @@ public class WorkProcessorMain {
             long seq;
             for (int i = 0; i < 10; i++) {
                 seq = ringBuffer.next();                           // 占一个坑-----ringBuffer一个可用区块
-                ringBuffer.get(seq).setPrice(Math.random() * 9999);// 给这个区块放入数据
+                ringBuffer.get(seq).setPrice(ThreadLocalRandom.current().nextDouble() * 9999);// 给这个区块放入数据
                 ringBuffer.publish(seq);                           // 发布这个区块的数据使handler(consumer)可见
             }
             return null;

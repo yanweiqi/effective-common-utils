@@ -36,15 +36,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
+                <version>3.14.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                     <generatedSourcesDirectory>${project.build.directory}/generated-sources/</generatedSourcesDirectory>
                     <annotationProcessors>
                         <annotationProcessor>com.effective.common.annotation.google.processor.BuilderProcessor</annotationProcessor>
                     </annotationProcessors>
+          <release>21</release>
                 </configuration>
             </plugin>
         </plugins>

@@ -148,10 +148,10 @@ public class HeaderCommand implements Header {
             return def;
         }
         Object result = attributes.get(key);
-        if (result instanceof Byte) {
-            return (Byte) result;
-        } else if (result instanceof Number) {
-            return ((Number) result).byteValue();
+        if (result instanceof Byte byte1) {
+            return byte1;
+        } else if (result instanceof Number number) {
+            return number.byteValue();
         } else {
             return def;
         }
@@ -168,10 +168,10 @@ public class HeaderCommand implements Header {
             return def;
         }
         Object result = attributes.get(key);
-        if (result instanceof Short) {
-            return (Short) result;
-        } else if (result instanceof Number) {
-            return ((Number) result).shortValue();
+        if (result instanceof Short short1) {
+            return short1;
+        } else if (result instanceof Number number) {
+            return number.shortValue();
         } else {
             return def;
         }
@@ -188,10 +188,10 @@ public class HeaderCommand implements Header {
             return def;
         }
         Object result = attributes.get(key);
-        if (result instanceof Integer) {
-            return (Integer) result;
-        } else if (result instanceof Number) {
-            return ((Number) result).intValue();
+        if (result instanceof Integer integer) {
+            return integer;
+        } else if (result instanceof Number number) {
+            return number.intValue();
         } else {
             return def;
         }
@@ -272,18 +272,18 @@ public class HeaderCommand implements Header {
             Object val = attr.getValue();
             if (val != null) {
                 out.writeByte(key);
-                if (val instanceof Integer) {
+                if (val instanceof Integer integer) {
                     out.writeByte((byte) 1);
-                    out.writeInt((Integer) val);
-                } else if (val instanceof String) {
+                    out.writeInt(integer);
+                } else if (val instanceof String string) {
                     out.writeByte((byte) 2);
-                    SerializerUtil.write((String) val, out);
-                } else if (val instanceof Byte) {
+                    SerializerUtil.write(string, out);
+                } else if (val instanceof Byte byte1) {
                     out.writeByte((byte) 3);
-                    out.writeByte((Byte) val);
-                } else if (val instanceof Short) {
+                    out.writeByte(byte1);
+                } else if (val instanceof Short short1) {
                     out.writeByte((byte) 4);
-                    out.writeShort((Short) val);
+                    out.writeShort(short1);
                 } else {
                     throw new CodecException("Value of attrs in message header must be byte/short/int/string");
                 }

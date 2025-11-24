@@ -38,7 +38,7 @@ public class Free extends SigarCommandBase {
     }
 
     private static Long format(long value) {
-        return new Long(value / 1024);
+        return Long.valueOf(value / 1024);
     }
 
     public void output(String[] args) throws SigarException {
