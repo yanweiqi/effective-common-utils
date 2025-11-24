@@ -88,7 +88,7 @@ public class HeaderCommand implements Header {
      */
     protected Map<Byte, Object> getOrCreateAttributes() {
         if (attributes == null) {
-            //TODO 是否是单线程操作
+            //是否是单线程操作
             synchronized (this) {
                 if (attributes == null) {
                     attributes = new ConcurrentHashMap<>(5);

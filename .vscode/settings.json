@@ -1,5 +1,13 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "/root/.sdkman/candidates/java/21.0.1-tem",
+            "default": true
+        }
+    ],
+    "java.jdt.ls.java.home": "/root/.sdkman/candidates/java/21.0.1-tem"
 }
