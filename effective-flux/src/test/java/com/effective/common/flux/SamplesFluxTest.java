@@ -259,19 +259,4 @@ public class SamplesFluxTest {
                 Thread.sleep(1000 * 15);
 
         }
-
-        // public static void main(String[] args) throws IOException, InterruptedException {
-
-        //         HttpClient httpClient = HttpClient.newHttpClient();
-        //         HttpRequest request = HttpRequest.newBuilder()
-        //                         .uri(URI.create("http://127.0.0.1:8080/posts"))
-        //                         .timeout(Duration.ofSeconds(20))
-        //                         .header("Content-type", "application/json")
-        //                         .GET()
-        //                         .build();
-        //         final HttpResponse<String> send = httpClient.send(
-        //                         request,
-        //                         HttpResponse.BodyHandlers.ofString());
-        //         System.out.println(send.body());
-        // }
 }
