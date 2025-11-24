@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>3.3.5</version>
+                <version>3.3.13</version>
             </plugin>
         </plugins>
     </build>
@@ -40,7 +40,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.3.5</version>
+            <version>3.3.13</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
-            <version>3.3.5</version>
+            <version>3.3.13</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>

@@ -89,7 +89,7 @@ public final class SubscribeReqProto {
   /**
    * Protobuf type {@code SubscribeReq}
    */
-  @SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
+  @SuppressWarnings("unchecked")
   public  static final class SubscribeReq extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:SubscribeReq)
