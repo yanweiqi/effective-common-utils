@@ -17,7 +17,7 @@ import java.util.Objects;
 @ChannelHandler.Sharable
 public class FactoryCommandHandler extends SimpleChannelInboundHandler<AbstractCommand<Command>> {
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, AbstractCommand command) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, AbstractCommand<Command> command) throws Exception {
         try {
             if (log.isInfoEnabled()) {
                 log.info("【服务端】接收命令, commandName:{},Command:{}", command.getCommandName(), JSONUtil.bean2Json(command));

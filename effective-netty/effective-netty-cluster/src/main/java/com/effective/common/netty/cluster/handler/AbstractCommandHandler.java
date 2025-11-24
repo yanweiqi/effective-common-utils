@@ -68,6 +68,7 @@ public abstract class AbstractCommandHandler<T extends Command> implements Comma
      * @param messageBody 消息体
      * @return T 泛型对象
      */
+    @SuppressWarnings("unchecked")
     @Override
     public T restore(String messageBody) {
         return JSONUtil.fromJson(messageBody, (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);

@@ -51,6 +51,7 @@ public final class SubscribeRepProto {
   /**
    * Protobuf type {@code SubscribeRep}
    */
+  @SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
   public  static final class SubscribeRep extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:SubscribeRep)

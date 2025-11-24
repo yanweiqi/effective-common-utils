@@ -40,6 +40,7 @@ public class ObjectUtils {
      * @param targetType 目标对象
      * @param consumer   转化对象并执行函数
      */
+    @SuppressWarnings("unchecked")
     public static <T, N> void isInstanceof(T sourceType, N targetType, Consumer<N> consumer) {
         if (Objects.nonNull(sourceType) && sourceType.getClass().isInstance(targetType)) {
             targetType = (N) sourceType;
