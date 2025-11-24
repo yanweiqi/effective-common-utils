@@ -204,59 +204,78 @@ public class SamplesFluxTest {
                 });
         }
 
+        /**
+         * Flux 基本创建方式演示
+         */
         @Test
-        public void test2() {
-                // 字符流处理：去重、排序、行号绑定
-                List<String> words = Arrays.asList(
-                                "the",
-                                "quick",
-                                "brown",
-                                "fox",
-                                "jumps",
-                                "over",
-                                "the",
-                                "lazy",
-                                "dog");
-                Flux<Integer> lines = Flux.range(1, Integer.MAX_VALUE);
-                Flux<String> wordsFlux = Flux.fromIterable(words);
-                wordsFlux.flatMap(word -> Flux.fromArray(word.split("")))
-                                .distinct()
-                                .sort()
-                                .zipWith(lines, (word, line) -> line + " " + word)
-                                .subscribe(System.out::println);
+        public void testFluxCreation() {
+                System.out.println("--- 数组创建 Flux ---");
+                Flux.just(new Integer[] { 1, 2, 3, 4 })
+                        .subscribe(x -> System.out.println("数组元素: " + x));
+
+                System.out.println("\n--- 可变参数创建 Flux ---");
+                Flux.just(1, 2, 3, 4)
+                        .subscribe(x -> System.out.println("参数元素: " + x));
+
+                System.out.println("\n--- 从集合创建 Flux ---");
+                Flux.fromIterable(Lists.newArrayList(10, 20, 30, 40))
+                        .subscribe(x -> System.out.println("集合元素: " + x));
+
+                System.out.println("\n--- range 创建数字序列 ---");
+                Flux.range(1, 5)
+                        .subscribe(x -> System.out.println("序列元素: " + x));
         }
 
+        /**
+         * interval 定时流演示：周期性发出递增的 Long 值
+         */
         @Test
-        public void test3() throws InterruptedException, IOException {
-                // 多种 Flux 创建与异步流演示
-                Flux.just(new Integer[] { 1, 2, 3, 4 })
-                                .subscribe(System.out::println);
-
-                // 使用可变参数创建Flux
-                Flux.just(1, 2, 3, 4)
-                                .subscribe(System.out::println);
-
+        public void testInterval() throws InterruptedException {
+                System.out.println("--- interval 定时流（每秒发出一个值） ---");
+                
                 Flux.interval(Duration.ofMillis(1000))
-                                // map可以对数据进行处理
-                                .map(i -> "执行内容1：" + i)
-                                // 限制执行10次
-                                .take(5)
-                                .subscribe(System.out::println);
+                        .map(i -> "定时任务-" + i)
+                        .take(5)  // 只取前 5 个
+                        .subscribe(System.out::println);
 
+                System.out.println("等待定时流完成...");
+                Thread.sleep(6000);
+                System.out.println("测试完成");
+        }
+
+        /**
+         * interval 并发流演示：多个定时流同时执行
+         */
+        @Test
+        public void testConcurrentIntervals() throws InterruptedException {
+                System.out.println("--- 两个并发的 interval 流 ---");
                 Flux.interval(Duration.ofMillis(1000))
-                                // map可以对数据进行处理
-                                .map(i -> "执行内容2：" + i)
-                                // 限制执行10次
-                                .take(5)
-                                .subscribe(System.out::println);
+                        .map(i -> "流1-执行" + i)
+                        .take(5)
+                        .subscribe(System.out::println);
+                        
+                Flux.interval(Duration.ofMillis(1000))
+                        .map(i -> "流2-执行" + i)
+                        .take(5)
+                        .subscribe(System.out::println);
+                System.out.println("等待两个流完成...");
+                Thread.sleep(6000);
+                System.out.println("测试完成");
+        }
 
-                Flux.fromIterable(Lists.newArrayList(100, 2777, 3777, 4777))
-                                // 延时发送
-                                .delayElements(Duration.ofMillis(1000L))
-                                .subscribe(System.out::println);
-                System.out.println("========");
-                // 避免主线程提前结束
-                Thread.sleep(1000 * 15);
-
+        /**
+         * delayElements 延时发送演示：每个元素发送前延迟指定时间
+         */
+        @Test
+        public void testDelayElements() throws InterruptedException {
+                System.out.println("--- delayElements 延时发送（每个元素延迟1秒） ---");
+                Flux.fromIterable(Lists.newArrayList(100, 200, 300, 400))
+                        .delayElements(Duration.ofMillis(1000L))
+                        .subscribe(x -> System.out.println("延时元素: " + x + " (时间: " + System.currentTimeMillis() % 10000 + ")"));
+                
+                System.out.println("开始时间: " + System.currentTimeMillis() % 10000);
+                System.out.println("等待延时流完成...");
+                Thread.sleep(5000);
+                System.out.println("测试完成");
         }
 }
