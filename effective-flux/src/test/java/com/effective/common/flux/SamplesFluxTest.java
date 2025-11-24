@@ -20,57 +20,153 @@ import java.util.List;
  * 包含背压、错误处理、组合操作符等演示
  */
 public class SamplesFluxTest {
-            /**
-             * 组合操作符演示：merge、zip、concat、combineLatest
-             */
-            @Test
-            public void testCombineOperators() {
-                System.out.println("--- merge ---");
-                Flux.merge(Flux.just("A", "B"), Flux.just("1", "2"))
-                        .subscribe(x -> System.out.println("merge: " + x));
 
-                System.out.println("--- zip ---");
-                Flux.zip(Flux.just("A", "B"), Flux.just("1", "2"), (a, b) -> a + b)
-                        .subscribe(x -> System.out.println("zip: " + x));
+        /**
+         * 基础 Flux 订阅演示
+         */
+        @Test
+        public void testSubscribe() {
+                System.out.println("--- 开始测试基础订阅 ---");
+                Flux.just("33333", "22222").subscribe(x -> System.out.println("接收到: " + x));
+                System.out.println("--- 测试完成 ---");
+        }
 
-                System.out.println("--- concat ---");
-                Flux.concat(Flux.just("A", "B"), Flux.just("1", "2"))
-                        .subscribe(x -> System.out.println("concat: " + x));
-
-                System.out.println("--- combineLatest ---");
+        /**
+         * combineLatest 演示：组合最新值（实时组合）
+         * 特点：任一流发出新值时，与其他流的最新值组合输出
+         * 区别于 zip：zip 是一一配对，combineLatest 是动态组合最新值
+         */
+        @Test
+        public void testCombineLatest() {
+                System.out.println("--- combineLatest 基本用法 ---");
                 Flux.combineLatest(
-                        arr -> arr[0] + "," + arr[1],
-                        Flux.just("A", "B"),
-                        Flux.just("1", "2")
-                ).subscribe(x -> System.out.println("combineLatest: " + x));
-            }
-            /**
-             * 错误处理演示：onErrorReturn、onErrorResume、doOnError
-             */
-            @Test
-            public void testErrorHandling() {
+                                arr -> (String) arr[0] + "," + (String) arr[1],
+                                Flux.just("A", "B", "C"),
+                                Flux.just("1", "2")).subscribe(x -> System.out.println("combineLatest: " + x));
+                System.out.println("说明：每当任一流发出新值，就与另一流的最新值组合");
+
+                System.out.println("\n--- combineLatest vs zip 对比 ---");
+                System.out.println("zip 输出（一一配对）：");
+                Flux.zip(
+                                Flux.just("A", "B", "C"),
+                                Flux.just("1", "2"),
+                                (a, b) -> a + b).subscribe(x -> System.out.println("  " + x));
+
+                System.out.println("combineLatest 输出（组合最新值）：");
+                Flux.combineLatest(
+                                arr -> arr[0] + "" + arr[1],
+                                Flux.just("A", "B", "C"),
+                                Flux.just("1", "2")).subscribe(x -> System.out.println("  " + x));
+
+                System.out.println("\n--- combineLatest 实际应用：温度+湿度监控 ---");
+                Flux<String> temperature = Flux
+                                .just("20°C", "21°C", "22°C")
+                                .delayElements(Duration.ofMillis(100));
+
+                Flux<String> humidity = Flux
+                                .just("60%", "65%")
+                                .delayElements(Duration.ofMillis(150));
+
+                Flux.combineLatest(
+                                arr -> "温度: " + arr[0] + ", 湿度: " + arr[1],
+                                temperature,
+                                humidity).subscribe(x-> System.out.println("  环境监控: " + x));
+                                .blockLast(); // 等待完成并输出
+                System.out.println("说明：任何传感器更新时，都输出当前两者的最新组合");
+        }
+
+        /**
+         * zip 演示：配对组合流（拉链式合并）
+         * 特点：将多个流的元素一一配对，使用函数组合成新元素
+         */
+        @Test
+        public void testZip() {
+                System.out.println("--- zip 基本用法（两个流配对） ---");
+                Flux.zip(
+                                Flux.just("A", "B", "C"),
+                                Flux.just("1", "2", "3"),
+                                (letter, number) -> letter + number)
+                                .subscribe(x -> System.out.println("zip: " + x));
+
+                System.out.println("\n--- zip 配对规则（短的流决定长度） ---");
+                Flux.zip(Flux.just("A", "B", "C", "D"), // 4个元素
+                                Flux.just("1", "2"), // 2个元素
+                                (letter, number) -> letter + number).subscribe(x -> System.out.println("zip: " + x));
+                System.out.println("说明：只输出 A1, B2，因为第二个流只有2个元素");
+
+                System.out.println("\n--- zip 三个流配对 ---");
+                Flux.zip(objects -> (String) objects[0] + (String) objects[1] + ": " + (String) objects[2],
+                                Flux.just("用户", "订单"),
+                                Flux.just("ID", "状态"),
+                                Flux.just("001", "已完成"))
+                                .subscribe(x -> System.out.println(x));
+        }
+
+        /**
+         * concat 演示：串行合并流（按顺序执行）
+         * 特点：等第一个流完全结束后，才订阅第二个流
+         */
+        @Test
+        public void testConcat() {
+                System.out.println("--- concat 基本用法 ---");
+                Flux.concat(Flux.just("A", "B"), Flux.just("1", "2"))
+                                .subscribe(x -> System.out.println("concat: " + x));
+
+                System.out.println("\n--- concat 性能测试（串行执行） ---");
+                long start = System.currentTimeMillis();
+                Flux.concat(
+                                Flux.just("第一个流").delayElements(Duration.ofMillis(100)),
+                                Flux.just("第二个流").delayElements(Duration.ofMillis(100))).blockLast(); // 等待完成
+                System.out.println("concat 总耗时: " + (System.currentTimeMillis() - start) + "ms");
+                System.out.println("说明：串行执行，总耗时 = 各流耗时之和");
+        }
+
+        /**
+         * merge 演示：并行合并流（同时执行）
+         * 特点：立即订阅所有流，谁先发出数据谁先输出，不保证顺序
+         */
+        @Test
+        public void testMerge() {
+                System.out.println("--- merge 基本用法 ---");
+                Flux.merge(
+                                Flux.just("A", "B"),
+                                Flux.just("1", "2")).subscribe(x -> System.out.println("merge: " + x));
+
+                System.out.println("\n--- merge 性能测试（并行执行） ---");
+                long start = System.currentTimeMillis();
+                Flux.merge(
+                                Flux.just("第一个流").delayElements(Duration.ofMillis(100)),
+                                Flux.just("第二个流").delayElements(Duration.ofMillis(100))).blockLast(); // 等待完成
+                System.out.println("merge 总耗时: " + (System.currentTimeMillis() - start) + "ms");
+                System.out.println("说明：并行执行，总耗时 = 最慢的流的耗时");
+        }
+
+        /**
+         * 错误处理演示：onErrorReturn、onErrorResume、doOnError
+         */
+        @Test
+        public void testErrorHandling() {
                 Flux<Integer> flux = Flux.just(1, 2, 0, 4)
-                        .map(i -> 10 / i)
-                        .doOnError(e -> System.out.println("doOnError: " + e))
-                        .onErrorResume(e -> {
-                            System.out.println("onErrorResume: " + e);
-                            return Flux.just(-1);
-                        });
+                                .map(i -> 10 / i)
+                                .doOnError(e -> System.out.println("doOnError: " + e))
+                                .onErrorResume(e -> {
+                                        System.out.println("onErrorResume: " + e);
+                                        return Flux.just(-1);
+                                });
                 flux.subscribe(
-                        data -> System.out.println("收到: " + data),
-                        err -> System.out.println("订阅时错误: " + err),
-                        () -> System.out.println("完成")
-                );
+                                data -> System.out.println("收到: " + data),
+                                err -> System.out.println("订阅时错误: " + err),
+                                () -> System.out.println("完成"));
 
                 Flux<Integer> flux2 = Flux.just(1, 2, 0, 4)
-                        .map(i -> 10 / i)
-                        .onErrorReturn(-2);
+                                .map(i -> 10 / i)
+                                .onErrorReturn(-2);
                 flux2.subscribe(
-                        data -> System.out.println("收到: " + data),
-                        err -> System.out.println("订阅时错误: " + err),
-                        () -> System.out.println("完成")
-                );
-            }
+                                data -> System.out.println("收到: " + data),
+                                err -> System.out.println("订阅时错误: " + err),
+                                () -> System.out.println("完成"));
+        }
+
         /**
          * 背压演示：自定义 Subscriber 控制每次请求 2 个元素
          */
@@ -108,87 +204,74 @@ public class SamplesFluxTest {
                 });
         }
 
-    /**
-     * 基础 Flux 订阅演示
-     */
-    @Test
-    public void testBasicFluxSubscribe() {
-        System.out.println("--- 开始测试基础订阅 ---");
-        Flux.just("33333", "22222").subscribe(x -> System.out.println("接收到: " + x));
-        System.out.println("--- 测试完成 ---");
-    }
+        @Test
+        public void test2() {
+                // 字符流处理：去重、排序、行号绑定
+                List<String> words = Arrays.asList(
+                                "the",
+                                "quick",
+                                "brown",
+                                "fox",
+                                "jumps",
+                                "over",
+                                "the",
+                                "lazy",
+                                "dog");
+                Flux<Integer> lines = Flux.range(1, Integer.MAX_VALUE);
+                Flux<String> wordsFlux = Flux.fromIterable(words);
+                wordsFlux.flatMap(word -> Flux.fromArray(word.split("")))
+                                .distinct()
+                                .sort()
+                                .zipWith(lines, (word, line) -> line + " " + word)
+                                .subscribe(System.out::println);
+        }
 
-    @Test
-    public void test2() {
-        // 字符流处理：去重、排序、行号绑定
-        List<String> words = Arrays.asList(
-                "the",
-                "quick",
-                "brown",
-                "fox",
-                "jumps",
-                "over",
-                "the",
-                "lazy",
-                "dog"
-        );
-        Flux<Integer> lines = Flux.range(1, Integer.MAX_VALUE);
-        Flux<String> wordsFlux = Flux.fromIterable(words);
-        wordsFlux.flatMap(word -> Flux.fromArray(word.split("")))
-                .distinct()
-                .sort()
-                .zipWith(lines, (word, line) -> line + " " + word)
-                .subscribe(System.out::println);
-    }
-
-    @Test
-    public void test3() throws InterruptedException, IOException {
+        @Test
+        public void test3() throws InterruptedException, IOException {
                 // 多种 Flux 创建与异步流演示
-        Flux.just(new Integer[]{1, 2, 3, 4})
-                .subscribe(System.out::println);
+                Flux.just(new Integer[] { 1, 2, 3, 4 })
+                                .subscribe(System.out::println);
 
-        //使用可变参数创建Flux
-        Flux.just(1, 2, 3, 4)
-                .subscribe(System.out::println);
+                // 使用可变参数创建Flux
+                Flux.just(1, 2, 3, 4)
+                                .subscribe(System.out::println);
 
-        Flux.interval(Duration.ofMillis(1000))
-                //  map可以对数据进行处理
-                .map(i -> "执行内容1：" + i)
-                //限制执行10次
-                .take(5)
-                .subscribe(System.out::println);
+                Flux.interval(Duration.ofMillis(1000))
+                                // map可以对数据进行处理
+                                .map(i -> "执行内容1：" + i)
+                                // 限制执行10次
+                                .take(5)
+                                .subscribe(System.out::println);
 
-        Flux.interval(Duration.ofMillis(1000))
-                //  map可以对数据进行处理
-                .map(i -> "执行内容2：" + i)
-                //限制执行10次
-                .take(5)
-                .subscribe(System.out::println);
+                Flux.interval(Duration.ofMillis(1000))
+                                // map可以对数据进行处理
+                                .map(i -> "执行内容2：" + i)
+                                // 限制执行10次
+                                .take(5)
+                                .subscribe(System.out::println);
 
-        Flux.fromIterable(Lists.newArrayList(100, 2777, 3777, 4777))
-                //延时发送
-                .delayElements(Duration.ofMillis(1000L))
-                .subscribe(System.out::println);
-        System.out.println("========");
-        //避免主线程提前结束
-        Thread.sleep(1000 * 15);
+                Flux.fromIterable(Lists.newArrayList(100, 2777, 3777, 4777))
+                                // 延时发送
+                                .delayElements(Duration.ofMillis(1000L))
+                                .subscribe(System.out::println);
+                System.out.println("========");
+                // 避免主线程提前结束
+                Thread.sleep(1000 * 15);
 
-    }
+        }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+        // public static void main(String[] args) throws IOException, InterruptedException {
 
-        HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://127.0.0.1:8080/posts"))
-                .timeout(Duration.ofSeconds(20))
-                .header("Content-type", "application/json")
-                .GET()
-                .build();
-        final HttpResponse<String> send = httpClient.send(
-                request,
-                HttpResponse.BodyHandlers.ofString()
-        );
-        System.out.println(send.body());
-
-    }
+        //         HttpClient httpClient = HttpClient.newHttpClient();
+        //         HttpRequest request = HttpRequest.newBuilder()
+        //                         .uri(URI.create("http://127.0.0.1:8080/posts"))
+        //                         .timeout(Duration.ofSeconds(20))
+        //                         .header("Content-type", "application/json")
+        //                         .GET()
+        //                         .build();
+        //         final HttpResponse<String> send = httpClient.send(
+        //                         request,
+        //                         HttpResponse.BodyHandlers.ofString());
+        //         System.out.println(send.body());
+        // }
 }
