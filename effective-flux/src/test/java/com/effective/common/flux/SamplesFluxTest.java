@@ -108,37 +108,20 @@ public class SamplesFluxTest {
                 });
         }
 
+    /**
+     * 基础 Flux 订阅演示
+     */
     @Test
-    public void test1() {
-                        // 基础用法：自定义 Subscriber，输出每个元素
-                        // 背压演示：每次请求 2 个元素，控制流速
-                        // 错误处理演示：onErrorResume、onErrorReturn、doOnError
-                        // 组合操作符演示：merge、zip、concat、combineLatest
-                Subscriber<String> subscriber = new Subscriber<String>() {
-                        @Override
-                        public void onSubscribe(Subscription s) {
-                        }
-
-                        @Override
-                        public void onNext(String o) {
-                                System.out.println("onNext: " + o);
-                        }
-
-                        @Override
-                        public void onError(Throwable t) {
-                        }
-
-                        @Override
-                        public void onComplete() {
-                        }
-                };
-                Flux.just("33333", "22222")
-                                .subscribe(x->subscriber.onNext(x));
+    public void testBasicFluxSubscribe() {
+        System.out.println("--- 开始测试基础订阅 ---");
+        Flux.just("33333", "22222")
+                .subscribe(x -> System.out.println("接收到: " + x));
+        System.out.println("--- 测试完成 ---");
     }
 
     @Test
     public void test2() {
-                // 字符流处理：去重、排序、行号绑定
+        // 字符流处理：去重、排序、行号绑定
         List<String> words = Arrays.asList(
                 "the",
                 "quick",
