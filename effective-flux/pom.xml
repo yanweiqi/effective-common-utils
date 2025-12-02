@@ -9,8 +9,8 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.4.12</spring.boot.version>
     </properties>
@@ -39,7 +39,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.9.3</version>
-            <scope>test</scope>
+            <scope>compile</scope>
         </dependency>
         <!-- Spring Boot 测试依赖 -->
         <dependency>
@@ -47,13 +47,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.boot.version}</version>
             <scope>test</scope>
-        </dependency>
-        <!-- JUnit 4 支持 (用于运行 JUnit 4 测试) -->
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
-            <version>5.9.3</version>
-            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- Spring Boot WebFlux 响应式依赖 -->
         <dependency>
@@ -127,19 +126,20 @@
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <version>3.4.18</version>
-<!--            <scope>test</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>32.0.1-jre</version>
+        </dependency>
+
+        <!-- Add Hamcrest Core dependency for assertions -->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>2.2</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

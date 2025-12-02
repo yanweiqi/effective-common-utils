@@ -1,7 +1,7 @@
 package com.effective.common.flux;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test; // Updated to JUnit 5
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -14,9 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
-//import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat; // Updated to use Hamcrest with JUnit 5
 
 @Slf4j
 public class SamplesMono {
@@ -28,38 +26,6 @@ public class SamplesMono {
             put("cDB", "c");
         }
     };
-
-
-    /*
-    StopWatch stopWatch = new StopWatch();
-        Flux.fromIterable(templates.entrySet())
-                .filterWhen((t) -> {
-                    String k = t.getKey();
-                    String v = t.getValue();
-                    try {
-                        Thread.sleep(sleep);//mock DB query
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.println(String.format(
-                            "Thread id:%s, Thread name:%s, query:%s, value:%s , used ms:%s",
-                            Thread.currentThread().getId(),
-                            Thread.currentThread().getName(),
-                            k,
-                            v,
-                            sleep)
-                    );
-                    return Mono.just(v.equals("b"));
-                })
-                .next()
-                .doOnSuccess(templateEntry -> log.info("Match {} ", templateEntry.getKey()))
-                .map(Map.Entry::getValue)
-                .onErrorResume(NoSuchElementException.class, e -> Mono.empty())
-                .onErrorMap(IndexOutOfBoundsException.class, Exception::new)
-                .doOnTerminate(() -> System.out.println(stopWatch.getTime()));
-        //Thread.sleep(1000 * 60);//mock DB query
-     */
 
     static Executor delegate = new ThreadPoolExecutor(
             100,
@@ -92,7 +58,6 @@ public class SamplesMono {
         );
         Thread t1 = new Thread(() -> {
             m1.block();
-            //assertThat(cancelled.get(),is(true));
             m1.subscribe(s -> {
                 try {
                     Thread.sleep(1000);
@@ -112,7 +77,6 @@ public class SamplesMono {
             m2.subscribe(s -> {
                 System.out.println("3333->" + s);
             });
-            //assertThat(cancelled.get(),is(false));
         });
 
         t1.start();

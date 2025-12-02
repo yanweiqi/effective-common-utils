@@ -1,6 +1,6 @@
 package com.effective.common.flux.listener;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test; // Updated to JUnit 5
 import reactor.core.publisher.Flux;
 import java.util.Arrays;
 import java.util.List;
@@ -115,17 +115,6 @@ public class FluxC {
         myEventProcessor.dataChunk("foo", "bar", "baz");
 
         System.out.println("开始干活");
-//        StepVerifier.withVirtualTime(() -> bridge)
-//                .expectSubscription()
-//                .expectNoEvent(Duration.ofSeconds(10))
-//                .then(() -> myEventProcessor.dataChunk("foo", "bar", "baz"))
-//                .expectNext("a", "b", "c")
-//                .expectNoEvent(Duration.ofSeconds(10))
-//                .then(() -> myEventProcessor.processComplete())
-//                .verifyComplete();
-
-        //myEventProcessor.dataChunk("1", "2", "3");
-        //myEventProcessor.processComplete();
         Thread.sleep(1000 * 5);
 
     }

@@ -1,7 +1,7 @@
 package com.effective.common.flux;
 
 import com.google.common.collect.Lists;
-import org.junit.Test;
+import org.junit.jupiter.api.Test; // Updated to JUnit 5
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
