@@ -9,5 +9,10 @@
             "default": true
         }
     ],
-    "java.jdt.ls.java.home": "/root/.sdkman/candidates/java/21.0.1-tem"
+    "java.jdt.ls.java.home": "/root/.sdkman/candidates/java/21.0.1-tem",
+
+    "java.project.sourcePaths": [
+        "src/main/java",
+        "src/test/java"
+    ]
 }
